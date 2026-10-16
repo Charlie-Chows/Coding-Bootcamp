@@ -1,0 +1,4024 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Console — Stackly</title>
+    <meta name="description" content="Stackly admin console demo. Illustrative sample data only.">
+    <meta name="theme-color" content="#2E073F">
+    <meta name="robots" content="noindex">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="../global.css">
+
+    <style>
+        :root {
+            --ad-header-h: 68px;
+            --ad-side-w: 280px;
+            --ad-gap: clamp(1rem, 2vw, 1.5rem);
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-x: clip;
+            max-width: 100%;
+        }
+
+        .ad-page {
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
+            background: var(--surface-soft);
+            color: var(--ink);
+            overflow-x: hidden;
+            overflow-x: clip;
+            max-width: 100%;
+        }
+
+        .ad-header {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            width: 100%;
+            min-height: var(--ad-header-h);
+            background: rgba(46, 7, 63, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(235, 211, 248, 0.12);
+        }
+
+        .ad-header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: min(100% - 2rem, 1600px);
+            margin-inline: auto;
+            min-height: var(--ad-header-h);
+        }
+
+        .ad-header__brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .ad-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            border-radius: var(--r-xs);
+        }
+
+        .ad-brand__logo {
+            filter: brightness(0) saturate(100%) invert(16%) sepia(95%) saturate(4300%) hue-rotate(276deg) brightness(90%) contrast(95%);
+            width: auto;
+            height: 34px;
+            object-fit: contain;
+            filter: brightness(0) saturate(100%) invert(91%) sepia(22%) saturate(1400%) hue-rotate(232deg) brightness(104%) contrast(96%);
+        }
+
+        .ad-brand__name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+            color: var(--lavender);
+            line-height: 1;
+        }
+
+        .ad-brand:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 4px;
+        }
+
+        .ad-role-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.3rem 0.72rem;
+            border-radius: var(--r-xs);
+            background: linear-gradient(120deg, var(--orchid), var(--purple));
+            color: #ffffff;
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            line-height: 1;
+            box-shadow: 0 6px 16px rgba(173, 73, 225, 0.34);
+        }
+
+        .ad-role-chip i {
+            font-size: 0.62rem;
+        }
+
+        .ad-header__greeting {
+            flex: 1;
+            min-width: 0;
+            padding-inline: clamp(0.5rem, 2vw, 1.5rem);
+            border-left: 1px solid rgba(235, 211, 248, 0.14);
+        }
+
+        .ad-header__greeting-text {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+            font-weight: 700;
+            color: var(--lavender);
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .ad-header__greeting-sub {
+            display: block;
+            font-size: 0.76rem;
+            color: var(--on-dark-soft);
+            margin-top: 0.15rem;
+        }
+
+        .ad-header__actions {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            flex-shrink: 0;
+        }
+
+        .ad-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.35rem 0.75rem 0.35rem 0.4rem;
+            border-radius: 999px;
+            border: 1px solid rgba(235, 211, 248, 0.18);
+            background: rgba(235, 211, 248, 0.06);
+            max-width: 280px;
+        }
+
+        .ad-profile__avatar {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, var(--orchid), var(--purple));
+            color: #ffffff;
+            font-size: 0.82rem;
+        }
+
+        .ad-profile__text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            line-height: 1.25;
+        }
+
+        .ad-profile__label {
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--orchid-300);
+        }
+
+        .ad-profile__email {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--lavender);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 178px;
+        }
+
+        .ad-menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1.5px solid rgba(235, 211, 248, 0.24);
+            border-radius: var(--r-s);
+            background: rgba(235, 211, 248, 0.06);
+            color: var(--lavender);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+        }
+
+        .ad-menu-toggle:hover {
+            background: rgba(173, 73, 225, 0.2);
+            border-color: var(--orchid);
+        }
+
+        .ad-menu-toggle:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 3px;
+        }
+
+        .ad-body {
+            display: grid;
+            grid-template-columns: var(--ad-side-w) minmax(0, 1fr);
+            gap: var(--ad-gap);
+            width: min(100% - 2rem, 1600px);
+            margin-inline: auto;
+            padding-block: clamp(1.25rem, 2.5vw, 2rem) clamp(2.5rem, 5vw, 4rem);
+            align-items: start;
+        }
+
+        .ad-sidebar {
+            position: sticky;
+            top: calc(var(--ad-header-h) + 1rem);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: calc(100vh - var(--ad-header-h) - 2rem);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: 1rem;
+            border-radius: var(--r-l);
+            background: var(--plum);
+            border: 1px solid rgba(235, 211, 248, 0.12);
+            box-shadow: var(--shadow-m);
+            scrollbar-width: thin;
+        }
+
+        .ad-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .ad-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(173, 73, 225, 0.4);
+            border-radius: 999px;
+        }
+
+        .ad-sidebar__head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.35rem 0.5rem 0.85rem;
+            border-bottom: 1px solid rgba(235, 211, 248, 0.12);
+        }
+
+        .ad-sidebar__title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--on-dark-soft);
+        }
+
+        .ad-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .ad-nav__link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            width: 100%;
+            padding: 0.72rem 0.85rem;
+            border: 0;
+            border-radius: var(--r-s);
+            background: transparent;
+            color: var(--on-dark-muted);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 550;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.2s var(--ease-out),
+                color 0.2s var(--ease-out);
+        }
+
+        .ad-nav__icon {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: var(--r-xs);
+            background: rgba(235, 211, 248, 0.06);
+            border: 1px solid rgba(235, 211, 248, 0.12);
+            color: var(--orchid-300);
+            font-size: 0.78rem;
+            transition: background-color 0.2s var(--ease-out),
+                color 0.2s var(--ease-out),
+                border-color 0.2s var(--ease-out);
+        }
+
+        .ad-nav__label {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ad-nav__link:hover {
+            background: rgba(235, 211, 248, 0.06);
+            color: var(--lavender);
+        }
+
+        .ad-nav__link:hover .ad-nav__icon {
+            background: rgba(173, 73, 225, 0.2);
+            border-color: rgba(173, 73, 225, 0.4);
+            color: var(--lavender);
+        }
+
+        .ad-nav__link:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 2px;
+        }
+
+        .ad-nav__link[aria-current="true"] {
+            background: linear-gradient(100deg, rgba(173, 73, 225, 0.24), rgba(122, 28, 172, 0.16));
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .ad-nav__link[aria-current="true"] .ad-nav__icon {
+            background: var(--orchid);
+            border-color: var(--orchid);
+            color: #ffffff;
+        }
+
+        .ad-nav__link[aria-current="true"]::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 60%;
+            border-radius: 3px;
+            background: var(--orchid);
+        }
+
+        .ad-sidebar__foot {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(235, 211, 248, 0.12);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ad-identity {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            padding: 0.85rem;
+            border-radius: var(--r-s);
+            background: rgba(235, 211, 248, 0.06);
+            border: 1px solid rgba(235, 211, 248, 0.14);
+        }
+
+        .ad-identity__avatar {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, var(--orchid), var(--purple));
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .ad-identity__text {
+            min-width: 0;
+        }
+
+        .ad-identity__name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--lavender);
+            line-height: 1.25;
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ad-identity__email {
+            font-size: 0.78rem;
+            color: var(--on-dark-soft);
+            margin: 0.15rem 0 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .ad-logout {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid rgba(255, 138, 162, 0.36);
+            border-radius: var(--r-s);
+            background: rgba(192, 38, 74, 0.1);
+            color: #ffb3c1;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 650;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.22s var(--ease-out),
+                border-color 0.22s var(--ease-out),
+                color 0.22s var(--ease-out);
+        }
+
+        .ad-logout:hover {
+            background: rgba(192, 38, 74, 0.2);
+            border-color: #ff8aa2;
+            color: #ffffff;
+        }
+
+        .ad-logout:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 3px;
+        }
+
+        .ad-main {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--ad-gap);
+        }
+
+        .ad-panel {
+            display: none;
+        }
+
+        .ad-panel.is-active {
+            display: flex;
+            flex-direction: column;
+            gap: var(--ad-gap);
+        }
+
+        .ad-head {
+            padding: clamp(1.15rem, 2.2vw, 1.75rem);
+            border-radius: var(--r-l);
+            background:
+                radial-gradient(circle at 88% 0%, rgba(173, 73, 225, 0.18), transparent 55%),
+                var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .ad-head__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: 0.65rem;
+        }
+
+        .ad-head__eyebrow i {
+            font-size: 0.7rem;
+        }
+
+        .ad-head h1,
+        .ad-head h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin: 0 0 0.5rem;
+        }
+
+        .ad-head h1:focus,
+        .ad-head h2:focus {
+            outline: none;
+        }
+
+        .ad-head p {
+            font-size: 0.92rem;
+            line-height: 1.65;
+            color: var(--ink-muted);
+            margin: 0;
+            max-width: 72ch;
+        }
+
+        .ad-grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: var(--ad-gap);
+        }
+
+        .ad-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: var(--ad-gap);
+        }
+
+        .ad-grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: var(--ad-gap);
+        }
+
+        .ad-grid-wide-left {
+            display: grid;
+            grid-template-columns: 1.5fr minmax(0, 1fr);
+            gap: var(--ad-gap);
+        }
+
+        .ad-grid-wide-right {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 1.5fr;
+            gap: var(--ad-gap);
+        }
+
+        .ad-card {
+            display: flex;
+            flex-direction: column;
+            padding: clamp(1.15rem, 2vw, 1.6rem);
+            border-radius: var(--r-m);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+            min-width: 0;
+        }
+
+        .ad-card--dark {
+            background: var(--plum);
+            border-color: rgba(235, 211, 248, 0.14);
+            box-shadow: none;
+        }
+
+        .ad-card--dark .ad-card__title {
+            color: var(--lavender);
+        }
+
+        .ad-card--dark .ad-card__sub {
+            color: var(--on-dark-soft);
+        }
+
+        .ad-card--dark .ad-card__text {
+            color: var(--on-dark-muted);
+        }
+
+        .ad-card__head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .ad-card__title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .ad-card__sub {
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-top: 0.28rem;
+        }
+
+        .ad-card__text {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--ink-muted);
+            margin: 0;
+        }
+
+        .ad-stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            padding: clamp(1rem, 1.8vw, 1.35rem);
+            border-radius: var(--r-m);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .ad-stat__top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+        }
+
+        .ad-stat__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r-s);
+            background: linear-gradient(140deg, rgba(173, 73, 225, 0.18), rgba(122, 28, 172, 0.12));
+            border: 1px solid rgba(122, 28, 172, 0.16);
+            color: var(--purple);
+            font-size: 0.85rem;
+        }
+
+        .ad-stat__label {
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+        }
+
+        .ad-stat__value {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.4vw, 2rem);
+            font-weight: 700;
+            line-height: 1;
+            color: var(--plum);
+            letter-spacing: -0.02em;
+        }
+
+        .ad-stat__meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+        }
+
+        .ad-stat__meta i {
+            font-size: 0.72rem;
+            color: var(--purple);
+        }
+
+        .ad-table-wrap {
+            width: 100%;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            border-radius: var(--r-s);
+            scrollbar-width: thin;
+        }
+
+        .ad-table-wrap::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .ad-table-wrap::-webkit-scrollbar-thumb {
+            background: rgba(122, 28, 172, 0.24);
+            border-radius: 999px;
+        }
+
+        .ad-table {
+            width: 100%;
+            min-width: 620px;
+            border-collapse: collapse;
+            font-size: 0.86rem;
+        }
+
+        .ad-table caption {
+            text-align: left;
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            padding-bottom: 0.6rem;
+        }
+
+        .ad-table thead th {
+            position: sticky;
+            top: 0;
+            text-align: left;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            padding: 0.7rem 0.85rem;
+            background: var(--surface-soft);
+            border-bottom: 1px solid var(--border);
+            white-space: nowrap;
+        }
+
+        .ad-table tbody td {
+            padding: 0.85rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--ink-muted);
+            vertical-align: middle;
+            line-height: 1.5;
+        }
+
+        .ad-table tbody tr:last-child td {
+            border-bottom: 0;
+        }
+
+        .ad-table tbody tr:hover {
+            background: var(--lavender-50);
+        }
+
+        .ad-table__strong {
+            font-weight: 650;
+            color: var(--ink);
+        }
+
+        .ad-table__mono {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            color: var(--purple);
+        }
+
+        .ad-learner {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .ad-learner__avatar {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, var(--purple), var(--orchid));
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+        }
+
+        .ad-mini-bar {
+            display: flex;
+            align-items: center;
+            gap: 0.55rem;
+            min-width: 140px;
+        }
+
+        .ad-mini-bar__track {
+            flex: 1;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--surface-tint);
+            overflow: hidden;
+        }
+
+        .ad-mini-bar__fill {
+            display: block;
+            height: 100%;
+            width: var(--w, 40%);
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--purple), var(--orchid));
+            transform-origin: left center;
+        }
+
+        .ad-mini-bar__pct {
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--purple);
+            white-space: nowrap;
+        }
+
+        .pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.24rem 0.62rem;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+
+        .pill i {
+            font-size: 0.6rem;
+        }
+
+        .pill--ok {
+            background: rgba(30, 145, 90, 0.12);
+            border-color: rgba(30, 145, 90, 0.28);
+            color: #157f4d;
+        }
+
+        .pill--warn {
+            background: rgba(200, 130, 20, 0.12);
+            border-color: rgba(200, 130, 20, 0.3);
+            color: #97620d;
+        }
+
+        .pill--bad {
+            background: rgba(192, 38, 74, 0.1);
+            border-color: rgba(192, 38, 74, 0.28);
+            color: #a32447;
+        }
+
+        .pill--info {
+            background: rgba(122, 28, 172, 0.1);
+            border-color: rgba(122, 28, 172, 0.22);
+            color: var(--purple);
+        }
+
+        .pill--neutral {
+            background: var(--surface-tint);
+            border-color: var(--border);
+            color: var(--ink-soft);
+        }
+
+        .pill--dark {
+            background: rgba(235, 211, 248, 0.12);
+            border-color: rgba(235, 211, 248, 0.24);
+            color: var(--orchid-300);
+        }
+
+        .ad-chart-bars {
+            display: flex;
+            align-items: stretch;
+            gap: clamp(0.4rem, 1.4vw, 0.85rem);
+            height: 176px;
+            padding-top: 0.5rem;
+        }
+
+        .ad-chart-bars__col {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.55rem;
+            min-width: 0;
+        }
+
+        .ad-chart-bars__track {
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            border-radius: var(--r-xs);
+            background: var(--surface-tint);
+            overflow: hidden;
+            padding: 0 3px;
+        }
+
+        .ad-chart-bars__fill {
+            display: block;
+            flex: 1;
+            height: var(--h, 40%);
+            border-radius: var(--r-xs) var(--r-xs) 0 0;
+            background: linear-gradient(180deg, var(--orchid), var(--purple));
+            transform-origin: bottom center;
+            will-change: transform;
+        }
+
+        .ad-chart-bars__fill--alt {
+            background: linear-gradient(180deg, var(--lavender), var(--orchid-300));
+        }
+
+        .ad-chart-bars__label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--ink-soft);
+            white-space: nowrap;
+        }
+
+        .ad-chart-kpis {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.65rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .ad-chart-kpi {
+            padding: 0.55rem 0.75rem;
+            border-radius: var(--r-xs);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 0.14rem;
+        }
+
+        .ad-chart-kpi__label {
+            font-size: 0.64rem;
+            font-weight: 700;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+        }
+
+        .ad-chart-kpi__val {
+            font-family: var(--font-display);
+            font-size: 0.96rem;
+            font-weight: 700;
+            color: var(--plum);
+            line-height: 1.2;
+        }
+
+        .ad-svg-chart-wrap {
+            width: 100%;
+            border-radius: var(--r-s);
+            background: linear-gradient(180deg, rgba(235, 211, 248, 0.22), rgba(235, 211, 248, 0.05));
+            border: 1px solid rgba(122, 28, 172, 0.12);
+            padding: 0.6rem 0.5rem 0.35rem;
+        }
+
+        .ad-svg-chart {
+            display: block;
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .ad-svg-chart__grid {
+            stroke: rgba(122, 28, 172, 0.12);
+            stroke-width: 1;
+            stroke-dasharray: 4 4;
+        }
+
+        .ad-svg-chart__axis {
+            stroke: rgba(122, 28, 172, 0.22);
+            stroke-width: 1.2;
+        }
+
+        .ad-svg-chart__tick-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            fill: var(--ink-soft);
+        }
+
+        .ad-svg-chart__x-label {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 600;
+            fill: var(--ink-soft);
+        }
+
+        .ad-svg-chart__val-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 600;
+            fill: var(--plum);
+        }
+
+        .ad-svg-chart__val-label--alt {
+            fill: var(--purple);
+        }
+
+        .ad-svg-chart__col {
+            transform-box: fill-box;
+            transform-origin: center bottom;
+        }
+
+        .ad-legend__line--dash {
+            width: 16px;
+            height: 0;
+            border-top: 2px dashed var(--orchid);
+            flex-shrink: 0;
+        }
+
+        .ad-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 0.9rem;
+            padding-top: 0.9rem;
+            border-top: 1px dashed var(--border);
+        }
+
+        .ad-legend__item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+        }
+
+        .ad-legend__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .ad-legend__dot--a {
+            background: linear-gradient(140deg, var(--orchid), var(--purple));
+        }
+
+        .ad-legend__dot--b {
+            background: var(--orchid-300);
+        }
+
+        .ad-legend__dot--c {
+            background: var(--lavender);
+            border: 1px solid rgba(122, 28, 172, 0.3);
+        }
+
+        .ad-donut {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-block: 0.5rem;
+        }
+
+        .ad-donut__svg {
+            width: min(190px, 60vw);
+            height: auto;
+            transform: rotate(-90deg);
+        }
+
+        .ad-donut__track {
+            fill: none;
+            stroke: var(--surface-tint);
+            stroke-width: 14;
+        }
+
+        .ad-donut__value {
+            fill: none;
+            stroke: url(#adDonutGrad);
+            stroke-width: 14;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .ad-donut__center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .ad-donut__pct {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.6vw, 2rem);
+            font-weight: 700;
+            color: var(--plum);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .ad-donut__cap {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-top: 0.35rem;
+        }
+
+        .ad-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+        }
+
+        .ad-stack__row {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .ad-stack__top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .ad-stack__label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .ad-stack__value {
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            color: var(--purple);
+        }
+
+        .ad-stack__track {
+            display: flex;
+            height: 12px;
+            border-radius: 999px;
+            background: var(--surface-tint);
+            overflow: hidden;
+        }
+
+        .ad-stack__seg {
+            display: block;
+            height: 100%;
+            width: var(--w, 30%);
+            transform-origin: left center;
+        }
+
+        .ad-stack__seg--done {
+            background: linear-gradient(90deg, var(--purple), var(--orchid));
+        }
+
+        .ad-stack__seg--active {
+            background: var(--orchid-300);
+        }
+
+        .ad-stack__seg--pending {
+            background: var(--lavender);
+        }
+
+        .ad-ring {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-block: 0.5rem;
+        }
+
+        .ad-ring__svg {
+            width: min(180px, 58vw);
+            height: auto;
+            transform: rotate(-90deg);
+        }
+
+        .ad-ring__track {
+            fill: none;
+            stroke: var(--surface-tint);
+            stroke-width: 12;
+        }
+
+        .ad-ring__value {
+            fill: none;
+            stroke: url(#adRingGrad);
+            stroke-width: 12;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .ad-ring__center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .ad-ring__pct {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+            font-weight: 700;
+            color: var(--plum);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .ad-ring__cap {
+            display: block;
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-top: 0.3rem;
+        }
+
+        .ad-spark {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .ad-spark__area {
+            fill: url(#adSparkFill);
+        }
+
+        .ad-spark__line {
+            fill: none;
+            stroke: var(--purple);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .ad-spark__dot {
+            fill: var(--orchid);
+            stroke: #fff;
+            stroke-width: 2;
+        }
+
+        .ad-feed {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ad-feed__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ad-feed__item:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .ad-feed__item:first-child {
+            padding-top: 0;
+        }
+
+        .ad-feed__icon {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: var(--r-xs);
+            background: var(--lavender-50);
+            border: 1px solid rgba(122, 28, 172, 0.12);
+            color: var(--purple);
+            font-size: 0.78rem;
+        }
+
+        .ad-feed__body {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .ad-feed__title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .ad-feed__meta {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            margin: 0.22rem 0 0;
+        }
+
+        .ad-feed__time {
+            flex-shrink: 0;
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            white-space: nowrap;
+            padding-top: 0.15rem;
+        }
+
+        .ad-queue {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ad-queue__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 0.9rem 1rem;
+            border-radius: var(--r-s);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--orchid);
+        }
+
+        .ad-queue__item--warn {
+            border-left-color: #c88a14;
+        }
+
+        .ad-queue__item--bad {
+            border-left-color: #c0264a;
+        }
+
+        .ad-queue__icon {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: var(--r-xs);
+            background: var(--surface);
+            border: 1px solid rgba(122, 28, 172, 0.14);
+            color: var(--purple);
+            font-size: 0.78rem;
+        }
+
+        .ad-queue__body {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .ad-queue__title {
+            font-size: 0.88rem;
+            font-weight: 650;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .ad-queue__meta {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            margin: 0.2rem 0 0;
+        }
+
+        .ad-cohort {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            padding: clamp(1.1rem, 2vw, 1.5rem);
+            border-radius: var(--r-m);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+            transition: transform 0.28s var(--ease-out),
+                box-shadow 0.28s var(--ease-out),
+                border-color 0.28s var(--ease-out);
+        }
+
+        .ad-cohort:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-s);
+            border-color: rgba(122, 28, 172, 0.26);
+        }
+
+        .ad-cohort__top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.85rem;
+        }
+
+        .ad-cohort__name {
+            font-family: var(--font-display);
+            font-size: 1.02rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .ad-cohort__meta {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin: 0.25rem 0 0;
+        }
+
+        .ad-cohort__stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 0.6rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--border);
+        }
+
+        .ad-cohort__stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            min-width: 0;
+        }
+
+        .ad-cohort__stat-label {
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+        }
+
+        .ad-cohort__stat-value {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--plum);
+            line-height: 1.1;
+        }
+
+        .ad-mentor-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .ad-mentor {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.75rem 0.9rem;
+            border-radius: var(--r-s);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+        }
+
+        .ad-mentor__avatar {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, var(--orchid), var(--purple));
+            color: #ffffff;
+            font-size: 0.78rem;
+        }
+
+        .ad-mentor__body {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .ad-mentor__name {
+            font-size: 0.86rem;
+            font-weight: 650;
+            color: var(--ink);
+            margin: 0;
+        }
+
+        .ad-mentor__meta {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            margin: 0.15rem 0 0;
+        }
+
+        .ad-check-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .ad-check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ad-check-list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .ad-check-list li:first-child {
+            padding-top: 0;
+        }
+
+        .ad-check-list__mark {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            margin-top: 0.08rem;
+            border-radius: 50%;
+            font-size: 0.62rem;
+        }
+
+        .ad-check-list__mark--done {
+            background: var(--purple);
+            color: #ffffff;
+        }
+
+        .ad-check-list__mark--active {
+            background: var(--lavender-100);
+            border: 1.5px solid var(--purple);
+            color: var(--purple);
+        }
+
+        .ad-check-list__mark--todo {
+            background: transparent;
+            border: 1.5px dashed var(--border-strong);
+            color: var(--ink-soft);
+        }
+
+        .ad-check-list__body {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .ad-check-list__title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .ad-check-list__meta {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            margin: 0.2rem 0 0;
+        }
+
+        .ad-actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .ad-skip {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            z-index: 200;
+            padding: 0.7rem 1.2rem;
+            border-radius: 0 0 var(--r-s) var(--r-s);
+            background: var(--orchid);
+            color: #fff;
+            font-size: 0.86rem;
+            font-weight: 650;
+            text-decoration: none;
+            transition: top 0.22s var(--ease-out);
+        }
+
+        .ad-skip:focus {
+            top: 0;
+            color: #fff;
+        }
+
+        .ad-main,
+        .ad-panel,
+        .ad-card,
+        .ad-head {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .ad-feed__title,
+        .ad-feed__meta,
+        .ad-check-list__title {
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 1280px) {
+            .ad-grid-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 1100px) {
+            :root {
+                --ad-side-w: 250px;
+            }
+
+            .ad-grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .ad-grid-wide-left,
+            .ad-grid-wide-right {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .ad-header__greeting {
+                display: none;
+            }
+
+            .ad-menu-toggle {
+                display: inline-flex;
+                flex-shrink: 0;
+            }
+
+            .ad-body {
+                grid-template-columns: minmax(0, 1fr);
+                padding-block: 1rem 3rem;
+            }
+
+            .ad-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 120;
+                width: min(320px, 86vw);
+                max-height: none;
+                border-radius: 0 var(--r-l) var(--r-l) 0;
+                transform: translateX(-102%);
+                transition: transform 0.32s var(--ease-out);
+                will-change: transform;
+            }
+
+            .ad-sidebar.is-open {
+                transform: translateX(0);
+            }
+
+            .ad-scrim {
+                position: fixed;
+                inset: 0;
+                z-index: 110;
+                background: rgba(46, 7, 63, 0.55);
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.28s var(--ease-out), visibility 0.28s var(--ease-out);
+            }
+
+            .ad-scrim.is-visible {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .ad-drawer-close {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 34px;
+                height: 34px;
+                border: 1.5px solid rgba(235, 211, 248, 0.24);
+                border-radius: var(--r-xs);
+                background: rgba(235, 211, 248, 0.06);
+                color: var(--lavender);
+                font-size: 0.86rem;
+                cursor: pointer;
+            }
+
+            .ad-drawer-close:focus-visible {
+                outline: 3px solid var(--orchid);
+                outline-offset: 2px;
+            }
+        }
+
+        @media (min-width: 901px) {
+
+            .ad-drawer-close,
+            .ad-scrim {
+                display: none;
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .ad-grid-2,
+            .ad-grid-3,
+            .ad-grid-4 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .ad-profile__text {
+                display: none;
+            }
+
+            .ad-profile {
+                padding: 0.3rem;
+            }
+
+            .ad-chart-bars {
+                height: 140px;
+            }
+
+            .ad-header__inner {
+                gap: 0.5rem;
+            }
+
+            .ad-header__brand {
+                gap: 0.5rem;
+            }
+
+            .ad-cohort__stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .ad-chart-kpis {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .ad-header__inner,
+            .ad-body {
+                width: min(100% - 1.5rem, 1600px);
+            }
+
+            .ad-menu-toggle {
+                width: 38px;
+                height: 38px;
+            }
+
+            .ad-brand__logo {
+                height: 28px;
+                max-width: 98px;
+            }
+
+            .ad-role-chip {
+                padding: 0.22rem 0.5rem;
+                font-size: 0.58rem;
+                letter-spacing: 0.1em;
+                flex-shrink: 0;
+            }
+
+            .ad-brand__name {
+                display: none;
+            }
+
+            .ad-head {
+                padding: 1.1rem;
+            }
+
+            .ad-actions .btn,
+            .ad-card .btn {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ad-sidebar {
+                transition: none;
+            }
+
+            .ad-cohort:hover {
+                transform: none;
+            }
+
+            .ad-chart-bars__fill,
+            .ad-svg-chart__col,
+            .ad-stack__seg,
+            .ad-mini-bar__fill {
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="ad-page">
+
+    <a class="ad-skip" href="#ad-main">Skip to admin content</a>
+
+    <header class="ad-header">
+        <div class="ad-header__inner">
+
+            <div class="ad-header__brand">
+                <button class="ad-menu-toggle" id="ad-menu-toggle" type="button" aria-label="Open admin navigation"
+                    aria-expanded="false" aria-controls="ad-sidebar">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+
+                <a class="ad-brand" id="ad-brand" href="#overview" aria-label="Stackly admin — go to Platform Overview">
+                    <img class="ad-brand__logo" src="../logo.webp" alt="Stackly logo" width="120" height="34">
+                </a>
+
+                <span class="ad-role-chip">
+                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                    Admin
+                </span>
+            </div>
+
+            <div class="ad-header__greeting">
+                <span class="ad-header__greeting-text" id="ad-greeting">Hello admin</span>
+                <span class="ad-header__greeting-sub">Platform console &middot; demo data</span>
+            </div>
+
+            <div class="ad-header__actions">
+                <div class="ad-profile" title="Signed-in demo identity">
+                    <span class="ad-profile__avatar" aria-hidden="true">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </span>
+                    <span class="ad-profile__text">
+                        <span class="ad-profile__label">Signed in</span>
+                        <span class="ad-profile__email" id="ad-profile-email">demo admin</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="ad-scrim" id="ad-scrim" hidden></div>
+
+    <div class="ad-body">
+
+        <aside class="ad-sidebar" id="ad-sidebar" aria-label="Admin sections">
+
+            <div class="ad-sidebar__head">
+                <a class="ad-brand" href="#overview" aria-label="Stackly admin — go to Platform Overview">
+                    <img class="ad-brand__logo" src="../logo.webp" alt="Stackly logo" width="120" height="34">
+                </a>
+                <button class="ad-drawer-close" id="ad-drawer-close" type="button" aria-label="Close admin navigation">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <nav class="ad-nav" aria-label="Admin sections">
+                <button class="ad-nav__link is-active" type="button" data-section="overview" aria-current="true">
+                    <span class="ad-nav__icon"><i class="fa-solid fa-chart-line" aria-hidden="true"></i></span>
+                    <span class="ad-nav__label">Platform Overview</span>
+                </button>
+
+                <button class="ad-nav__link" type="button" data-section="cohorts">
+                    <span class="ad-nav__icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span>
+                    <span class="ad-nav__label">Cohort Operations</span>
+                </button>
+
+                <button class="ad-nav__link" type="button" data-section="learners">
+                    <span class="ad-nav__icon"><i class="fa-solid fa-address-book" aria-hidden="true"></i></span>
+                    <span class="ad-nav__label">Learner Directory</span>
+                </button>
+
+                <button class="ad-nav__link" type="button" data-section="curriculum">
+                    <span class="ad-nav__icon"><i class="fa-solid fa-book-bookmark" aria-hidden="true"></i></span>
+                    <span class="ad-nav__label">Curriculum Operations</span>
+                </button>
+
+                <button class="ad-nav__link" type="button" data-section="reports">
+                    <span class="ad-nav__icon"><i class="fa-solid fa-clipboard-list" aria-hidden="true"></i></span>
+                    <span class="ad-nav__label">Reports &amp; Activity</span>
+                </button>
+            </nav>
+
+            <div class="ad-sidebar__foot">
+
+                <div class="ad-identity">
+                    <span class="ad-identity__avatar" aria-hidden="true">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </span>
+                    <div class="ad-identity__text">
+                        <p class="ad-identity__name" id="ad-identity-name">Demo Admin</p>
+                        <p class="ad-identity__email" id="ad-identity-email">demo admin</p>
+                    </div>
+                </div>
+
+                <a class="ad-logout" id="ad-logout" href="login.html">
+                    <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                    Log out
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="ad-main" id="ad-main">
+
+            <section class="ad-panel is-active" id="panel-overview" data-panel="overview"
+                aria-labelledby="ad-overview-heading">
+
+                <header class="ad-head">
+                    <p class="ad-head__eyebrow">
+                        <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                        Platform Overview
+                    </p>
+                    <h1 id="ad-overview-heading" tabindex="-1">Platform status at a glance</h1>
+                    <p>Aggregate activity across cohorts, mentor capacity, and review queues. All values are
+                        illustrative demo data.</p>
+                </header>
+
+                <div class="ad-grid-4">
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-people-group"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">Active cohorts</span>
+                        <span class="ad-stat__value">6</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> +1
+                            starting next month</span>
+                    </article>
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-user-graduate"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">Enrolled learners</span>
+                        <span class="ad-stat__value">142</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> +18
+                            this quarter</span>
+                    </article>
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-code-pull-request"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">Reviews pending</span>
+                        <span class="ad-stat__value">37</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-clock" aria-hidden="true"></i> Avg age: 1.4
+                            days</span>
+                    </article>
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-user-tie" aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">Mentor hours / week</span>
+                        <span class="ad-stat__value">84</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-arrow-trend-down" aria-hidden="true"></i> −6
+                            hrs vs last week</span>
+                    </article>
+
+                </div>
+
+                <div class="ad-grid-wide-left">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Cohort engagement &amp; review queue</h2>
+                                <span class="ad-card__sub">Active learners vs awaiting review &middot; last 6 weeks (illustrative demo data)</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-chart-kpis">
+                            <div class="ad-chart-kpi">
+                                <span class="ad-chart-kpi__label">Peak cohort</span>
+                                <span class="ad-chart-kpi__val">C-24 (26 active)</span>
+                            </div>
+                            <div class="ad-chart-kpi">
+                                <span class="ad-chart-kpi__label">Avg active / cohort</span>
+                                <span class="ad-chart-kpi__val">22.2 learners</span>
+                            </div>
+                            <div class="ad-chart-kpi">
+                                <span class="ad-chart-kpi__label">Total review queue</span>
+                                <span class="ad-chart-kpi__val">37 submissions</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-svg-chart-wrap">
+                            <svg class="ad-svg-chart" viewBox="0 0 560 205" role="img"
+                                aria-label="Dual-line area chart comparing active learners and learners awaiting review across cohorts C-21 through C-26, illustrative demo data">
+                                <defs>
+                                    <linearGradient id="adCohortAreaA" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#7A1CAC" stop-opacity="0.32" />
+                                        <stop offset="100%" stop-color="#7A1CAC" stop-opacity="0.02" />
+                                    </linearGradient>
+                                    <linearGradient id="adCohortAreaB" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#AD49E1" stop-opacity="0.22" />
+                                        <stop offset="100%" stop-color="#AD49E1" stop-opacity="0.0" />
+                                    </linearGradient>
+                                </defs>
+
+                                <line class="ad-svg-chart__grid" x1="44" y1="28" x2="536" y2="28" />
+                                <line class="ad-svg-chart__grid" x1="44" y1="64" x2="536" y2="64" />
+                                <line class="ad-svg-chart__grid" x1="44" y1="100" x2="536" y2="100" />
+                                <line class="ad-svg-chart__grid" x1="44" y1="136" x2="536" y2="136" />
+                                <line class="ad-svg-chart__axis" x1="44" y1="172" x2="536" y2="172" />
+
+                                <text class="ad-svg-chart__tick-label" x="34" y="32" text-anchor="end">28</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="68" text-anchor="end">21</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="104" text-anchor="end">14</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="140" text-anchor="end">7</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="175" text-anchor="end">0</text>
+
+                                <path d="M 80 59 L 168 48 L 256 64 L 344 38 L 432 74 L 520 64 L 520 172 L 80 172 Z"
+                                    fill="url(#adCohortAreaA)" />
+
+                                <path d="M 80 146 L 168 136 L 256 151 L 344 100 L 432 156 L 520 151 L 520 172 L 80 172 Z"
+                                    fill="url(#adCohortAreaB)" />
+
+                                <polyline class="ad-svg-chart__line"
+                                    points="80,59 168,48 256,64 344,38 432,74 520,64"
+                                    fill="none" stroke="#7A1CAC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+
+                                <polyline class="ad-svg-chart__line"
+                                    points="80,146 168,136 256,151 344,100 432,156 520,151"
+                                    fill="none" stroke="#AD49E1" stroke-width="2.5" stroke-dasharray="6 4" stroke-linecap="round" stroke-linejoin="round" />
+
+                                <g class="ad-svg-chart__dots">
+                                    <circle cx="80" cy="59" r="5" fill="#7A1CAC" stroke="#ffffff" stroke-width="2" />
+                                    <text class="ad-svg-chart__val-label" x="80" y="47" text-anchor="middle">22</text>
+
+                                    <circle cx="168" cy="48" r="5" fill="#7A1CAC" stroke="#ffffff" stroke-width="2" />
+                                    <text class="ad-svg-chart__val-label" x="168" y="36" text-anchor="middle">24</text>
+
+                                    <circle cx="256" cy="64" r="5" fill="#7A1CAC" stroke="#ffffff" stroke-width="2" />
+                                    <text class="ad-svg-chart__val-label" x="256" y="52" text-anchor="middle">21</text>
+
+                                    <circle cx="344" cy="38" r="5.5" fill="#2E073F" stroke="#AD49E1" stroke-width="2.5" />
+                                    <text class="ad-svg-chart__val-label" x="344" y="25" text-anchor="middle">26</text>
+
+                                    <circle cx="432" cy="74" r="5" fill="#7A1CAC" stroke="#ffffff" stroke-width="2" />
+                                    <text class="ad-svg-chart__val-label" x="432" y="62" text-anchor="middle">19</text>
+
+                                    <circle cx="520" cy="64" r="5" fill="#7A1CAC" stroke="#ffffff" stroke-width="2" />
+                                    <text class="ad-svg-chart__val-label" x="520" y="52" text-anchor="middle">21</text>
+
+                                    <circle cx="80" cy="146" r="4" fill="#AD49E1" stroke="#ffffff" stroke-width="1.5" />
+                                    <text class="ad-svg-chart__val-label ad-svg-chart__val-label--alt" x="80" y="136" text-anchor="middle">5</text>
+
+                                    <circle cx="168" cy="136" r="4" fill="#AD49E1" stroke="#ffffff" stroke-width="1.5" />
+                                    <text class="ad-svg-chart__val-label ad-svg-chart__val-label--alt" x="168" y="126" text-anchor="middle">7</text>
+
+                                    <circle cx="256" cy="151" r="4" fill="#AD49E1" stroke="#ffffff" stroke-width="1.5" />
+                                    <text class="ad-svg-chart__val-label ad-svg-chart__val-label--alt" x="256" y="141" text-anchor="middle">4</text>
+
+                                    <circle cx="344" cy="100" r="4.5" fill="#AD49E1" stroke="#ffffff" stroke-width="2" />
+                                    <text class="ad-svg-chart__val-label ad-svg-chart__val-label--alt" x="344" y="89" text-anchor="middle">14</text>
+
+                                    <circle cx="432" cy="156" r="4" fill="#AD49E1" stroke="#ffffff" stroke-width="1.5" />
+                                    <text class="ad-svg-chart__val-label ad-svg-chart__val-label--alt" x="432" y="146" text-anchor="middle">3</text>
+
+                                    <circle cx="520" cy="151" r="4" fill="#AD49E1" stroke="#ffffff" stroke-width="1.5" />
+                                    <text class="ad-svg-chart__val-label ad-svg-chart__val-label--alt" x="520" y="141" text-anchor="middle">4</text>
+                                </g>
+
+                                <text class="ad-svg-chart__x-label" x="80" y="193" text-anchor="middle">C-21</text>
+                                <text class="ad-svg-chart__x-label" x="168" y="193" text-anchor="middle">C-22</text>
+                                <text class="ad-svg-chart__x-label" x="256" y="193" text-anchor="middle">C-23</text>
+                                <text class="ad-svg-chart__x-label" x="344" y="193" text-anchor="middle">C-24</text>
+                                <text class="ad-svg-chart__x-label" x="432" y="193" text-anchor="middle">C-25</text>
+                                <text class="ad-svg-chart__x-label" x="520" y="193" text-anchor="middle">C-26</text>
+                            </svg>
+                        </div>
+
+                        <div class="ad-legend">
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__dot ad-legend__dot--a"></span>
+                                Active learners (headcount)
+                            </span>
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__line--dash"></span>
+                                Learners awaiting review
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Review pass rate</h2>
+                                <span class="ad-card__sub">Across all active cohorts</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-donut" role="img" aria-label="Donut chart showing a 74 percent review pass rate">
+                            <svg class="ad-donut__svg" viewBox="0 0 140 140" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="adDonutGrad" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#AD49E1" />
+                                        <stop offset="100%" stop-color="#7A1CAC" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="ad-donut__track" cx="70" cy="70" r="54"></circle>
+                                <circle class="ad-donut__value" cx="70" cy="70" r="54" stroke-dasharray="339.29"
+                                    stroke-dashoffset="339.29" data-pct="74"></circle>
+                            </svg>
+                            <span class="ad-donut__center">
+                                <span class="ad-donut__pct" id="ad-donut-pct">0%</span>
+                                <span class="ad-donut__cap">Pass rate</span>
+                            </span>
+                        </div>
+
+                        <p class="ad-card__text" style="margin-top:1rem;">
+                            74% of submitted reviews pass on first attempt. Remaining 26% receive
+                            follow-up comments or need another round.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="ad-grid-2">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Platform status</h2>
+                                <span class="ad-card__sub">Service checks &amp; queue health</span>
+                            </div>
+                        </div>
+
+                        <ul class="ad-check-list">
+                            <li>
+                                <span class="ad-check-list__mark ad-check-list__mark--done" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <div class="ad-check-list__body">
+                                    <p class="ad-check-list__title">Learner dashboard &mdash; online</p>
+                                    <p class="ad-check-list__meta">Last checked 4 minutes ago</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="ad-check-list__mark ad-check-list__mark--done" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <div class="ad-check-list__body">
+                                    <p class="ad-check-list__title">Review queue &mdash; healthy</p>
+                                    <p class="ad-check-list__meta">37 pending &middot; average age 1.4 days</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="ad-check-list__mark ad-check-list__mark--active" aria-hidden="true">
+                                    <i class="fa-solid fa-play"></i>
+                                </span>
+                                <div class="ad-check-list__body">
+                                    <p class="ad-check-list__title">Cohort C-26 &mdash; onboarding in progress</p>
+                                    <p class="ad-check-list__meta">Starts in 9 days &middot; 22 enrolled</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="ad-check-list__mark ad-check-list__mark--todo" aria-hidden="true">
+                                    <i class="fa-solid fa-circle"></i>
+                                </span>
+                                <div class="ad-check-list__body">
+                                    <p class="ad-check-list__title">Curriculum revision &mdash; 2 modules queued</p>
+                                    <p class="ad-check-list__meta">Awaiting mentor sign-off</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Recent admin activity</h2>
+                                <span class="ad-card__sub">Latest actions in the console</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-feed">
+                            <div class="ad-feed__item">
+                                <span class="ad-feed__icon"><i class="fa-solid fa-user-plus"
+                                        aria-hidden="true"></i></span>
+                                <div class="ad-feed__body">
+                                    <p class="ad-feed__title">Approved 4 new learner applications</p>
+                                    <p class="ad-feed__meta">Cohort C-26 &middot; Frontend track</p>
+                                </div>
+                                <span class="ad-feed__time">2 hrs ago</span>
+                            </div>
+                            <div class="ad-feed__item">
+                                <span class="ad-feed__icon"><i class="fa-solid fa-user-tie"
+                                        aria-hidden="true"></i></span>
+                                <div class="ad-feed__body">
+                                    <p class="ad-feed__title">Reassigned mentor coverage for C-24</p>
+                                    <p class="ad-feed__meta">Balanced review load across 3 mentors</p>
+                                </div>
+                                <span class="ad-feed__time">6 hrs ago</span>
+                            </div>
+                            <div class="ad-feed__item">
+                                <span class="ad-feed__icon"><i class="fa-solid fa-book-bookmark"
+                                        aria-hidden="true"></i></span>
+                                <div class="ad-feed__body">
+                                    <p class="ad-feed__title">Published curriculum revision 2.4.1</p>
+                                    <p class="ad-feed__meta">Backend &amp; Data &middot; testing section updates</p>
+                                </div>
+                                <span class="ad-feed__time">1 day ago</span>
+                            </div>
+                            <div class="ad-feed__item">
+                                <span class="ad-feed__icon"><i class="fa-solid fa-flag" aria-hidden="true"></i></span>
+                                <div class="ad-feed__body">
+                                    <p class="ad-feed__title">Flagged 2 learners for support check-in</p>
+                                    <p class="ad-feed__meta">Low activity over 10+ days</p>
+                                </div>
+                                <span class="ad-feed__time">1 day ago</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </section>
+
+            <section class="ad-panel" id="panel-cohorts" data-panel="cohorts" aria-labelledby="ad-cohorts-heading"
+                hidden>
+
+                <header class="ad-head">
+                    <p class="ad-head__eyebrow">
+                        <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+                        Cohort Operations
+                    </p>
+                    <h2 id="ad-cohorts-heading" tabindex="-1">Running cohorts and schedules</h2>
+                    <p>Status of every active cohort, mentor allocation, and operational alerts. Cohort names and
+                        numbers are illustrative demo data.</p>
+                </header>
+
+                <article class="ad-card">
+                    <div class="ad-card__head">
+                        <div>
+                            <h2 class="ad-card__title">Active cohorts</h2>
+                            <span class="ad-card__sub">Six in progress this term</span>
+                        </div>
+                    </div>
+
+                    <div class="ad-table-wrap">
+                        <table class="ad-table">
+                            <caption>All active cohorts, sorted by start date</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cohort</th>
+                                    <th scope="col">Track</th>
+                                    <th scope="col">Learners</th>
+                                    <th scope="col">Mentor</th>
+                                    <th scope="col">Progress</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ad-table__strong">C-21</td>
+                                    <td>Full-Stack</td>
+                                    <td>24</td>
+                                    <td>A. Raman</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:88%"></span></span>
+                                            <span class="ad-mini-bar__pct">88%</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> Near
+                                            complete</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-22</td>
+                                    <td>Frontend</td>
+                                    <td>26</td>
+                                    <td>P. Nair</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:64%"></span></span>
+                                            <span class="ad-mini-bar__pct">64%</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> On track</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-23</td>
+                                    <td>Backend</td>
+                                    <td>22</td>
+                                    <td>R. Iyer</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:52%"></span></span>
+                                            <span class="ad-mini-bar__pct">52%</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> On track</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-24</td>
+                                    <td>Frontend</td>
+                                    <td>28</td>
+                                    <td>A. Raman</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:38%"></span></span>
+                                            <span class="ad-mini-bar__pct">38%</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Review
+                                            backlog</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-25</td>
+                                    <td>Full-Stack</td>
+                                    <td>20</td>
+                                    <td>P. Nair</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:22%"></span></span>
+                                            <span class="ad-mini-bar__pct">22%</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> On track</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-26</td>
+                                    <td>Frontend</td>
+                                    <td>22</td>
+                                    <td>R. Iyer</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:8%"></span></span>
+                                            <span class="ad-mini-bar__pct">8%</span>
+                                        </div>
+                                    </td>
+                                    <td><span class="pill pill--info"><i class="fa-solid fa-play"></i> Onboarding</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <div class="ad-grid-wide-left">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Mentor allocation</h2>
+                                <span class="ad-card__sub">Current assignment load</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-mentor-list">
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user-tie"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Mentor A &mdash; A. Raman</p>
+                                    <p class="ad-mentor__meta">Cohorts C-21, C-24 &middot; 52 learners &middot; 26
+                                        hrs/week</p>
+                                </div>
+                                <span class="pill pill--warn"><i class="fa-solid fa-triangle-exclamation"></i>
+                                    Overloaded</span>
+                            </div>
+
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user-tie"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Mentor B &mdash; P. Nair</p>
+                                    <p class="ad-mentor__meta">Cohorts C-22, C-25 &middot; 46 learners &middot; 24
+                                        hrs/week</p>
+                                </div>
+                                <span class="pill pill--ok"><i class="fa-solid fa-check"></i> Balanced</span>
+                            </div>
+
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user-tie"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Mentor C &mdash; R. Iyer</p>
+                                    <p class="ad-mentor__meta">Cohorts C-23, C-26 &middot; 44 learners &middot; 22
+                                        hrs/week</p>
+                                </div>
+                                <span class="pill pill--ok"><i class="fa-solid fa-check"></i> Balanced</span>
+                            </div>
+
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user-tie"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Mentor D &mdash; S. Kaur</p>
+                                    <p class="ad-mentor__meta">Review-only &middot; 12 hrs/week allocated</p>
+                                </div>
+                                <span class="pill pill--info"><i class="fa-solid fa-circle-info"></i> Part-time</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-actions">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Rebalance allocation
+                                <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Operational alerts</h2>
+                                <span class="ad-card__sub">Items needing attention</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-queue">
+                            <div class="ad-queue__item ad-queue__item--warn">
+                                <span class="ad-queue__icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></span>
+                                <div class="ad-queue__body">
+                                    <p class="ad-queue__title">C-24 review queue age is above target</p>
+                                    <p class="ad-queue__meta">Average 3.1 days vs 2-day target</p>
+                                </div>
+                            </div>
+
+                            <div class="ad-queue__item ad-queue__item--bad">
+                                <span class="ad-queue__icon"><i class="fa-solid fa-user-xmark"
+                                        aria-hidden="true"></i></span>
+                                <div class="ad-queue__body">
+                                    <p class="ad-queue__title">Mentor A load above threshold</p>
+                                    <p class="ad-queue__meta">26 hrs/week vs 22-hr recommended cap</p>
+                                </div>
+                            </div>
+
+                            <div class="ad-queue__item">
+                                <span class="ad-queue__icon"><i class="fa-solid fa-user-plus"
+                                        aria-hidden="true"></i></span>
+                                <div class="ad-queue__body">
+                                    <p class="ad-queue__title">C-26 onboarding checklist incomplete</p>
+                                    <p class="ad-queue__meta">4 learners awaiting environment setup</p>
+                                </div>
+                            </div>
+
+                            <div class="ad-queue__item">
+                                <span class="ad-queue__icon"><i class="fa-solid fa-flag" aria-hidden="true"></i></span>
+                                <div class="ad-queue__body">
+                                    <p class="ad-queue__title">2 support check-ins flagged last week</p>
+                                    <p class="ad-queue__meta">Learners with low activity over 10+ days</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ad-actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Open alert log
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="ad-grid-3">
+
+                    <article class="ad-cohort">
+                        <div class="ad-cohort__top">
+                            <div>
+                                <h3 class="ad-cohort__name">Cohort C-23</h3>
+                                <p class="ad-cohort__meta">Backend track &middot; started 6 weeks ago</p>
+                            </div>
+                            <span class="pill pill--ok"><i class="fa-solid fa-check"></i> Healthy</span>
+                        </div>
+                        <div class="ad-cohort__stats">
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Learners</span>
+                                <span class="ad-cohort__stat-value">22</span>
+                            </div>
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Avg progress</span>
+                                <span class="ad-cohort__stat-value">52%</span>
+                            </div>
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Open reviews</span>
+                                <span class="ad-cohort__stat-value">4</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="ad-cohort">
+                        <div class="ad-cohort__top">
+                            <div>
+                                <h3 class="ad-cohort__name">Cohort C-24</h3>
+                                <p class="ad-cohort__meta">Frontend track &middot; started 4 weeks ago</p>
+                            </div>
+                            <span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Backlog</span>
+                        </div>
+                        <div class="ad-cohort__stats">
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Learners</span>
+                                <span class="ad-cohort__stat-value">28</span>
+                            </div>
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Avg progress</span>
+                                <span class="ad-cohort__stat-value">38%</span>
+                            </div>
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Open reviews</span>
+                                <span class="ad-cohort__stat-value">14</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="ad-cohort">
+                        <div class="ad-cohort__top">
+                            <div>
+                                <h3 class="ad-cohort__name">Cohort C-25</h3>
+                                <p class="ad-cohort__meta">Full-Stack track &middot; started 2 weeks ago</p>
+                            </div>
+                            <span class="pill pill--ok"><i class="fa-solid fa-check"></i> On track</span>
+                        </div>
+                        <div class="ad-cohort__stats">
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Learners</span>
+                                <span class="ad-cohort__stat-value">20</span>
+                            </div>
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Avg progress</span>
+                                <span class="ad-cohort__stat-value">22%</span>
+                            </div>
+                            <div class="ad-cohort__stat">
+                                <span class="ad-cohort__stat-label">Open reviews</span>
+                                <span class="ad-cohort__stat-value">3</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <article class="ad-card">
+                    <div class="ad-card__head">
+                        <div>
+                            <h2 class="ad-card__title">Upcoming cohort schedule</h2>
+                            <span class="ad-card__sub">Starts, checkpoints, and wrap-ups</span>
+                        </div>
+                    </div>
+
+                    <div class="ad-table-wrap">
+                        <table class="ad-table">
+                            <caption>Cohort schedule for the next eight weeks</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Cohort</th>
+                                    <th scope="col">Event</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Owner</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ad-table__strong">C-26</td>
+                                    <td>Onboarding week</td>
+                                    <td class="ad-table__mono">Week 1</td>
+                                    <td>R. Iyer</td>
+                                    <td><span class="pill pill--info"><i class="fa-solid fa-play"></i> Scheduled</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-23</td>
+                                    <td>Mid-track assessment</td>
+                                    <td class="ad-table__mono">Week 2</td>
+                                    <td>R. Iyer</td>
+                                    <td><span class="pill pill--info"><i class="fa-solid fa-play"></i> Scheduled</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-24</td>
+                                    <td>Review backlog catch-up</td>
+                                    <td class="ad-table__mono">Week 3</td>
+                                    <td>A. Raman</td>
+                                    <td><span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Needs
+                                            planning</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-22</td>
+                                    <td>Final capstone presentations</td>
+                                    <td class="ad-table__mono">Week 5</td>
+                                    <td>P. Nair</td>
+                                    <td><span class="pill pill--info"><i class="fa-solid fa-play"></i> Scheduled</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">C-21</td>
+                                    <td>Cohort wrap-up &amp; hand-off</td>
+                                    <td class="ad-table__mono">Week 7</td>
+                                    <td>A. Raman</td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> Confirmed</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="ad-panel" id="panel-learners" data-panel="learners" aria-labelledby="ad-learners-heading"
+                hidden>
+
+                <header class="ad-head">
+                    <p class="ad-head__eyebrow">
+                        <i class="fa-solid fa-address-book" aria-hidden="true"></i>
+                        Learner Directory
+                    </p>
+                    <h2 id="ad-learners-heading" tabindex="-1">Directory and enrollment status</h2>
+                    <p>A directory view of enrolled learners with progress and support flags. Names, emails, and values
+                        are illustrative demo data only.</p>
+                </header>
+
+                <div class="ad-grid-4">
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">Total learners</span>
+                        <span class="ad-stat__value">142</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Across 6
+                            cohorts</span>
+                    </article>
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-circle-check"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">On track</span>
+                        <span class="ad-stat__value">118</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-percent" aria-hidden="true"></i> 83% of
+                            learners</span>
+                    </article>
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-triangle-exclamation"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">Needs check-in</span>
+                        <span class="ad-stat__value">14</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-flag" aria-hidden="true"></i> Low activity
+                            signals</span>
+                    </article>
+
+                    <article class="ad-stat">
+                        <div class="ad-stat__top">
+                            <span class="ad-stat__icon"><i class="fa-solid fa-circle-pause"
+                                    aria-hidden="true"></i></span>
+                        </div>
+                        <span class="ad-stat__label">Paused</span>
+                        <span class="ad-stat__value">10</span>
+                        <span class="ad-stat__meta"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>
+                            Planned returns</span>
+                    </article>
+
+                </div>
+
+                <div class="ad-grid-wide-left">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Enrollment by track</h2>
+                                <span class="ad-card__sub">Current distribution</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-stack">
+                            <div class="ad-stack__row">
+                                <div class="ad-stack__top">
+                                    <span class="ad-stack__label">Frontend</span>
+                                    <span class="ad-stack__value">54 learners</span>
+                                </div>
+                                <div class="ad-stack__track">
+                                    <span class="ad-stack__seg ad-stack__seg--done" style="--w:62%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--active" style="--w:14%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--pending" style="--w:24%"></span>
+                                </div>
+                            </div>
+
+                            <div class="ad-stack__row">
+                                <div class="ad-stack__top">
+                                    <span class="ad-stack__label">Backend</span>
+                                    <span class="ad-stack__value">38 learners</span>
+                                </div>
+                                <div class="ad-stack__track">
+                                    <span class="ad-stack__seg ad-stack__seg--done" style="--w:48%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--active" style="--w:18%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--pending" style="--w:34%"></span>
+                                </div>
+                            </div>
+
+                            <div class="ad-stack__row">
+                                <div class="ad-stack__top">
+                                    <span class="ad-stack__label">Full-Stack</span>
+                                    <span class="ad-stack__value">32 learners</span>
+                                </div>
+                                <div class="ad-stack__track">
+                                    <span class="ad-stack__seg ad-stack__seg--done" style="--w:42%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--active" style="--w:20%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--pending" style="--w:38%"></span>
+                                </div>
+                            </div>
+
+                            <div class="ad-stack__row">
+                                <div class="ad-stack__top">
+                                    <span class="ad-stack__label">Foundations</span>
+                                    <span class="ad-stack__value">18 learners</span>
+                                </div>
+                                <div class="ad-stack__track">
+                                    <span class="ad-stack__seg ad-stack__seg--done" style="--w:36%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--active" style="--w:22%"></span>
+                                    <span class="ad-stack__seg ad-stack__seg--pending" style="--w:42%"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="ad-legend">
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__dot ad-legend__dot--a"></span>
+                                On track
+                            </span>
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__dot ad-legend__dot--b"></span>
+                                Needs check-in
+                            </span>
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__dot ad-legend__dot--c"></span>
+                                Paused
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Support watch</h2>
+                                <span class="ad-card__sub">Learners needing outreach</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-mentor-list">
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Learner &mdash; Cohort C-24</p>
+                                    <p class="ad-mentor__meta">No activity in 11 days &middot; last login Mar 12</p>
+                                </div>
+                                <span class="pill pill--bad"><i class="fa-solid fa-flag"></i> Flagged</span>
+                            </div>
+
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Learner &mdash; Cohort C-22</p>
+                                    <p class="ad-mentor__meta">Two review rounds with no reply</p>
+                                </div>
+                                <span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Watch</span>
+                            </div>
+
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Learner &mdash; Cohort C-25</p>
+                                    <p class="ad-mentor__meta">Slower pace, but active weekly</p>
+                                </div>
+                                <span class="pill pill--info"><i class="fa-solid fa-circle-info"></i> Monitoring</span>
+                            </div>
+
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user"></i></span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Learner &mdash; Cohort C-23</p>
+                                    <p class="ad-mentor__meta">Requested a pause last week</p>
+                                </div>
+                                <span class="pill pill--neutral"><i class="fa-solid fa-circle-pause"></i> Paused</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Open support queue
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <article class="ad-card">
+                    <div class="ad-card__head">
+                        <div>
+                            <h2 class="ad-card__title">Directory &mdash; sample view</h2>
+                            <span class="ad-card__sub">Six of 142 learners shown</span>
+                        </div>
+                    </div>
+
+                    <div class="ad-table-wrap">
+                        <table class="ad-table">
+                            <caption>Sample learner directory records</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Learner</th>
+                                    <th scope="col">Cohort</th>
+                                    <th scope="col">Track</th>
+                                    <th scope="col">Progress</th>
+                                    <th scope="col">Last active</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <span class="ad-learner">
+                                            <span class="ad-learner__avatar" aria-hidden="true">L1</span>
+                                            <span class="ad-table__strong">Learner L-1001</span>
+                                        </span>
+                                    </td>
+                                    <td>C-23</td>
+                                    <td>Backend</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:66%"></span></span>
+                                            <span class="ad-mini-bar__pct">66%</span>
+                                        </div>
+                                    </td>
+                                    <td class="ad-table__mono">Today</td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> On track</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="ad-learner">
+                                            <span class="ad-learner__avatar" aria-hidden="true">L2</span>
+                                            <span class="ad-table__strong">Learner L-1002</span>
+                                        </span>
+                                    </td>
+                                    <td>C-24</td>
+                                    <td>Frontend</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:28%"></span></span>
+                                            <span class="ad-mini-bar__pct">28%</span>
+                                        </div>
+                                    </td>
+                                    <td class="ad-table__mono">11 days ago</td>
+                                    <td><span class="pill pill--bad"><i class="fa-solid fa-flag"></i> Flagged</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="ad-learner">
+                                            <span class="ad-learner__avatar" aria-hidden="true">L3</span>
+                                            <span class="ad-table__strong">Learner L-1003</span>
+                                        </span>
+                                    </td>
+                                    <td>C-21</td>
+                                    <td>Full-Stack</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:92%"></span></span>
+                                            <span class="ad-mini-bar__pct">92%</span>
+                                        </div>
+                                    </td>
+                                    <td class="ad-table__mono">Yesterday</td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> Near
+                                            complete</span></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="ad-learner">
+                                            <span class="ad-learner__avatar" aria-hidden="true">L4</span>
+                                            <span class="ad-table__strong">Learner L-1004</span>
+                                        </span>
+                                    </td>
+                                    <td>C-22</td>
+                                    <td>Frontend</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:48%"></span></span>
+                                            <span class="ad-mini-bar__pct">48%</span>
+                                        </div>
+                                    </td>
+                                    <td class="ad-table__mono">3 days ago</td>
+                                    <td><span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Watch</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="ad-learner">
+                                            <span class="ad-learner__avatar" aria-hidden="true">L5</span>
+                                            <span class="ad-table__strong">Learner L-1005</span>
+                                        </span>
+                                    </td>
+                                    <td>C-25</td>
+                                    <td>Full-Stack</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:18%"></span></span>
+                                            <span class="ad-mini-bar__pct">18%</span>
+                                        </div>
+                                    </td>
+                                    <td class="ad-table__mono">Today</td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> On track</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <span class="ad-learner">
+                                            <span class="ad-learner__avatar" aria-hidden="true">L6</span>
+                                            <span class="ad-table__strong">Learner L-1006</span>
+                                        </span>
+                                    </td>
+                                    <td>C-23</td>
+                                    <td>Backend</td>
+                                    <td>
+                                        <div class="ad-mini-bar">
+                                            <span class="ad-mini-bar__track"><span class="ad-mini-bar__fill"
+                                                    style="--w:54%"></span></span>
+                                            <span class="ad-mini-bar__pct">54%</span>
+                                        </div>
+                                    </td>
+                                    <td class="ad-table__mono">5 days ago</td>
+                                    <td><span class="pill pill--neutral"><i class="fa-solid fa-circle-pause"></i>
+                                            Paused</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="ad-actions">
+                        <a class="btn btn--primary btn--sm" href="../404.html">
+                            Open full directory
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn--ghost btn--sm" href="../404.html">
+                            Export CSV
+                            <i class="fa-solid fa-download" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <div class="ad-grid-2">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">On-track ratio</h2>
+                                <span class="ad-card__sub">Share of learners on track</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-ring" role="img"
+                            aria-label="Ring chart showing 83 percent of learners are on track">
+                            <svg class="ad-ring__svg" viewBox="0 0 140 140" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="adRingGrad" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#7A1CAC" />
+                                        <stop offset="100%" stop-color="#AD49E1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="ad-ring__track" cx="70" cy="70" r="52"></circle>
+                                <circle class="ad-ring__value" cx="70" cy="70" r="52" stroke-dasharray="326.73"
+                                    stroke-dashoffset="326.73" data-pct="83"></circle>
+                            </svg>
+                            <span class="ad-ring__center">
+                                <span class="ad-ring__pct" id="ad-ring-pct">0%</span>
+                                <span class="ad-ring__cap">On track</span>
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Retention trend</h2>
+                                <span class="ad-card__sub">Active learners, last 8 months</span>
+                            </div>
+                        </div>
+
+                        <svg class="ad-spark" viewBox="0 0 320 110" role="img"
+                            aria-label="Line chart of active learners trending upward over the last eight months">
+                            <defs>
+                                <linearGradient id="adSparkFill" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="rgba(122, 28, 172, 0.28)" />
+                                    <stop offset="100%" stop-color="rgba(122, 28, 172, 0)" />
+                                </linearGradient>
+                            </defs>
+
+                            <path class="ad-spark__area"
+                                d="M10 82 L52 76 L94 70 L136 66 L178 56 L220 46 L262 38 L310 30 L310 100 L10 100 Z">
+                            </path>
+
+                            <polyline class="ad-spark__line"
+                                points="10,82 52,76 94,70 136,66 178,56 220,46 262,38 310,30"></polyline>
+
+                            <circle class="ad-spark__dot" cx="310" cy="30" r="4"></circle>
+                        </svg>
+
+                        <div class="ad-legend">
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__dot ad-legend__dot--a"></span>
+                                Active learners per month
+                            </span>
+                        </div>
+
+                        <p class="ad-card__text" style="margin-top:0.85rem;">
+                            Steady upward trend across the term. Retention after month two remains the
+                            main lever for growth.
+                        </p>
+                    </article>
+
+                </div>
+
+            </section>
+
+            <section class="ad-panel" id="panel-curriculum" data-panel="curriculum"
+                aria-labelledby="ad-curriculum-heading" hidden>
+
+                <header class="ad-head">
+                    <p class="ad-head__eyebrow">
+                        <i class="fa-solid fa-book-bookmark" aria-hidden="true"></i>
+                        Curriculum Operations
+                    </p>
+                    <h2 id="ad-curriculum-heading" tabindex="-1">Module health and revision queue</h2>
+                    <p>Status of every module across tracks, plus the revision queue awaiting mentor sign-off. All
+                        values are illustrative demo data.</p>
+                </header>
+
+                <article class="ad-card">
+                    <div class="ad-card__head">
+                        <div>
+                            <h2 class="ad-card__title">Module status</h2>
+                            <span class="ad-card__sub">Across all tracks</span>
+                        </div>
+                    </div>
+
+                    <div class="ad-table-wrap">
+                        <table class="ad-table">
+                            <caption>Curriculum modules and their current operational status</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col">Module</th>
+                                    <th scope="col">Track</th>
+                                    <th scope="col">Version</th>
+                                    <th scope="col">Last revised</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ad-table__strong">Forms &amp; Validation</td>
+                                    <td>Frontend</td>
+                                    <td class="ad-table__mono">v2.4</td>
+                                    <td class="ad-table__mono">4 days ago</td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> Live</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">API Design Fundamentals</td>
+                                    <td>Backend</td>
+                                    <td class="ad-table__mono">v1.9</td>
+                                    <td class="ad-table__mono">2 weeks ago</td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> Live</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">Testing Patterns</td>
+                                    <td>Backend</td>
+                                    <td class="ad-table__mono">v2.1</td>
+                                    <td class="ad-table__mono">1 day ago</td>
+                                    <td><span class="pill pill--info"><i class="fa-solid fa-play"></i> Just
+                                            published</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">Responsive Layout Systems</td>
+                                    <td>Frontend</td>
+                                    <td class="ad-table__mono">v3.2</td>
+                                    <td class="ad-table__mono">1 month ago</td>
+                                    <td><span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Revision
+                                            queued</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">Schema Design</td>
+                                    <td>Backend</td>
+                                    <td class="ad-table__mono">v1.4</td>
+                                    <td class="ad-table__mono">3 months ago</td>
+                                    <td><span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Revision
+                                            queued</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">Project Architecture</td>
+                                    <td>Full-Stack</td>
+                                    <td class="ad-table__mono">v2.0</td>
+                                    <td class="ad-table__mono">5 weeks ago</td>
+                                    <td><span class="pill pill--ok"><i class="fa-solid fa-check"></i> Live</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="ad-table__strong">Accessibility Foundations</td>
+                                    <td>Frontend</td>
+                                    <td class="ad-table__mono">v1.0</td>
+                                    <td class="ad-table__mono">New</td>
+                                    <td><span class="pill pill--info"><i class="fa-solid fa-pen"></i> In draft</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+
+                <div class="ad-grid-wide-left">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Revision queue</h2>
+                                <span class="ad-card__sub">Awaiting mentor sign-off</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-queue">
+                            <div class="ad-queue__item">
+                                <span class="ad-queue__icon"><i class="fa-solid fa-pen" aria-hidden="true"></i></span>
+                                <div class="ad-queue__body">
+                                    <p class="ad-queue__title">Responsive Layout Systems &mdash; restructure for clarity
+                                    </p>
+                                    <p class="ad-queue__meta">Frontend &middot; proposed by P. Nair &middot; 2 weeks in
+                                        queue</p>
+                                </div>
+                                <span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Pending</span>
+                            </div>
+
+                            <div class="ad-queue__item">
+                                <span class="ad-queue__icon"><i class="fa-solid fa-pen" aria-hidden="true"></i></span>
+                                <div class="ad-queue__body">
+                                    <p class="ad-queue__title">Schema Design &mdash; add migrations exercise</p>
+                                    <p class="ad-queue__meta">Backend &middot; proposed by R. Iyer &middot; 9 days in
+                                        queue</p>
+                                </div>
+                                <span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Pending</span>
+                            </div>
+
+                            <div class="ad-queue__item">
+                                <span class="ad-queue__icon"><i class="fa-solid fa-pen" aria-hidden="true"></i></span>
+                                <div class="ad-queue__body">
+                                    <p class="ad-queue__title">Accessibility Foundations &mdash; first full draft</p>
+                                    <p class="ad-queue__meta">Frontend &middot; new module &middot; awaiting review</p>
+                                </div>
+                                <span class="pill pill--info"><i class="fa-solid fa-circle-info"></i> In review</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-actions">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Open revision queue
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Curriculum health</h2>
+                                <span class="ad-card__sub">Modules within current revision window</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-ring" role="img"
+                            aria-label="Ring chart showing 87 percent of modules are within their current revision window">
+                            <svg class="ad-ring__svg" viewBox="0 0 140 140" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="adRingGrad2" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#AD49E1" />
+                                        <stop offset="100%" stop-color="#7A1CAC" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="ad-ring__track" cx="70" cy="70" r="52"></circle>
+                                <circle class="ad-ring__value" cx="70" cy="70" r="52" stroke="url(#adRingGrad2)"
+                                    stroke-dasharray="326.73" stroke-dashoffset="326.73" data-pct="87"></circle>
+                            </svg>
+                            <span class="ad-ring__center">
+                                <span class="ad-ring__pct" id="ad-ring-pct-2">0%</span>
+                                <span class="ad-ring__cap">Up to date</span>
+                            </span>
+                        </div>
+
+                        <p class="ad-card__text" style="margin-top:1rem;">
+                            2 modules are outside their revision window. Both are queued for
+                            revision this month.
+                        </p>
+                    </article>
+
+                </div>
+
+                <article class="ad-card">
+                    <div class="ad-card__head">
+                        <div>
+                            <h2 class="ad-card__title">Version history</h2>
+                            <span class="ad-card__sub">Recent curriculum publications</span>
+                        </div>
+                    </div>
+
+                    <div class="ad-feed">
+                        <div class="ad-feed__item">
+                            <span class="ad-feed__icon"><i class="fa-solid fa-code-branch"
+                                    aria-hidden="true"></i></span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title">Published revision 2.4.1</p>
+                                <p class="ad-feed__meta">Testing Patterns &middot; backend track &middot; 12 lesson
+                                    edits</p>
+                            </div>
+                            <span class="ad-feed__time">1 day ago</span>
+                        </div>
+
+                        <div class="ad-feed__item">
+                            <span class="ad-feed__icon"><i class="fa-solid fa-code-branch"
+                                    aria-hidden="true"></i></span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title">Published revision 2.4.0</p>
+                                <p class="ad-feed__meta">Forms &amp; Validation &middot; frontend track &middot; major
+                                    restructure</p>
+                            </div>
+                            <span class="ad-feed__time">4 days ago</span>
+                        </div>
+
+                        <div class="ad-feed__item">
+                            <span class="ad-feed__icon"><i class="fa-solid fa-code-branch"
+                                    aria-hidden="true"></i></span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title">Rolled back revision 2.3.9</p>
+                                <p class="ad-feed__meta">Schema Design &middot; exercise did not run cleanly on first
+                                    pass</p>
+                            </div>
+                            <span class="ad-feed__time">2 weeks ago</span>
+                        </div>
+
+                        <div class="ad-feed__item">
+                            <span class="ad-feed__icon"><i class="fa-solid fa-code-branch"
+                                    aria-hidden="true"></i></span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title">Published revision 2.3.8</p>
+                                <p class="ad-feed__meta">Project Architecture &middot; full-stack track</p>
+                            </div>
+                            <span class="ad-feed__time">5 weeks ago</span>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="ad-grid-3">
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <h3 class="ad-card__title">Frontend coverage</h3>
+                        </div>
+                        <p class="ad-card__text">10 modules. Strong on layout and accessibility. Forms module recently
+                            revised.</p>
+                        <div class="ad-actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Open track</a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <h3 class="ad-card__title">Backend coverage</h3>
+                        </div>
+                        <p class="ad-card__text">9 modules. Testing section updated this week. Schema module needs
+                            revision.</p>
+                        <div class="ad-actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Open track</a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <h3 class="ad-card__title">Full-stack coverage</h3>
+                        </div>
+                        <p class="ad-card__text">6 modules. Architecture module is current. Deployment module next in
+                            queue.</p>
+                        <div class="ad-actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Open track</a>
+                        </div>
+                    </article>
+                </div>
+
+            </section>
+
+            <section class="ad-panel" id="panel-reports" data-panel="reports" aria-labelledby="ad-reports-heading"
+                hidden>
+
+                <header class="ad-head">
+                    <p class="ad-head__eyebrow">
+                        <i class="fa-solid fa-clipboard-list" aria-hidden="true"></i>
+                        Reports &amp; Activity
+                    </p>
+                    <h2 id="ad-reports-heading" tabindex="-1">Reporting and audit trail</h2>
+                    <p>Periodic reports and a rolling audit log of admin actions. All values are illustrative demo data.
+                    </p>
+                </header>
+
+                <div class="ad-grid-3">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h3 class="ad-card__title">Cohort health report</h3>
+                                <span class="ad-card__sub">Weekly</span>
+                            </div>
+                            <span class="pill pill--info"><i class="fa-solid fa-file-lines"></i> Ready</span>
+                        </div>
+                        <p class="ad-card__text">Engagement, review backlog, and mentor load across all active cohorts.
+                        </p>
+                        <div class="ad-actions">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                View report
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Download
+                                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h3 class="ad-card__title">Learner progress report</h3>
+                                <span class="ad-card__sub">Monthly</span>
+                            </div>
+                            <span class="pill pill--info"><i class="fa-solid fa-file-lines"></i> Ready</span>
+                        </div>
+                        <p class="ad-card__text">Module completion, review outcomes, and support flags per cohort.</p>
+                        <div class="ad-actions">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                View report
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Download
+                                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h3 class="ad-card__title">Curriculum revision report</h3>
+                                <span class="ad-card__sub">Per release</span>
+                            </div>
+                            <span class="pill pill--warn"><i class="fa-solid fa-clock"></i> Queued</span>
+                        </div>
+                        <p class="ad-card__text">All published revisions and their impact on module health.</p>
+                        <div class="ad-actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Schedule
+                                <i class="fa-solid fa-calendar-plus" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="ad-grid-wide-left">
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Weekly review throughput &amp; SLA target</h2>
+                                <span class="ad-card__sub">Last 8 weeks, all cohorts (illustrative demo data)</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-chart-kpis">
+                            <div class="ad-chart-kpi">
+                                <span class="ad-chart-kpi__label">8-week total</span>
+                                <span class="ad-chart-kpi__val">538 reviews</span>
+                            </div>
+                            <div class="ad-chart-kpi">
+                                <span class="ad-chart-kpi__label">Weekly peak</span>
+                                <span class="ad-chart-kpi__val">94 (W8)</span>
+                            </div>
+                            <div class="ad-chart-kpi">
+                                <span class="ad-chart-kpi__label">SLA benchmark</span>
+                                <span class="ad-chart-kpi__val">70 / week</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-svg-chart-wrap">
+                            <svg class="ad-svg-chart" viewBox="0 0 580 210" role="img"
+                                aria-label="Combo column and target line chart of weekly reviews completed from W1 (42) to W8 (94) compared against a 70-review weekly benchmark, illustrative demo data">
+                                <defs>
+                                    <linearGradient id="adColGradMain" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#AD49E1" />
+                                        <stop offset="100%" stop-color="#7A1CAC" />
+                                    </linearGradient>
+                                    <linearGradient id="adColGradPeak" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#7A1CAC" />
+                                        <stop offset="100%" stop-color="#2E073F" />
+                                    </linearGradient>
+                                    <linearGradient id="adColGradSub" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#EBD3F8" />
+                                        <stop offset="100%" stop-color="#C880EE" />
+                                    </linearGradient>
+                                </defs>
+
+                                <line class="ad-svg-chart__grid" x1="42" y1="26" x2="558" y2="26" />
+                                <line class="ad-svg-chart__grid" x1="42" y1="63" x2="558" y2="63" />
+                                <line class="ad-svg-chart__grid" x1="42" y1="100" x2="558" y2="100" />
+                                <line class="ad-svg-chart__grid" x1="42" y1="137" x2="558" y2="137" />
+                                <line class="ad-svg-chart__axis" x1="42" y1="174" x2="558" y2="174" />
+
+                                <text class="ad-svg-chart__tick-label" x="34" y="30" text-anchor="end">100</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="67" text-anchor="end">75</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="104" text-anchor="end">50</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="141" text-anchor="end">25</text>
+                                <text class="ad-svg-chart__tick-label" x="34" y="177" text-anchor="end">0</text>
+
+                                <rect class="ad-svg-chart__col" x="58" y="112" width="18" height="62" rx="4" fill="url(#adColGradMain)" />
+                                <rect class="ad-svg-chart__col" x="79" y="128" width="12" height="46" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="67" y="105" text-anchor="middle">42</text>
+
+                                <rect class="ad-svg-chart__col" x="121" y="101" width="18" height="73" rx="4" fill="url(#adColGradMain)" />
+                                <rect class="ad-svg-chart__col" x="142" y="121" width="12" height="53" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="130" y="94" text-anchor="middle">49</text>
+
+                                <rect class="ad-svg-chart__col" x="184" y="93" width="18" height="81" rx="4" fill="url(#adColGradMain)" />
+                                <rect class="ad-svg-chart__col" x="205" y="113" width="12" height="61" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="193" y="86" text-anchor="middle">55</text>
+
+                                <rect class="ad-svg-chart__col" x="247" y="81" width="18" height="93" rx="4" fill="url(#adColGradMain)" />
+                                <rect class="ad-svg-chart__col" x="268" y="104" width="12" height="70" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="256" y="74" text-anchor="middle">63</text>
+
+                                <rect class="ad-svg-chart__col" x="310" y="69" width="18" height="105" rx="4" fill="url(#adColGradMain)" />
+                                <rect class="ad-svg-chart__col" x="331" y="96" width="12" height="78" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="319" y="62" text-anchor="middle">71</text>
+
+                                <rect class="ad-svg-chart__col" x="373" y="59" width="18" height="115" rx="4" fill="url(#adColGradMain)" />
+                                <rect class="ad-svg-chart__col" x="394" y="87" width="12" height="87" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="382" y="52" text-anchor="middle">78</text>
+
+                                <rect class="ad-svg-chart__col" x="436" y="47" width="18" height="127" rx="4" fill="url(#adColGradMain)" />
+                                <rect class="ad-svg-chart__col" x="457" y="78" width="12" height="96" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="445" y="40" text-anchor="middle">86</text>
+
+                                <rect class="ad-svg-chart__col" x="499" y="35" width="18" height="139" rx="4" fill="url(#adColGradPeak)" />
+                                <rect class="ad-svg-chart__col" x="520" y="67" width="12" height="107" rx="3" fill="url(#adColGradSub)" />
+                                <text class="ad-svg-chart__val-label" x="508" y="28" text-anchor="middle">94</text>
+
+                                <line x1="42" y1="70" x2="558" y2="70" stroke="#2E073F" stroke-width="1.6" stroke-dasharray="5 4" opacity="0.65" />
+
+                                <text class="ad-svg-chart__x-label" x="74" y="195" text-anchor="middle">W1</text>
+                                <text class="ad-svg-chart__x-label" x="137" y="195" text-anchor="middle">W2</text>
+                                <text class="ad-svg-chart__x-label" x="200" y="195" text-anchor="middle">W3</text>
+                                <text class="ad-svg-chart__x-label" x="263" y="195" text-anchor="middle">W4</text>
+                                <text class="ad-svg-chart__x-label" x="326" y="195" text-anchor="middle">W5</text>
+                                <text class="ad-svg-chart__x-label" x="389" y="195" text-anchor="middle">W6</text>
+                                <text class="ad-svg-chart__x-label" x="452" y="195" text-anchor="middle">W7</text>
+                                <text class="ad-svg-chart__x-label" x="515" y="195" text-anchor="middle">W8</text>
+                            </svg>
+                        </div>
+
+                        <div class="ad-legend">
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__dot ad-legend__dot--a"></span>
+                                Reviews completed
+                            </span>
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__dot ad-legend__dot--c"></span>
+                                Passed on first attempt
+                            </span>
+                            <span class="ad-legend__item">
+                                <span class="ad-legend__line--dash" style="border-top-color: var(--plum);"></span>
+                                Weekly target (70)
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <div>
+                                <h2 class="ad-card__title">Top performing cohorts</h2>
+                                <span class="ad-card__sub">Review pass rate, this term</span>
+                            </div>
+                        </div>
+
+                        <div class="ad-mentor-list">
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true">1</span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Cohort C-21</p>
+                                    <p class="ad-mentor__meta">Full-Stack &middot; 24 learners</p>
+                                </div>
+                                <span class="pill pill--ok"><i class="fa-solid fa-arrow-up"></i> 91%</span>
+                            </div>
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true">2</span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Cohort C-23</p>
+                                    <p class="ad-mentor__meta">Backend &middot; 22 learners</p>
+                                </div>
+                                <span class="pill pill--ok"><i class="fa-solid fa-arrow-up"></i> 88%</span>
+                            </div>
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true">3</span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Cohort C-22</p>
+                                    <p class="ad-mentor__meta">Frontend &middot; 26 learners</p>
+                                </div>
+                                <span class="pill pill--info"><i class="fa-solid fa-minus"></i> 79%</span>
+                            </div>
+                            <div class="ad-mentor">
+                                <span class="ad-mentor__avatar" aria-hidden="true">4</span>
+                                <div class="ad-mentor__body">
+                                    <p class="ad-mentor__name">Cohort C-24</p>
+                                    <p class="ad-mentor__meta">Frontend &middot; 28 learners</p>
+                                </div>
+                                <span class="pill pill--warn"><i class="fa-solid fa-arrow-down"></i> 68%</span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <article class="ad-card ad-card--dark">
+                    <div class="ad-card__head">
+                        <div>
+                            <h2 class="ad-card__title">Audit log</h2>
+                            <span class="ad-card__sub">Rolling window &middot; last 7 days</span>
+                        </div>
+                    </div>
+
+                    <div class="ad-feed">
+                        <div class="ad-feed__item" style="border-color: rgba(235,211,248,0.12);">
+                            <span class="ad-feed__icon"
+                                style="background:rgba(235,211,248,0.08);border-color:rgba(235,211,248,0.16);color:var(--orchid-300);">
+                                <i class="fa-solid fa-user-plus" aria-hidden="true"></i>
+                            </span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title" style="color:var(--lavender);">Admin approved 4 applications
+                                </p>
+                                <p class="ad-feed__meta" style="color:var(--on-dark-soft);">Cohort C-26 &middot;
+                                    Frontend track</p>
+                            </div>
+                            <span class="ad-feed__time" style="color:var(--on-dark-soft);">2 hrs ago</span>
+                        </div>
+
+                        <div class="ad-feed__item" style="border-color: rgba(235,211,248,0.12);">
+                            <span class="ad-feed__icon"
+                                style="background:rgba(235,211,248,0.08);border-color:rgba(235,211,248,0.16);color:var(--orchid-300);">
+                                <i class="fa-solid fa-shuffle" aria-hidden="true"></i>
+                            </span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title" style="color:var(--lavender);">Mentor allocation rebalanced
+                                </p>
+                                <p class="ad-feed__meta" style="color:var(--on-dark-soft);">Cohort C-24 &middot; split
+                                    load between two mentors</p>
+                            </div>
+                            <span class="ad-feed__time" style="color:var(--on-dark-soft);">6 hrs ago</span>
+                        </div>
+
+                        <div class="ad-feed__item" style="border-color: rgba(235,211,248,0.12);">
+                            <span class="ad-feed__icon"
+                                style="background:rgba(235,211,248,0.08);border-color:rgba(235,211,248,0.16);color:var(--orchid-300);">
+                                <i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+                            </span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title" style="color:var(--lavender);">Curriculum revision 2.4.1
+                                    published</p>
+                                <p class="ad-feed__meta" style="color:var(--on-dark-soft);">Testing Patterns &middot; 12
+                                    lesson edits</p>
+                            </div>
+                            <span class="ad-feed__time" style="color:var(--on-dark-soft);">1 day ago</span>
+                        </div>
+
+                        <div class="ad-feed__item" style="border-color: rgba(235,211,248,0.12);">
+                            <span class="ad-feed__icon"
+                                style="background:rgba(235,211,248,0.08);border-color:rgba(235,211,248,0.16);color:var(--orchid-300);">
+                                <i class="fa-solid fa-flag" aria-hidden="true"></i>
+                            </span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title" style="color:var(--lavender);">Support check-ins flagged</p>
+                                <p class="ad-feed__meta" style="color:var(--on-dark-soft);">2 learners &middot; low
+                                    activity over 10+ days</p>
+                            </div>
+                            <span class="ad-feed__time" style="color:var(--on-dark-soft);">1 day ago</span>
+                        </div>
+
+                        <div class="ad-feed__item" style="border-color: rgba(235,211,248,0.12);">
+                            <span class="ad-feed__icon"
+                                style="background:rgba(235,211,248,0.08);border-color:rgba(235,211,248,0.16);color:var(--orchid-300);">
+                                <i class="fa-solid fa-file-export" aria-hidden="true"></i>
+                            </span>
+                            <div class="ad-feed__body">
+                                <p class="ad-feed__title" style="color:var(--lavender);">Weekly cohort health report
+                                    generated</p>
+                                <p class="ad-feed__meta" style="color:var(--on-dark-soft);">Auto-scheduled &middot;
+                                    shared with mentors</p>
+                            </div>
+                            <span class="ad-feed__time" style="color:var(--on-dark-soft);">2 days ago</span>
+                        </div>
+                    </div>
+
+                    <div class="ad-actions">
+                        <a class="btn btn--light btn--sm" href="../404.html">
+                            Open full audit log
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <div class="ad-grid-2">
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <h3 class="ad-card__title">Scheduled exports</h3>
+                        </div>
+                        <p class="ad-card__text">Configure recurring report exports and their destinations.</p>
+                        <div class="ad-actions">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Manage schedules
+                                <i class="fa-solid fa-calendar-days" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="ad-card">
+                        <div class="ad-card__head">
+                            <h3 class="ad-card__title">Data retention</h3>
+                        </div>
+                        <p class="ad-card__text">Review retention rules for learner records, review threads, and audit
+                            history.</p>
+                        <div class="ad-actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Open policy
+                                <i class="fa-solid fa-shield-halved" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script>
+        (function () {
+            'use strict';
+
+            var SESSION_KEY = 'stackly_demo_email';
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.addEventListener('load', function () {
+                if (!window.location.hash) { window.scrollTo(0, 0); }
+            });
+
+            function readDemoIdentity() {
+                var raw = '';
+                try {
+                    raw = sessionStorage.getItem(SESSION_KEY) || '';
+                } catch (err) {
+                    raw = '';
+                }
+                raw = raw.trim();
+
+                if (!raw) {
+                    return {
+                        greeting: 'Hello admin',
+                        display: 'demo admin',
+                        name: 'Demo Admin'
+                    };
+                }
+
+                var hasAt = raw.indexOf('@') !== -1;
+                var localPart = hasAt ? raw.split('@')[0] : raw;
+                var safeLocal = localPart || 'admin';
+                var displayName = safeLocal.charAt(0).toUpperCase() + safeLocal.slice(1);
+
+                return {
+                    greeting: 'Hello ' + safeLocal,
+                    display: hasAt ? raw : safeLocal,
+                    name: displayName
+                };
+            }
+
+            var identity = readDemoIdentity();
+
+            var greetingEl = document.getElementById('ad-greeting');
+            var profileEmail = document.getElementById('ad-profile-email');
+            var idNameEl = document.getElementById('ad-identity-name');
+            var idEmailEl = document.getElementById('ad-identity-email');
+
+            if (greetingEl) { greetingEl.textContent = identity.greeting; }
+            if (profileEmail) { profileEmail.textContent = identity.display; profileEmail.title = identity.display; }
+            if (idNameEl) { idNameEl.textContent = identity.name; }
+            if (idEmailEl) { idEmailEl.textContent = identity.display; }
+
+            var navButtons = Array.prototype.slice.call(document.querySelectorAll('.ad-nav__link'));
+            var panels = Array.prototype.slice.call(document.querySelectorAll('.ad-panel'));
+            var adBody = document.querySelector('.ad-body');
+            var headerEl = document.querySelector('.ad-header');
+            var firstSection = 'overview';
+
+            function getPanel(name) {
+                for (var i = 0; i < panels.length; i++) {
+                    if (panels[i].getAttribute('data-panel') === name) { return panels[i]; }
+                }
+                return null;
+            }
+
+            function headerOffset() {
+                return headerEl ? headerEl.getBoundingClientRect().height : 68;
+            }
+
+            function scrollToPanelTop(panel) {
+                if (!panel) return;
+                var bodyTop = adBody
+                    ? adBody.getBoundingClientRect().top + window.pageYOffset
+                    : 0;
+                var target = Math.max(bodyTop - headerOffset() - 16, 0);
+
+                if (prefersReduced) {
+                    window.scrollTo(0, target);
+                } else {
+                    window.scrollTo({ top: target, behavior: 'smooth' });
+                }
+            }
+
+            function focusHeading(panel) {
+                if (!panel) return;
+                var heading = panel.querySelector('[tabindex="-1"]');
+                if (!heading) return;
+
+                window.setTimeout(function () {
+                    try { heading.focus({ preventScroll: true }); } catch (err) { heading.focus(); }
+                }, prefersReduced ? 0 : 320);
+            }
+
+            function animateBars(panel) {
+                if (!panel || !window.gsap || prefersReduced) return;
+                var bars = panel.querySelectorAll('.ad-chart-bars__fill, .ad-svg-chart__col');
+                if (bars.length) {
+                    gsap.fromTo(bars,
+                        { scaleY: 0 },
+                        {
+                            scaleY: 1, duration: 0.75, ease: 'power3.out', stagger: 0.035,
+                            transformOrigin: 'center bottom'
+                        });
+                }
+                var dots = panel.querySelectorAll('.ad-svg-chart__dots circle');
+                if (dots.length) {
+                    gsap.fromTo(dots,
+                        { scale: 0, opacity: 0 },
+                        {
+                            scale: 1, opacity: 1, duration: 0.55, ease: 'back.out(1.7)', stagger: 0.04,
+                            transformOrigin: 'center center'
+                        });
+                }
+            }
+
+            function animateStack(panel) {
+                if (!panel || !window.gsap || prefersReduced) return;
+                var segs = panel.querySelectorAll('.ad-stack__seg, .ad-mini-bar__fill');
+                if (!segs.length) return;
+                gsap.fromTo(segs,
+                    { scaleX: 0 },
+                    {
+                        scaleX: 1, duration: 0.85, ease: 'power3.out', stagger: 0.05,
+                        transformOrigin: 'left center'
+                    });
+            }
+
+            function animateDonut(panel) {
+                if (!panel) return;
+
+                var donut = panel.querySelector('.ad-donut__value');
+                var pctEl = panel.querySelector('.ad-donut__pct');
+                if (donut) {
+                    var pct = parseFloat(donut.getAttribute('data-pct') || '0');
+                    var circ = 339.29;
+                    var offset = circ * (1 - (pct / 100));
+
+                    if (prefersReduced || !window.gsap) {
+                        donut.style.strokeDashoffset = String(offset);
+                        if (pctEl) { pctEl.textContent = Math.round(pct) + '%'; }
+                    } else {
+                        gsap.fromTo(donut,
+                            { strokeDashoffset: circ },
+                            { strokeDashoffset: offset, duration: 1.15, ease: 'power2.out' });
+
+                        if (pctEl) {
+                            var counter = { v: 0 };
+                            gsap.to(counter, {
+                                v: pct, duration: 1.15, ease: 'power2.out',
+                                onUpdate: function () { pctEl.textContent = Math.round(counter.v) + '%'; }
+                            });
+                        }
+                    }
+                }
+
+                var rings = panel.querySelectorAll('.ad-ring__value');
+                rings.forEach(function (ring) {
+                    var ringPct = parseFloat(ring.getAttribute('data-pct') || '0');
+                    var ringCirc = 326.73;
+                    var ringOffset = ringCirc * (1 - (ringPct / 100));
+
+                    var center = ring.closest('.ad-ring');
+                    var capEl = center ? center.querySelector('.ad-ring__pct') : null;
+
+                    if (prefersReduced || !window.gsap) {
+                        ring.style.strokeDashoffset = String(ringOffset);
+                        if (capEl) { capEl.textContent = Math.round(ringPct) + '%'; }
+                    } else {
+                        gsap.fromTo(ring,
+                            { strokeDashoffset: ringCirc },
+                            { strokeDashoffset: ringOffset, duration: 1.15, ease: 'power2.out' });
+
+                        if (capEl) {
+                            var rc = { v: 0 };
+                            gsap.to(rc, {
+                                v: ringPct, duration: 1.15, ease: 'power2.out',
+                                onUpdate: function () { capEl.textContent = Math.round(rc.v) + '%'; }
+                            });
+                        }
+                    }
+                });
+            }
+
+            function primePanel(panel) {
+                if (!panel) return;
+                if (!window.gsap || prefersReduced) {
+                    animateDonut(panel);
+                }
+            }
+
+            function animatePanel(panel) {
+                if (!panel) return;
+                animateBars(panel);
+                animateStack(panel);
+                animateDonut(panel);
+            }
+
+            function activateSection(name, options) {
+                var opts = options || {};
+                var target = getPanel(name);
+                if (!target) return;
+
+                panels.forEach(function (panel) {
+                    var active = panel === target;
+                    panel.classList.toggle('is-active', active);
+                    if (active) {
+                        panel.removeAttribute('hidden');
+                    } else {
+                        panel.setAttribute('hidden', '');
+                    }
+                });
+
+                navButtons.forEach(function (btn) {
+                    var active = btn.getAttribute('data-section') === name;
+                    btn.classList.toggle('is-active', active);
+                    if (active) {
+                        btn.setAttribute('aria-current', 'true');
+                    } else {
+                        btn.removeAttribute('aria-current');
+                    }
+                });
+
+                primePanel(target);
+
+                if (history.replaceState) {
+                    history.replaceState(null, '', '#' + name);
+                }
+
+                if (opts.scroll !== false) {
+                    scrollToPanelTop(target);
+                    focusHeading(target);
+                }
+
+                if (opts.animate !== false) {
+                    animatePanel(target);
+                }
+
+                closeDrawer(false);
+            }
+
+            navButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    activateSection(btn.getAttribute('data-section'));
+                });
+            });
+
+            var brands = Array.prototype.slice.call(document.querySelectorAll('.ad-brand'));
+            brands.forEach(function (brand) {
+                brand.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    activateSection(firstSection);
+                });
+            });
+
+            (function initFromHash() {
+                var hash = (window.location.hash || '').replace('#', '');
+                var valid = ['overview', 'cohorts', 'learners', 'curriculum', 'reports'];
+
+                if (hash && valid.indexOf(hash) !== -1) {
+                    activateSection(hash, { scroll: false, animate: false });
+                    window.setTimeout(function () { animatePanel(getPanel(hash)); }, 120);
+                } else {
+                    var initial = getPanel(firstSection);
+                    primePanel(initial);
+                    window.setTimeout(function () { animatePanel(initial); }, 160);
+                }
+            })();
+
+            var sidebar = document.getElementById('ad-sidebar');
+            var scrim = document.getElementById('ad-scrim');
+            var menuToggle = document.getElementById('ad-menu-toggle');
+            var closeBtn = document.getElementById('ad-drawer-close');
+            var lastFocus = null;
+
+            function isDrawerMode() {
+                return window.matchMedia('(max-width: 900px)').matches;
+            }
+
+            function openDrawer() {
+                if (!sidebar || !isDrawerMode()) return;
+                lastFocus = document.activeElement;
+
+                sidebar.classList.add('is-open');
+                if (scrim) {
+                    scrim.hidden = false;
+                    scrim.classList.add('is-visible');
+                }
+                document.body.style.overflow = 'hidden';
+                if (menuToggle) { menuToggle.setAttribute('aria-expanded', 'true'); }
+
+                if (closeBtn) { closeBtn.focus(); }
+            }
+
+            function closeDrawer(returnFocus) {
+                if (!sidebar || !sidebar.classList.contains('is-open')) return;
+
+                sidebar.classList.remove('is-open');
+                document.body.style.overflow = '';
+                if (menuToggle) { menuToggle.setAttribute('aria-expanded', 'false'); }
+
+                if (scrim) {
+                    scrim.classList.remove('is-visible');
+                    window.setTimeout(function () {
+                        if (!sidebar.classList.contains('is-open')) {
+                            scrim.hidden = true;
+                        }
+                    }, 280);
+                }
+
+                if (returnFocus !== false) {
+                    if (lastFocus && typeof lastFocus.focus === 'function') { lastFocus.focus(); }
+                    else if (menuToggle) { menuToggle.focus(); }
+                }
+            }
+
+            if (menuToggle) { menuToggle.addEventListener('click', openDrawer); }
+            if (closeBtn) { closeBtn.addEventListener('click', function () { closeDrawer(true); }); }
+            if (scrim) { scrim.addEventListener('click', function () { closeDrawer(true); }); }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) {
+                    closeDrawer(true);
+                }
+            });
+
+            window.addEventListener('resize', function () {
+                if (!isDrawerMode() && sidebar && sidebar.classList.contains('is-open')) {
+                    closeDrawer(false);
+                }
+            });
+
+            var logoutLink = document.getElementById('ad-logout');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function () {
+                    try { sessionStorage.removeItem(SESSION_KEY); } catch (err) {  }
+                });
+            }
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted) {
+                    var stillThere = '';
+                    try { stillThere = sessionStorage.getItem(SESSION_KEY) || ''; } catch (err) { stillThere = ''; }
+                    if (!stillThere && greetingEl) { greetingEl.textContent = 'Hello admin'; }
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>

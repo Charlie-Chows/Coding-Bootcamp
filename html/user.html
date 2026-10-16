@@ -1,0 +1,3179 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Learning Dashboard — Stackly</title>
+    <meta name="description" content="Stackly learner dashboard demo. Illustrative sample data only.">
+    <meta name="theme-color" content="#2E073F">
+    <meta name="robots" content="noindex">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="../global.css">
+
+    <style>
+        :root {
+            --dash-header-h: 68px;
+            --dash-side-w: 272px;
+            --dash-gap: clamp(1rem, 2vw, 1.5rem);
+        }
+
+        html {
+            overflow-x: hidden;
+            overflow-x: clip;
+            max-width: 100%;
+        }
+
+        .dash-page {
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
+            background: var(--surface-soft);
+            color: var(--ink);
+            overflow-x: hidden;
+            overflow-x: clip;
+            max-width: 100%;
+        }
+
+        .dash-header {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            width: 100%;
+            min-height: var(--dash-header-h);
+            background: rgba(255, 255, 255, 0.94);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dash-header__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            width: min(100% - 2rem, 1560px);
+            margin-inline: auto;
+            min-height: var(--dash-header-h);
+        }
+
+        .dash-header__brand {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            min-width: 0;
+            flex-shrink: 1;
+        }
+
+        .dash-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            border-radius: var(--r-xs);
+        }
+
+        .dash-brand__logo {
+            filter: brightness(0) saturate(100%) invert(16%) sepia(95%) saturate(4300%) hue-rotate(276deg) brightness(90%) contrast(95%);
+            width: auto;
+            height: 34px;
+            object-fit: contain;
+        }
+
+        .dash-brand__name {
+            font-family: var(--font-display);
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: 0.13em;
+            color: var(--plum);
+            line-height: 1;
+        }
+
+        .dash-brand:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 4px;
+        }
+
+        .dash-role-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.28rem 0.7rem;
+            border-radius: 999px;
+            background: var(--purple);
+            color: #ffffff;
+            font-size: 0.66rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            line-height: 1;
+        }
+
+        .dash-role-chip i {
+            font-size: 0.66rem;
+        }
+
+        .dash-header__greeting {
+            flex: 1;
+            min-width: 0;
+            padding-inline: clamp(0.5rem, 2vw, 1.5rem);
+            border-left: 1px solid var(--border);
+        }
+
+        .dash-header__greeting-text {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+            font-weight: 700;
+            color: var(--ink);
+            line-height: 1.25;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .dash-header__greeting-sub {
+            display: block;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin-top: 0.15rem;
+        }
+
+        .dash-header__actions {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            flex-shrink: 0;
+        }
+
+        .dash-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.35rem 0.7rem 0.35rem 0.4rem;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            max-width: 260px;
+        }
+
+        .dash-profile__avatar {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, var(--purple), var(--orchid));
+            color: #ffffff;
+            font-size: 0.82rem;
+        }
+
+        .dash-profile__text {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            line-height: 1.25;
+        }
+
+        .dash-profile__label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--purple);
+        }
+
+        .dash-profile__email {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--ink);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 168px;
+        }
+
+        .dash-menu-toggle {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border: 1.5px solid var(--border-strong);
+            border-radius: var(--r-s);
+            background: var(--surface);
+            color: var(--plum);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: border-color 0.2s var(--ease-out), color 0.2s var(--ease-out);
+        }
+
+        .dash-menu-toggle:hover {
+            border-color: var(--purple);
+            color: var(--purple);
+        }
+
+        .dash-menu-toggle:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 3px;
+        }
+
+        .dash-body {
+            display: grid;
+            grid-template-columns: var(--dash-side-w) minmax(0, 1fr);
+            gap: var(--dash-gap);
+            width: min(100% - 2rem, 1560px);
+            margin-inline: auto;
+            padding-block: clamp(1.25rem, 2.5vw, 2rem) clamp(2.5rem, 5vw, 4rem);
+            align-items: start;
+        }
+
+        .dash-sidebar {
+            position: sticky;
+            top: calc(var(--dash-header-h) + 1rem);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: calc(100vh - var(--dash-header-h) - 2rem);
+            overflow-y: auto;
+            overscroll-behavior: contain;
+            padding: 1rem;
+            border-radius: var(--r-l);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+            scrollbar-width: thin;
+        }
+
+        .dash-sidebar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .dash-sidebar::-webkit-scrollbar-thumb {
+            background: rgba(122, 28, 172, 0.24);
+            border-radius: 999px;
+        }
+
+        .dash-sidebar__head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            padding: 0.35rem 0.5rem 0.85rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dash-sidebar__title {
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+        }
+
+        .dash-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .dash-nav__link {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            width: 100%;
+            padding: 0.72rem 0.85rem;
+            border: 0;
+            border-radius: var(--r-s);
+            background: transparent;
+            color: var(--ink-muted);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 550;
+            text-align: left;
+            cursor: pointer;
+            transition: background-color 0.2s var(--ease-out),
+                color 0.2s var(--ease-out);
+        }
+
+        .dash-nav__icon {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            border-radius: var(--r-xs);
+            background: var(--lavender-50);
+            border: 1px solid rgba(122, 28, 172, 0.12);
+            color: var(--purple);
+            font-size: 0.78rem;
+            transition: background-color 0.2s var(--ease-out),
+                color 0.2s var(--ease-out),
+                border-color 0.2s var(--ease-out);
+        }
+
+        .dash-nav__label {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dash-nav__link:hover {
+            background: var(--lavender-50);
+            color: var(--plum);
+        }
+
+        .dash-nav__link:hover .dash-nav__icon {
+            background: var(--lavender-100);
+            border-color: rgba(122, 28, 172, 0.24);
+        }
+
+        .dash-nav__link:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 2px;
+        }
+
+        .dash-nav__link[aria-current="true"] {
+            background: linear-gradient(100deg, rgba(122, 28, 172, 0.12), rgba(173, 73, 225, 0.08));
+            color: var(--plum);
+            font-weight: 700;
+        }
+
+        .dash-nav__link[aria-current="true"] .dash-nav__icon {
+            background: var(--purple);
+            border-color: var(--purple);
+            color: #ffffff;
+        }
+
+        .dash-nav__link[aria-current="true"]::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 60%;
+            border-radius: 3px;
+            background: linear-gradient(180deg, var(--purple), var(--orchid));
+        }
+
+        .dash-sidebar__foot {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .dash-identity {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            padding: 0.85rem;
+            border-radius: var(--r-s);
+            background: var(--lavender-50);
+            border: 1px solid rgba(122, 28, 172, 0.14);
+        }
+
+        .dash-identity__avatar {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, var(--purple), var(--orchid));
+            color: #ffffff;
+            font-size: 0.95rem;
+        }
+
+        .dash-identity__text {
+            min-width: 0;
+        }
+
+        .dash-identity__name {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--plum);
+            line-height: 1.25;
+            margin: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dash-identity__email {
+            font-size: 0.78rem;
+            color: var(--ink-soft);
+            margin: 0.15rem 0 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dash-logout {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1.5px solid rgba(192, 38, 74, 0.28);
+            border-radius: var(--r-s);
+            background: transparent;
+            color: #b3254a;
+            font-family: inherit;
+            font-size: 0.88rem;
+            font-weight: 650;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.22s var(--ease-out),
+                border-color 0.22s var(--ease-out),
+                color 0.22s var(--ease-out);
+        }
+
+        .dash-logout:hover {
+            background: rgba(192, 38, 74, 0.08);
+            border-color: rgba(192, 38, 74, 0.5);
+        }
+
+        .dash-logout:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 3px;
+        }
+
+        .dash-main {
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            gap: var(--dash-gap);
+        }
+
+        .dash-panel {
+            display: none;
+        }
+
+        .dash-panel.is-active {
+            display: flex;
+            flex-direction: column;
+            gap: var(--dash-gap);
+        }
+
+        .panel-head {
+            padding: clamp(1.15rem, 2.2vw, 1.75rem);
+            border-radius: var(--r-l);
+            background:
+                radial-gradient(circle at 88% 0%, rgba(173, 73, 225, 0.16), transparent 55%),
+                var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .panel-head__eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--purple);
+            margin-bottom: 0.65rem;
+        }
+
+        .panel-head__eyebrow i {
+            font-size: 0.7rem;
+        }
+
+        .panel-head h1,
+        .panel-head h2 {
+            font-family: var(--font-display);
+            font-size: clamp(1.35rem, 2.1vw, 1.85rem);
+            font-weight: 700;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin: 0 0 0.5rem;
+        }
+
+        .panel-head h1:focus,
+        .panel-head h2:focus {
+            outline: none;
+        }
+
+        .panel-head p {
+            font-size: 0.92rem;
+            line-height: 1.65;
+            color: var(--ink-muted);
+            margin: 0;
+            max-width: 70ch;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: var(--dash-gap);
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: var(--dash-gap);
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: var(--dash-gap);
+        }
+
+        .grid-wide-left {
+            display: grid;
+            grid-template-columns: 1.4fr minmax(0, 1fr);
+            gap: var(--dash-gap);
+        }
+
+        .grid-wide-right {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 1.4fr;
+            gap: var(--dash-gap);
+        }
+
+        .d-card {
+            display: flex;
+            flex-direction: column;
+            padding: clamp(1.15rem, 2vw, 1.6rem);
+            border-radius: var(--r-m);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+            min-width: 0;
+        }
+
+        .d-card--dark {
+            background: var(--plum);
+            border-color: rgba(235, 211, 248, 0.14);
+            box-shadow: none;
+        }
+
+        .d-card--dark .d-card__title {
+            color: var(--lavender);
+        }
+
+        .d-card--dark .d-card__sub {
+            color: var(--on-dark-soft);
+        }
+
+        .d-card--dark .d-card__text {
+            color: var(--on-dark-muted);
+        }
+
+        .d-card__head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.85rem;
+            margin-bottom: 1rem;
+        }
+
+        .d-card__title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .d-card__sub {
+            display: block;
+            font-size: 0.74rem;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-top: 0.28rem;
+        }
+
+        .d-card__text {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: var(--ink-muted);
+            margin: 0;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 0.55rem;
+            padding: clamp(1rem, 1.8vw, 1.35rem);
+            border-radius: var(--r-m);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .stat__top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+        }
+
+        .stat__icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--r-s);
+            background: linear-gradient(140deg, var(--lavender-100), #ffffff);
+            border: 1px solid rgba(122, 28, 172, 0.14);
+            color: var(--purple);
+            font-size: 0.85rem;
+        }
+
+        .stat__label {
+            font-size: 0.74rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+        }
+
+        .stat__value {
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.4vw, 2rem);
+            font-weight: 700;
+            line-height: 1;
+            color: var(--plum);
+            letter-spacing: -0.02em;
+        }
+
+        .stat__meta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+        }
+
+        .stat__meta i {
+            font-size: 0.72rem;
+            color: var(--purple);
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: stretch;
+            gap: clamp(0.4rem, 1.4vw, 0.85rem);
+            height: 168px;
+            padding-top: 0.5rem;
+        }
+
+        .chart-bars__col {
+            flex: 1;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.55rem;
+            min-width: 0;
+        }
+
+        .chart-bars__track {
+            width: 100%;
+            flex: 1;
+            min-height: 0;
+            display: flex;
+            align-items: flex-end;
+            border-radius: var(--r-xs);
+            background: var(--surface-tint);
+            overflow: hidden;
+        }
+
+        .chart-bars__fill {
+            display: block;
+            width: 100%;
+            height: var(--h, 40%);
+            border-radius: var(--r-xs) var(--r-xs) 0 0;
+            background: linear-gradient(180deg, var(--orchid), var(--purple));
+            transform-origin: bottom center;
+            will-change: transform;
+        }
+
+        .chart-bars__col--peak .chart-bars__fill {
+            background: linear-gradient(180deg, var(--orchid), var(--plum));
+        }
+
+        .chart-bars__label {
+            font-size: 0.72rem;
+            font-weight: 600;
+            color: var(--ink-soft);
+            white-space: nowrap;
+        }
+
+        .chart-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            margin-top: 0.9rem;
+            padding-top: 0.9rem;
+            border-top: 1px dashed var(--border);
+        }
+
+        .chart-legend__item {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+        }
+
+        .chart-legend__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            flex-shrink: 0;
+        }
+
+        .chart-legend__dot--a {
+            background: linear-gradient(140deg, var(--orchid), var(--purple));
+        }
+
+        .chart-legend__dot--b {
+            background: linear-gradient(140deg, var(--orchid), var(--plum));
+        }
+
+        .chart-donut {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-block: 0.5rem;
+        }
+
+        .chart-donut__svg {
+            width: min(190px, 60vw);
+            height: auto;
+            transform: rotate(-90deg);
+        }
+
+        .chart-donut__track {
+            fill: none;
+            stroke: var(--surface-tint);
+            stroke-width: 14;
+        }
+
+        .chart-donut__value {
+            fill: none;
+            stroke: url(#donutGrad);
+            stroke-width: 14;
+            stroke-linecap: round;
+            transition: stroke-dashoffset 1.1s cubic-bezier(0.22, 0.61, 0.36, 1);
+        }
+
+        .chart-donut__center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .chart-donut__pct {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(1.5rem, 2.6vw, 2rem);
+            font-weight: 700;
+            color: var(--plum);
+            line-height: 1;
+            letter-spacing: -0.02em;
+        }
+
+        .chart-donut__cap {
+            display: block;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-soft);
+            margin-top: 0.35rem;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.05rem;
+        }
+
+        .skill {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .skill__top {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.75rem;
+        }
+
+        .skill__name {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+        }
+
+        .skill__pct {
+            font-family: var(--font-mono);
+            font-size: 0.76rem;
+            font-weight: 500;
+            color: var(--purple);
+        }
+
+        .skill__track {
+            height: 9px;
+            border-radius: 999px;
+            background: var(--surface-tint);
+            overflow: hidden;
+        }
+
+        .skill__fill {
+            display: block;
+            height: 100%;
+            width: var(--w, 50%);
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--purple), var(--orchid));
+            transform-origin: left center;
+            will-change: transform;
+        }
+
+        .spark {
+            width: 100%;
+            height: auto;
+            overflow: visible;
+        }
+
+        .spark__area {
+            fill: url(#sparkFill);
+        }
+
+        .spark__line {
+            fill: none;
+            stroke: var(--purple);
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .spark__dot {
+            fill: var(--orchid);
+            stroke: #fff;
+            stroke-width: 2;
+        }
+
+        .course-card {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            padding: clamp(1.1rem, 2vw, 1.5rem);
+            border-radius: var(--r-m);
+            background: var(--surface);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-xs);
+            transition: transform 0.28s var(--ease-out),
+                box-shadow 0.28s var(--ease-out),
+                border-color 0.28s var(--ease-out);
+        }
+
+        .course-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-s);
+            border-color: rgba(122, 28, 172, 0.26);
+        }
+
+        .course-card__top {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+        }
+
+        .course-card__icon {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: var(--r-s);
+            background: linear-gradient(140deg, var(--lavender-100), #ffffff);
+            border: 1px solid rgba(122, 28, 172, 0.14);
+            color: var(--purple);
+            font-size: 1rem;
+        }
+
+        .course-card__title {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.3;
+        }
+
+        .course-card__meta {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin: 0.25rem 0 0;
+        }
+
+        .course-card__progress {
+            display: flex;
+            flex-direction: column;
+            gap: 0.45rem;
+        }
+
+        .course-card__bar {
+            height: 7px;
+            border-radius: 999px;
+            background: var(--surface-tint);
+            overflow: hidden;
+        }
+
+        .course-card__bar span {
+            display: block;
+            height: 100%;
+            width: var(--w, 40%);
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--purple), var(--orchid));
+            transform-origin: left center;
+        }
+
+        .course-card__row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+        }
+
+        .course-card__pct {
+            font-family: var(--font-mono);
+            font-weight: 500;
+            color: var(--purple);
+        }
+
+        .course-card__actions {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 0.25rem;
+            padding-top: 0.85rem;
+            border-top: 1px dashed var(--border);
+        }
+
+        .check-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .check-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .check-list li:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .check-list li:first-child {
+            padding-top: 0;
+        }
+
+        .check-list__mark {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            margin-top: 0.08rem;
+            border-radius: 50%;
+            font-size: 0.62rem;
+        }
+
+        .check-list__mark--done {
+            background: var(--purple);
+            color: #ffffff;
+        }
+
+        .check-list__mark--active {
+            background: var(--lavender-100);
+            border: 1.5px solid var(--purple);
+            color: var(--purple);
+        }
+
+        .check-list__mark--todo {
+            background: transparent;
+            border: 1.5px dashed var(--border-strong);
+            color: var(--ink-soft);
+        }
+
+        .check-list__body {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .check-list__title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .check-list__meta {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            margin: 0.2rem 0 0;
+        }
+
+        .timeline {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1.15rem;
+            padding-left: 1.6rem;
+        }
+
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 6px;
+            bottom: 6px;
+            width: 2px;
+            border-radius: 2px;
+            background: linear-gradient(180deg, var(--purple), var(--orchid), var(--lavender));
+            opacity: 0.4;
+        }
+
+        .timeline__item {
+            position: relative;
+        }
+
+        .timeline__dot {
+            position: absolute;
+            left: -1.6rem;
+            top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--surface);
+            border: 2px solid var(--border-strong);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.55rem;
+            color: var(--ink-soft);
+        }
+
+        .timeline__item--done .timeline__dot {
+            background: var(--purple);
+            border-color: var(--purple);
+            color: #ffffff;
+        }
+
+        .timeline__item--active .timeline__dot {
+            background: var(--surface);
+            border-color: var(--purple);
+            color: var(--purple);
+            box-shadow: 0 0 0 4px rgba(122, 28, 172, 0.14);
+        }
+
+        .timeline__title {
+            font-size: 0.9rem;
+            font-weight: 650;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .timeline__meta {
+            font-size: 0.76rem;
+            color: var(--ink-soft);
+            margin: 0.22rem 0 0;
+        }
+
+        .feed {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feed__item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+            padding: 0.9rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .feed__item:last-child {
+            border-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .feed__item:first-child {
+            padding-top: 0;
+        }
+
+        .feed__icon {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: var(--r-xs);
+            background: var(--lavender-50);
+            border: 1px solid rgba(122, 28, 172, 0.12);
+            color: var(--purple);
+            font-size: 0.78rem;
+        }
+
+        .feed__body {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .feed__title {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .feed__meta {
+            font-size: 0.75rem;
+            color: var(--ink-soft);
+            margin: 0.22rem 0 0;
+        }
+
+        .feed__time {
+            flex-shrink: 0;
+            font-size: 0.72rem;
+            color: var(--ink-soft);
+            white-space: nowrap;
+            padding-top: 0.15rem;
+        }
+
+        .review-note {
+            padding: 0.9rem 1rem;
+            border-radius: var(--r-s);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--purple);
+        }
+
+        .review-note+.review-note {
+            margin-top: 0.75rem;
+        }
+
+        .review-note__head {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.45rem;
+        }
+
+        .review-note__avatar {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(140deg, var(--purple), var(--orchid));
+            color: #ffffff;
+            font-size: 0.66rem;
+        }
+
+        .review-note__who {
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--plum);
+        }
+
+        .review-note__when {
+            font-size: 0.7rem;
+            color: var(--ink-soft);
+            margin-left: auto;
+        }
+
+        .review-note p {
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--ink-muted);
+            margin: 0;
+        }
+
+        .review-note code {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+            background: var(--lavender-50);
+            color: var(--purple);
+        }
+
+        .resource-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.65rem;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 0.85rem;
+            padding: 0.8rem 0.95rem;
+            border-radius: var(--r-s);
+            background: var(--surface-soft);
+            border: 1px solid var(--border);
+            text-decoration: none;
+            color: inherit;
+            transition: border-color 0.2s var(--ease-out),
+                background-color 0.2s var(--ease-out),
+                transform 0.2s var(--ease-out);
+        }
+
+        .resource-item:hover {
+            background: var(--lavender-50);
+            border-color: rgba(122, 28, 172, 0.28);
+            transform: translateX(3px);
+        }
+
+        .resource-item:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 2px;
+        }
+
+        .resource-item__icon {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: var(--r-xs);
+            background: var(--surface);
+            border: 1px solid rgba(122, 28, 172, 0.14);
+            color: var(--purple);
+            font-size: 0.82rem;
+        }
+
+        .resource-item__body {
+            min-width: 0;
+            flex: 1;
+        }
+
+        .resource-item__title {
+            font-size: 0.86rem;
+            font-weight: 600;
+            color: var(--ink);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .resource-item__meta {
+            font-size: 0.74rem;
+            color: var(--ink-soft);
+            margin: 0.18rem 0 0;
+        }
+
+        .resource-item__go {
+            flex-shrink: 0;
+            color: var(--ink-soft);
+            font-size: 0.76rem;
+        }
+
+        .mini-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            padding: 0.24rem 0.62rem;
+            border-radius: 999px;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            background: var(--lavender-100);
+            border: 1px solid rgba(122, 28, 172, 0.16);
+            color: var(--purple);
+            white-space: nowrap;
+        }
+
+        .mini-chip i {
+            font-size: 0.62rem;
+        }
+
+        .mini-chip--ok {
+            background: rgba(30, 145, 90, 0.12);
+            border-color: rgba(30, 145, 90, 0.28);
+            color: #157f4d;
+        }
+
+        .mini-chip--warn {
+            background: rgba(200, 130, 20, 0.12);
+            border-color: rgba(200, 130, 20, 0.3);
+            color: #97620d;
+        }
+
+        .mini-chip--dark {
+            background: rgba(235, 211, 248, 0.12);
+            border-color: rgba(235, 211, 248, 0.24);
+            color: var(--orchid-300);
+        }
+
+        .dash-skip {
+            position: absolute;
+            top: -100px;
+            left: 1rem;
+            z-index: 200;
+            padding: 0.7rem 1.2rem;
+            border-radius: 0 0 var(--r-s) var(--r-s);
+            background: var(--purple);
+            color: #fff;
+            font-size: 0.86rem;
+            font-weight: 650;
+            text-decoration: none;
+            transition: top 0.22s var(--ease-out);
+        }
+
+        .dash-skip:focus {
+            top: 0;
+            color: #fff;
+        }
+
+        .dash-main,
+        .dash-panel,
+        .d-card,
+        .panel-head {
+            min-width: 0;
+            max-width: 100%;
+        }
+
+        .feed__title,
+        .feed__meta,
+        .check-list__title,
+        .resource-item__title {
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width: 1280px) {
+            .grid-4 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 1100px) {
+            :root {
+                --dash-side-w: 240px;
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .grid-wide-left,
+            .grid-wide-right {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .dash-header__greeting {
+                display: none;
+            }
+
+            .dash-menu-toggle {
+                display: inline-flex;
+                flex-shrink: 0;
+            }
+
+            .dash-body {
+                grid-template-columns: minmax(0, 1fr);
+                padding-block: 1rem 3rem;
+            }
+
+            .dash-sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                z-index: 120;
+                width: min(320px, 86vw);
+                max-height: none;
+                border-radius: 0 var(--r-l) var(--r-l) 0;
+                border-left: 0;
+                transform: translateX(-102%);
+                transition: transform 0.32s var(--ease-out);
+                will-change: transform;
+            }
+
+            .dash-sidebar.is-open {
+                transform: translateX(0);
+            }
+
+            .dash-drawer-scrim {
+                position: fixed;
+                inset: 0;
+                z-index: 110;
+                background: rgba(46, 7, 63, 0.5);
+                backdrop-filter: blur(2px);
+                -webkit-backdrop-filter: blur(2px);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.28s var(--ease-out), visibility 0.28s var(--ease-out);
+            }
+
+            .dash-drawer-scrim.is-visible {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .dash-drawer-close {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 34px;
+                height: 34px;
+                border: 1.5px solid var(--border-strong);
+                border-radius: var(--r-xs);
+                background: transparent;
+                color: var(--plum);
+                font-size: 0.86rem;
+                cursor: pointer;
+            }
+
+            .dash-drawer-close:focus-visible {
+                outline: 3px solid var(--orchid);
+                outline-offset: 2px;
+            }
+        }
+
+        @media (min-width: 901px) {
+
+            .dash-drawer-close,
+            .dash-drawer-scrim {
+                display: none;
+            }
+        }
+
+        @media (max-width: 720px) {
+
+            .grid-2,
+            .grid-3,
+            .grid-4 {
+                grid-template-columns: minmax(0, 1fr);
+            }
+
+            .dash-profile__text {
+                display: none;
+            }
+
+            .dash-profile {
+                padding: 0.3rem;
+            }
+
+            .chart-bars {
+                height: 140px;
+            }
+
+            .dash-header__inner {
+                gap: 0.5rem;
+            }
+
+            .dash-header__brand {
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .dash-header__inner,
+            .dash-body {
+                width: min(100% - 1.5rem, 1560px);
+            }
+
+            .dash-menu-toggle {
+                width: 38px;
+                height: 38px;
+            }
+
+            .dash-brand__logo {
+                height: 28px;
+                max-width: 98px;
+            }
+
+            .dash-role-chip {
+                padding: 0.22rem 0.5rem;
+                font-size: 0.58rem;
+                letter-spacing: 0.1em;
+                flex-shrink: 0;
+            }
+
+            .dash-brand__name {
+                display: none;
+            }
+
+            .panel-head {
+                padding: 1.1rem;
+            }
+
+            .course-card__actions .btn,
+            .d-card .btn {
+                width: 100%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .dash-sidebar {
+                transition: none;
+            }
+
+            .course-card:hover {
+                transform: none;
+            }
+
+            .resource-item:hover {
+                transform: none;
+            }
+
+            .chart-bars__fill,
+            .skill__fill,
+            .course-card__bar span {
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="dash-page">
+
+    <a class="dash-skip" href="#dash-main">Skip to dashboard content</a>
+
+    <header class="dash-header">
+        <div class="dash-header__inner">
+
+            <div class="dash-header__brand">
+                <button class="dash-menu-toggle" id="dash-menu-toggle" type="button"
+                    aria-label="Open dashboard navigation" aria-expanded="false" aria-controls="dash-sidebar">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+
+                <a class="dash-brand" id="dash-brand" href="#overview"
+                    aria-label="Stackly dashboard — go to Learning Overview">
+                    <img class="dash-brand__logo" src="../logo.webp" alt="Stackly logo" width="120" height="34">
+                </a>
+
+                <span class="dash-role-chip">
+                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                    User
+                </span>
+            </div>
+
+            <div class="dash-header__greeting">
+                <span class="dash-header__greeting-text" id="dash-greeting">Hello learner</span>
+                <span class="dash-header__greeting-sub">Ready for your next module?</span>
+            </div>
+
+            <div class="dash-header__actions">
+                <div class="dash-profile" title="Signed-in demo identity">
+                    <span class="dash-profile__avatar" aria-hidden="true">
+                        <i class="fa-solid fa-user"></i>
+                    </span>
+                    <span class="dash-profile__text">
+                        <span class="dash-profile__label">Signed in</span>
+                        <span class="dash-profile__email" id="dash-profile-email">demo learner</span>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="dash-drawer-scrim" id="dash-scrim" hidden></div>
+
+    <div class="dash-body">
+
+        <aside class="dash-sidebar" id="dash-sidebar" aria-label="Dashboard sections">
+
+            <div class="dash-sidebar__head">
+                <a class="dash-brand" href="#overview"
+                    aria-label="Stackly dashboard — go to Learning Overview">
+                    <img class="dash-brand__logo" src="../logo.webp" alt="Stackly logo" width="120" height="34">
+                </a>
+                <button class="dash-drawer-close" id="dash-drawer-close" type="button"
+                    aria-label="Close dashboard navigation">
+                    <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <nav class="dash-nav" aria-label="Dashboard sections">
+                <button class="dash-nav__link is-active" type="button" data-section="overview" aria-current="true">
+                    <span class="dash-nav__icon"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></span>
+                    <span class="dash-nav__label">Learning Overview</span>
+                </button>
+
+                <button class="dash-nav__link" type="button" data-section="courses">
+                    <span class="dash-nav__icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+                    <span class="dash-nav__label">My Courses</span>
+                </button>
+
+                <button class="dash-nav__link" type="button" data-section="lab">
+                    <span class="dash-nav__icon"><i class="fa-solid fa-flask" aria-hidden="true"></i></span>
+                    <span class="dash-nav__label">Project Lab</span>
+                </button>
+
+                <button class="dash-nav__link" type="button" data-section="skills">
+                    <span class="dash-nav__icon"><i class="fa-solid fa-chart-simple" aria-hidden="true"></i></span>
+                    <span class="dash-nav__label">Progress &amp; Skills</span>
+                </button>
+
+                <button class="dash-nav__link" type="button" data-section="activity">
+                    <span class="dash-nav__icon"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i></span>
+                    <span class="dash-nav__label">Activity &amp; Resources</span>
+                </button>
+            </nav>
+
+            <div class="dash-sidebar__foot">
+
+                <div class="dash-identity">
+                    <span class="dash-identity__avatar" aria-hidden="true">
+                        <i class="fa-solid fa-user"></i>
+                    </span>
+                    <div class="dash-identity__text">
+                        <p class="dash-identity__name" id="dash-identity-name">Demo Learner</p>
+                        <p class="dash-identity__email" id="dash-identity-email">demo learner</p>
+                    </div>
+                </div>
+
+                <a class="dash-logout" id="dash-logout" href="login.html">
+                    <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+                    Log out
+                </a>
+
+            </div>
+
+        </aside>
+
+        <main class="dash-main" id="dash-main">
+
+            <section class="dash-panel is-active" id="panel-overview" data-panel="overview"
+                aria-labelledby="overview-heading">
+
+                <header class="panel-head">
+                    <p class="panel-head__eyebrow">
+                        <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+                        Learning Overview
+                    </p>
+                    <h1 id="overview-heading" tabindex="-1">Where you are this week</h1>
+                    <p>A snapshot of activity, module progress, and what&rsquo;s coming next. All values are
+                        illustrative demo data.</p>
+                </header>
+
+                <div class="grid-4">
+
+                    <article class="stat">
+                        <div class="stat__top">
+                            <span class="stat__icon"><i class="fa-solid fa-fire" aria-hidden="true"></i></span>
+                            
+                        </div>
+                        <span class="stat__label">Current streak</span>
+                        <span class="stat__value">12 <span style="font-size:0.9rem;">days</span></span>
+                        <span class="stat__meta"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> Best so
+                            far: 18 days</span>
+                    </article>
+
+                    <article class="stat">
+                        <div class="stat__top">
+                            <span class="stat__icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></span>
+                            
+                        </div>
+                        <span class="stat__label">Focused this week</span>
+                        <span class="stat__value">7.5 <span style="font-size:0.9rem;">hrs</span></span>
+                        <span class="stat__meta"><i class="fa-solid fa-arrow-trend-up" aria-hidden="true"></i> +1.4 hrs
+                            vs last week</span>
+                    </article>
+
+                    <article class="stat">
+                        <div class="stat__top">
+                            <span class="stat__icon"><i class="fa-solid fa-code-pull-request"
+                                    aria-hidden="true"></i></span>
+                           
+                        </div>
+                        <span class="stat__label">Reviews passed</span>
+                        <span class="stat__value">9</span>
+                        <span class="stat__meta"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i> 2 threads
+                            open</span>
+                    </article>
+
+                    <article class="stat">
+                        <div class="stat__top">
+                            <span class="stat__icon"><i class="fa-solid fa-list-check" aria-hidden="true"></i></span>
+                            
+                        </div>
+                        <span class="stat__label">Modules complete</span>
+                        <span class="stat__value">14 <span style="font-size:0.9rem;">/ 24</span></span>
+                        <span class="stat__meta"><i class="fa-solid fa-forward" aria-hidden="true"></i> 3 in
+                            progress</span>
+                    </article>
+
+                </div>
+
+                <div class="grid-wide-left">
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Weekly activity</h2>
+                                <span class="d-card__sub">Focused hours per day</span>
+                            </div>
+                        </div>
+
+                        <div class="chart-bars" role="img"
+                            aria-label="Bar chart of focused hours per day this week: Monday 1.2, Tuesday 0.8, Wednesday 1.6, Thursday 1.1, Friday 1.4, Saturday 0.7, Sunday 0.7 hours">
+                            <div class="chart-bars__col">
+                                <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:60%"></span>
+                                </div>
+                                <span class="chart-bars__label">Mon</span>
+                            </div>
+                            <div class="chart-bars__col">
+                                <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:40%"></span>
+                                </div>
+                                <span class="chart-bars__label">Tue</span>
+                            </div>
+                            <div class="chart-bars__col chart-bars__col--peak">
+                                <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:80%"></span>
+                                </div>
+                                <span class="chart-bars__label">Wed</span>
+                            </div>
+                            <div class="chart-bars__col">
+                                <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:55%"></span>
+                                </div>
+                                <span class="chart-bars__label">Thu</span>
+                            </div>
+                            <div class="chart-bars__col">
+                                <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:70%"></span>
+                                </div>
+                                <span class="chart-bars__label">Fri</span>
+                            </div>
+                            <div class="chart-bars__col">
+                                <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:35%"></span>
+                                </div>
+                                <span class="chart-bars__label">Sat</span>
+                            </div>
+                            <div class="chart-bars__col">
+                                <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:35%"></span>
+                                </div>
+                                <span class="chart-bars__label">Sun</span>
+                            </div>
+                        </div>
+
+                        <div class="chart-legend">
+                            <span class="chart-legend__item">
+                                <span class="chart-legend__dot chart-legend__dot--a"></span>
+                                Focused learning time
+                            </span>
+                            <span class="chart-legend__item">
+                                <span class="chart-legend__dot chart-legend__dot--b"></span>
+                                Peak day (Wednesday)
+                            </span>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Program completion</h2>
+                                <span class="d-card__sub">Across all enrolled modules</span>
+                            </div>
+                        </div>
+
+                        <div class="chart-donut" role="img"
+                            aria-label="Donut chart showing 58 percent of the program complete">
+                            <svg class="chart-donut__svg" viewBox="0 0 140 140" aria-hidden="true">
+                                <defs>
+                                    <linearGradient id="donutGrad" x1="0" y1="0" x2="1" y2="1">
+                                        <stop offset="0%" stop-color="#7A1CAC" />
+                                        <stop offset="100%" stop-color="#AD49E1" />
+                                    </linearGradient>
+                                </defs>
+                                <circle class="chart-donut__track" cx="70" cy="70" r="54"></circle>
+                                <circle class="chart-donut__value" cx="70" cy="70" r="54" stroke-dasharray="339.29"
+                                    stroke-dashoffset="339.29" data-pct="58"></circle>
+                            </svg>
+                            <span class="chart-donut__center">
+                                <span class="chart-donut__pct" id="donut-pct">0%</span>
+                                <span class="chart-donut__cap">Complete</span>
+                            </span>
+                        </div>
+
+                        <p class="d-card__text" style="margin-top:1rem;">
+                            14 of 24 modules finished. Two mentor reviews are awaiting your response.
+                        </p>
+                    </article>
+
+                </div>
+
+                <div class="grid-2">
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">This week&rsquo;s focus</h2>
+                                <span class="d-card__sub">Suggested next steps</span>
+                            </div>
+                        </div>
+
+                        <ul class="check-list">
+                            <li>
+                                <span class="check-list__mark check-list__mark--active" aria-hidden="true">
+                                    <i class="fa-solid fa-play"></i>
+                                </span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Finish &ldquo;Forms &amp; validation&rdquo;</p>
+                                    <p class="check-list__meta">Frontend Track &middot; 2 of 4 lessons done</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="check-list__mark check-list__mark--todo" aria-hidden="true">
+                                    <i class="fa-solid fa-circle"></i>
+                                </span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Submit cart-totals for peer review</p>
+                                    <p class="check-list__meta">Project Lab &middot; due in 2 days</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="check-list__mark check-list__mark--todo" aria-hidden="true">
+                                    <i class="fa-solid fa-circle"></i>
+                                </span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Read mentor feedback on bookings API</p>
+                                    <p class="check-list__meta">2 comments &middot; 1 suggestion</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div style="margin-top:1rem;">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Open this week&rsquo;s plan
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Consistency trend</h2>
+                                <span class="d-card__sub">Last 8 weeks</span>
+                            </div>
+                        </div>
+
+                        <svg class="spark" viewBox="0 0 320 110" role="img"
+                            aria-label="Line chart showing focused hours trending upward over the last eight weeks">
+                            <defs>
+                                <linearGradient id="sparkFill" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="rgba(122, 28, 172, 0.28)" />
+                                    <stop offset="100%" stop-color="rgba(122, 28, 172, 0)" />
+                                </linearGradient>
+                            </defs>
+
+                            <path class="spark__area"
+                                d="M10 78 L52 70 L94 74 L136 56 L178 60 L220 40 L262 34 L310 22 L310 100 L10 100 Z">
+                            </path>
+
+                            <polyline class="spark__line" points="10,78 52,70 94,74 136,56 178,60 220,40 262,34 310,22">
+                            </polyline>
+
+                            <circle class="spark__dot" cx="310" cy="22" r="4"></circle>
+                        </svg>
+
+                        <div class="chart-legend">
+                            <span class="chart-legend__item">
+                                <span class="chart-legend__dot chart-legend__dot--a"></span>
+                                Weekly focused hours
+                            </span>
+                        </div>
+
+                        <p class="d-card__text" style="margin-top:0.85rem;">
+                            Short, regular sessions are working. Your average session is 45 minutes.
+                        </p>
+                    </article>
+
+                </div>
+
+            </section>
+
+            <section class="dash-panel" id="panel-courses" data-panel="courses" aria-labelledby="courses-heading"
+                hidden>
+
+                <header class="panel-head">
+                    <p class="panel-head__eyebrow">
+                        <i class="fa-solid fa-book-open" aria-hidden="true"></i>
+                        My Courses
+                    </p>
+                    <h2 id="courses-heading" tabindex="-1">Your enrolled tracks</h2>
+                    <p>Four tracks in progress. Course names and progress are illustrative demo data.</p>
+                </header>
+
+                <div class="grid-3">
+
+                    <article class="course-card">
+                        <div class="course-card__top">
+                            <span class="course-card__icon"><i class="fa-solid fa-seedling"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3 class="course-card__title">Programming Foundations</h3>
+                                <p class="course-card__meta">8 modules &middot; beginner</p>
+                            </div>
+                        </div>
+                        <div class="course-card__progress">
+                            <div class="course-card__bar"><span style="--w:100%"></span></div>
+                            <div class="course-card__row">
+                                <span>Completed</span>
+                                <span class="course-card__pct">100%</span>
+                            </div>
+                        </div>
+                        <div class="course-card__actions">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Review modules
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-card__top">
+                            <span class="course-card__icon"><i class="fa-solid fa-window-restore"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3 class="course-card__title">Frontend Craft</h3>
+                                <p class="course-card__meta">10 modules &middot; in progress</p>
+                            </div>
+                        </div>
+                        <div class="course-card__progress">
+                            <div class="course-card__bar"><span style="--w:62%"></span></div>
+                            <div class="course-card__row">
+                                <span>6 of 10 complete</span>
+                                <span class="course-card__pct">62%</span>
+                            </div>
+                        </div>
+                        <div class="course-card__actions">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Continue
+                                <i class="fa-solid fa-play" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Syllabus</a>
+                        </div>
+                    </article>
+
+                    <article class="course-card">
+                        <div class="course-card__top">
+                            <span class="course-card__icon"><i class="fa-solid fa-database"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3 class="course-card__title">Backend &amp; Data</h3>
+                                <p class="course-card__meta">9 modules &middot; in progress</p>
+                            </div>
+                        </div>
+                        <div class="course-card__progress">
+                            <div class="course-card__bar"><span style="--w:34%"></span></div>
+                            <div class="course-card__row">
+                                <span>3 of 9 complete</span>
+                                <span class="course-card__pct">34%</span>
+                            </div>
+                        </div>
+                        <div class="course-card__actions">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Continue
+                                <i class="fa-solid fa-play" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Syllabus</a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="grid-wide-left">
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Active module — Forms &amp; Validation</h2>
+                                <span class="d-card__sub">Frontend Craft &middot; Module 7</span>
+                            </div>
+                            <span class="mini-chip"><i class="fa-solid fa-play" aria-hidden="true"></i> In
+                                progress</span>
+                        </div>
+
+                        <ul class="check-list">
+                            <li>
+                                <span class="check-list__mark check-list__mark--done" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Why client-side validation is not enough</p>
+                                    <p class="check-list__meta">Lesson 1 &middot; 18 min</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="check-list__mark check-list__mark--done" aria-hidden="true">
+                                    <i class="fa-solid fa-check"></i>
+                                </span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Field-level errors and accessible messaging</p>
+                                    <p class="check-list__meta">Lesson 2 &middot; 24 min</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="check-list__mark check-list__mark--active" aria-hidden="true">
+                                    <i class="fa-solid fa-play"></i>
+                                </span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Handling async validation without jank</p>
+                                    <p class="check-list__meta">Lesson 3 &middot; currently open</p>
+                                </div>
+                            </li>
+                            <li>
+                                <span class="check-list__mark check-list__mark--todo" aria-hidden="true">
+                                    <i class="fa-solid fa-circle"></i>
+                                </span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Build: two-step booking form</p>
+                                    <p class="check-list__meta">Lesson 4 &middot; project build</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+
+                    <article class="d-card d-card--dark">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Continue where you left off</h2>
+                                <span class="d-card__sub">Picks up in 1 click</span>
+                            </div>
+                        </div>
+
+                        <p class="d-card__text" style="margin-bottom:1.15rem;">
+                            You were last working on async validation in the booking form. Your draft
+                            commit is saved and ready.
+                        </p>
+<pre class="code-window__body"
+                            style="background:rgba(0,0,0,0.24);border-radius:12px;margin:0 0 1.15rem;font-size:0.78rem;padding:1rem;"><code>  <span class="tok-key">async function</span> <span class="tok-fn">validateField</span>(<span class="tok-var">name</span>, <span class="tok-var">value</span>) {
+    <span class="tok-key">const</span> <span class="tok-var">res</span> = <span class="tok-key">await</span> <span class="tok-fn">check</span>(<span class="tok-var">name</span>, <span class="tok-var">value</span>);
+    <span class="tok-key">return</span> <span class="tok-var">res</span>.<span class="tok-prop">ok</span> ? <span class="tok-num">null</span> : <span class="tok-var">res</span>.<span class="tok-prop">message</span>;
+  }</code></pre>                        <a class="btn btn--light btn--sm" href="../404.html">
+                            Resume lesson
+                            <i class="fa-solid fa-play" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                </div>
+
+                <article class="d-card">
+                    <div class="d-card__head">
+                        <div>
+                            <h2 class="d-card__title">Recent course notes</h2>
+                            <span class="d-card__sub">Your own notes from module lessons</span>
+                        </div>
+                    </div>
+
+                    <div class="feed">
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-note-sticky" aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">Debounce vs throttle — quick reference</p>
+                                <p class="feed__meta">Frontend Craft &middot; Lesson 3</p>
+                            </div>
+                            <span class="feed__time">2 days ago</span>
+                        </div>
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-note-sticky" aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">When to reach for a Map instead of an array</p>
+                                <p class="feed__meta">Backend &amp; Data &middot; Lesson 5</p>
+                            </div>
+                            <span class="feed__time">5 days ago</span>
+                        </div>
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-note-sticky" aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">Reading a stack trace without panicking</p>
+                                <p class="feed__meta">Foundations &middot; Lesson 8</p>
+                            </div>
+                            <span class="feed__time">1 week ago</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:1rem;">
+                        <a class="btn btn--ghost btn--sm" href="../404.html">
+                            Open all notes
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="dash-panel" id="panel-lab" data-panel="lab" aria-labelledby="lab-heading" hidden>
+
+                <header class="panel-head">
+                    <p class="panel-head__eyebrow">
+                        <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                        Project Lab
+                    </p>
+                    <h2 id="lab-heading" tabindex="-1">Your current build</h2>
+                    <p>Milestones, submissions, and mentor review status for your active project.</p>
+                </header>
+
+                <div class="grid-wide-left">
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Inventory Tracker</h2>
+                                <span class="d-card__sub">Full-stack capstone &middot; Node &amp; SQL</span>
+                            </div>
+                            <span class="mini-chip"><i class="fa-solid fa-play" aria-hidden="true"></i> Active</span>
+                        </div>
+
+                        <p class="d-card__text" style="margin-bottom:1.15rem;">
+                            A stock management tool that prevents silent overwrites when two people
+                            edit the same record. Currently working on optimistic locking.
+                        </p>
+
+                        <div class="course-card__progress" style="margin-bottom:1.25rem;">
+                            <div class="course-card__bar"><span style="--w:68%"></span></div>
+                            <div class="course-card__row">
+                                <span>Overall build progress</span>
+                                <span class="course-card__pct">68%</span>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;gap:0.6rem;flex-wrap:wrap;">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Open project
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                View brief
+                                <i class="fa-regular fa-file-lines" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Review status</h2>
+                                <span class="d-card__sub">Latest submission</span>
+                            </div>
+                        </div>
+
+                        <div class="review-note">
+                            <div class="review-note__head">
+                                <span class="review-note__avatar" aria-hidden="true">
+                                    <i class="fa-solid fa-user-tie"></i>
+                                </span>
+                                <span class="review-note__who">Mentor</span>
+                                <span class="review-note__when">1 day ago</span>
+                            </div>
+                            <p>
+                                Good separation between parsing and the handler. Consider a test for
+                                the conflicting-booking case — it&rsquo;s the path most likely to break silently.
+                            </p>
+                        </div>
+
+                        <div class="review-note" style="border-left-color: var(--orchid);">
+                            <div class="review-note__head">
+                                <span class="review-note__avatar" aria-hidden="true">
+                                    <i class="fa-solid fa-user"></i>
+                                </span>
+                                <span class="review-note__who">Peer review</span>
+                                <span class="review-note__when">2 days ago</span>
+                            </div>
+                            <p>
+                                The <code>parseBooking</code> helper reads well. One nit: rename
+                                <code>res</code> to something more specific in the conflict branch.
+                            </p>
+                        </div>
+
+                        <div style="margin-top:1rem;">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                Open review thread
+                                <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <div class="grid-wide-right">
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Milestone progress</h2>
+                                <span class="d-card__sub">6 milestones</span>
+                            </div>
+                        </div>
+
+                        <div class="timeline">
+                            <div class="timeline__item timeline__item--done">
+                                <span class="timeline__dot" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                                <p class="timeline__title">Project brief &amp; architecture sketch</p>
+                                <p class="timeline__meta">Approved &middot; week 1</p>
+                            </div>
+                            <div class="timeline__item timeline__item--done">
+                                <span class="timeline__dot" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                                <p class="timeline__title">Database schema &amp; migrations</p>
+                                <p class="timeline__meta">Approved &middot; week 2</p>
+                            </div>
+                            <div class="timeline__item timeline__item--done">
+                                <span class="timeline__dot" aria-hidden="true"><i class="fa-solid fa-check"></i></span>
+                                <p class="timeline__title">Read &amp; write API endpoints</p>
+                                <p class="timeline__meta">Approved &middot; week 3</p>
+                            </div>
+                            <div class="timeline__item timeline__item--active">
+                                <span class="timeline__dot" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+                                <p class="timeline__title">Optimistic locking for concurrent edits</p>
+                                <p class="timeline__meta">In progress &middot; currently open</p>
+                            </div>
+                            <div class="timeline__item">
+                                <span class="timeline__dot" aria-hidden="true"><i class="fa-solid fa-circle"></i></span>
+                                <p class="timeline__title">Client form and conflict messaging</p>
+                                <p class="timeline__meta">Not started</p>
+                            </div>
+                            <div class="timeline__item">
+                                <span class="timeline__dot" aria-hidden="true"><i class="fa-solid fa-circle"></i></span>
+                                <p class="timeline__title">Deployment &amp; README case study</p>
+                                <p class="timeline__meta">Not started</p>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Lab notes</h2>
+                                <span class="d-card__sub">Quick reminders you pinned</span>
+                            </div>
+                        </div>
+
+                        <div class="feed">
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-thumbtack" aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Write the failing test before the fix</p>
+                                    <p class="feed__meta">From mentor feedback on bookings API</p>
+                                </div>
+                            </div>
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-thumbtack" aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Keep commits under 200 lines</p>
+                                    <p class="feed__meta">Makes review threads easier to follow</p>
+                                </div>
+                            </div>
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-thumbtack" aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Screenshot the conflict state</p>
+                                    <p class="feed__meta">Attach to the PR description</p>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+                <article class="d-card">
+                    <div class="d-card__head">
+                        <div>
+                            <h2 class="d-card__title">Recent submissions</h2>
+                            <span class="d-card__sub">Pull requests and review outcomes</span>
+                        </div>
+                    </div>
+
+                    <div class="feed">
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-code-pull-request"
+                                    aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">feat: reject conflicting bookings</p>
+                                <p class="feed__meta">PR #14 &middot; 2 comments open</p>
+                            </div>
+                            <span class="mini-chip mini-chip--warn"><i class="fa-solid fa-clock" aria-hidden="true"></i>
+                                Needs work</span>
+                        </div>
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-code-pull-request"
+                                    aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">refactor: extract parseBooking helper</p>
+                                <p class="feed__meta">PR #13 &middot; merged</p>
+                            </div>
+                            <span class="mini-chip mini-chip--ok"><i class="fa-solid fa-check" aria-hidden="true"></i>
+                                Passed</span>
+                        </div>
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-code-pull-request"
+                                    aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">test: cover empty availability case</p>
+                                <p class="feed__meta">PR #12 &middot; merged</p>
+                            </div>
+                            <span class="mini-chip mini-chip--ok"><i class="fa-solid fa-check" aria-hidden="true"></i>
+                                Passed</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:1rem;">
+                        <a class="btn btn--ghost btn--sm" href="../404.html">
+                            View all submissions
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </section>
+
+            <section class="dash-panel" id="panel-skills" data-panel="skills" aria-labelledby="skills-heading" hidden>
+
+                <header class="panel-head">
+                    <p class="panel-head__eyebrow">
+                        <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+                        Progress &amp; Skills
+                    </p>
+                    <h2 id="skills-heading" tabindex="-1">Skill growth across the program</h2>
+                    <p>Skill levels reflect practice and review outcomes. All values are illustrative demo data.</p>
+                </header>
+
+                <div class="grid-wide-left">
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Skill breakdown</h2>
+                                <span class="d-card__sub">Self-assessed + review-informed</span>
+                            </div>
+                        </div>
+
+                        <div class="skill-list">
+                            <div class="skill">
+                                <div class="skill__top">
+                                    <span class="skill__name">HTML &amp; semantic structure</span>
+                                    <span class="skill__pct">88%</span>
+                                </div>
+                                <div class="skill__track"><span class="skill__fill" style="--w:88%"></span></div>
+                            </div>
+
+                            <div class="skill">
+                                <div class="skill__top">
+                                    <span class="skill__name">CSS layout &amp; responsiveness</span>
+                                    <span class="skill__pct">82%</span>
+                                </div>
+                                <div class="skill__track"><span class="skill__fill" style="--w:82%"></span></div>
+                            </div>
+
+                            <div class="skill">
+                                <div class="skill__top">
+                                    <span class="skill__name">JavaScript fundamentals</span>
+                                    <span class="skill__pct">74%</span>
+                                </div>
+                                <div class="skill__track"><span class="skill__fill" style="--w:74%"></span></div>
+                            </div>
+
+                            <div class="skill">
+                                <div class="skill__top">
+                                    <span class="skill__name">Accessibility &amp; keyboard support</span>
+                                    <span class="skill__pct">70%</span>
+                                </div>
+                                <div class="skill__track"><span class="skill__fill" style="--w:70%"></span></div>
+                            </div>
+
+                            <div class="skill">
+                                <div class="skill__top">
+                                    <span class="skill__name">API design &amp; testing</span>
+                                    <span class="skill__pct">58%</span>
+                                </div>
+                                <div class="skill__track"><span class="skill__fill" style="--w:58%"></span></div>
+                            </div>
+
+                            <div class="skill">
+                                <div class="skill__top">
+                                    <span class="skill__name">Database modelling</span>
+                                    <span class="skill__pct">46%</span>
+                                </div>
+                                <div class="skill__track"><span class="skill__fill" style="--w:46%"></span></div>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Strengths &amp; focus</h2>
+                                <span class="d-card__sub">Based on review outcomes</span>
+                            </div>
+                        </div>
+
+                        <p class="d-card__text" style="margin-bottom:0.9rem;">
+                            <strong style="color:var(--plum);">Strongest areas</strong>
+                        </p>
+                        <ul class="check-list" style="margin-bottom:1.25rem;">
+                            <li style="padding:0.5rem 0;border-bottom:0;">
+                                <span class="check-list__mark check-list__mark--done" aria-hidden="true"><i
+                                        class="fa-solid fa-check"></i></span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Semantic HTML and structure</p>
+                                </div>
+                            </li>
+                            <li style="padding:0.5rem 0;border-bottom:0;">
+                                <span class="check-list__mark check-list__mark--done" aria-hidden="true"><i
+                                        class="fa-solid fa-check"></i></span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Responsive layout thinking</p>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <p class="d-card__text" style="margin-bottom:0.9rem;">
+                            <strong style="color:var(--plum);">Focus next</strong>
+                        </p>
+                        <ul class="check-list">
+                            <li style="padding:0.5rem 0;border-bottom:0;">
+                                <span class="check-list__mark check-list__mark--todo" aria-hidden="true"><i
+                                        class="fa-solid fa-circle"></i></span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Writing tests earlier in the build</p>
+                                </div>
+                            </li>
+                            <li style="padding:0.5rem 0;border-bottom:0;">
+                                <span class="check-list__mark check-list__mark--todo" aria-hidden="true"><i
+                                        class="fa-solid fa-circle"></i></span>
+                                <div class="check-list__body">
+                                    <p class="check-list__title">Schema design and migrations</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </article>
+
+                </div>
+
+                <article class="d-card">
+                    <div class="d-card__head">
+                        <div>
+                            <h2 class="d-card__title">Skill growth over time</h2>
+                            <span class="d-card__sub">Average skill score, last 6 checkpoints</span>
+                        </div>
+                    </div>
+
+                    <div class="chart-bars" style="height:150px;" role="img"
+                        aria-label="Bar chart of average skill score rising across six checkpoints from 34 to 70 percent">
+                        <div class="chart-bars__col">
+                            <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:34%"></span></div>
+                            <span class="chart-bars__label">C1</span>
+                        </div>
+                        <div class="chart-bars__col">
+                            <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:44%"></span></div>
+                            <span class="chart-bars__label">C2</span>
+                        </div>
+                        <div class="chart-bars__col">
+                            <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:52%"></span></div>
+                            <span class="chart-bars__label">C3</span>
+                        </div>
+                        <div class="chart-bars__col">
+                            <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:59%"></span></div>
+                            <span class="chart-bars__label">C4</span>
+                        </div>
+                        <div class="chart-bars__col">
+                            <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:65%"></span></div>
+                            <span class="chart-bars__label">C5</span>
+                        </div>
+                        <div class="chart-bars__col chart-bars__col--peak">
+                            <div class="chart-bars__track"><span class="chart-bars__fill" style="--h:70%"></span></div>
+                            <span class="chart-bars__label">C6</span>
+                        </div>
+                    </div>
+
+                    <div class="chart-legend">
+                        <span class="chart-legend__item">
+                            <span class="chart-legend__dot chart-legend__dot--a"></span>
+                            Average skill score at each checkpoint
+                        </span>
+                        <span class="chart-legend__item">
+                            <span class="chart-legend__dot chart-legend__dot--b"></span>
+                            Current checkpoint (C6)
+                        </span>
+                    </div>
+                </article>
+
+                <article class="d-card">
+                    <div class="d-card__head">
+                        <div>
+                            <h2 class="d-card__title">Assessment history</h2>
+                            <span class="d-card__sub">Reviews and self-checks</span>
+                        </div>
+                    </div>
+
+                    <div class="feed">
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-clipboard-check"
+                                    aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">Frontend Craft &mdash; mid-track check</p>
+                                <p class="feed__meta">Passed with notes on accessibility depth</p>
+                            </div>
+                            <span class="feed__time">3 weeks ago</span>
+                        </div>
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-clipboard-check"
+                                    aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">Programming Foundations &mdash; final review</p>
+                                <p class="feed__meta">Passed</p>
+                            </div>
+                            <span class="feed__time">2 months ago</span>
+                        </div>
+                        <div class="feed__item">
+                            <span class="feed__icon"><i class="fa-solid fa-clipboard-check"
+                                    aria-hidden="true"></i></span>
+                            <div class="feed__body">
+                                <p class="feed__title">Backend &amp; Data &mdash; API design check</p>
+                                <p class="feed__meta">Scheduled</p>
+                            </div>
+                            <span class="mini-chip mini-chip--warn"><i class="fa-solid fa-clock" aria-hidden="true"></i>
+                                Upcoming</span>
+                        </div>
+                    </div>
+                </article>
+
+                <div class="grid-3">
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <h3 class="d-card__title">Tests first</h3>
+                        </div>
+                        <p class="d-card__text">Write the failing case before the fix. It turns debugging into a
+                            checklist.</p>
+                        <div style="margin-top:1rem;">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Practice exercise</a>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <h3 class="d-card__title">Schema thinking</h3>
+                        </div>
+                        <p class="d-card__text">Model relationships and constraints before writing a single query.</p>
+                        <div style="margin-top:1rem;">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Practice exercise</a>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <h3 class="d-card__title">Reading stack traces</h3>
+                        </div>
+                        <p class="d-card__text">Slow down. Read the top three frames before touching the code.</p>
+                        <div style="margin-top:1rem;">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">Practice exercise</a>
+                        </div>
+                    </article>
+                </div>
+
+            </section>
+
+            <section class="dash-panel" id="panel-activity" data-panel="activity" aria-labelledby="activity-heading"
+                hidden>
+
+                <header class="panel-head">
+                    <p class="panel-head__eyebrow">
+                        <i class="fa-solid fa-comment-dots" aria-hidden="true"></i>
+                        Activity &amp; Resources
+                    </p>
+                    <h2 id="activity-heading" tabindex="-1">What&rsquo;s happened recently</h2>
+                    <p>Feedback threads, cohort notes, and reference material you can revisit anytime.</p>
+                </header>
+
+                <div class="grid-wide-left">
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Activity feed</h2>
+                                <span class="d-card__sub">Latest events in your workspace</span>
+                            </div>
+                        </div>
+
+                        <div class="feed">
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-code-pull-request"
+                                        aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Submitted PR #14 for mentor review</p>
+                                    <p class="feed__meta">Project Lab &middot; Inventory Tracker</p>
+                                </div>
+                                <span class="feed__time">1 day ago</span>
+                            </div>
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-comment-dots"
+                                        aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Replied to mentor feedback on bookings API</p>
+                                    <p class="feed__meta">Review thread &middot; 1 comment pushed</p>
+                                </div>
+                                <span class="feed__time">2 days ago</span>
+                            </div>
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-book-open" aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Completed lesson 3 draft &mdash; async validation</p>
+                                    <p class="feed__meta">Frontend Craft &middot; Module 7</p>
+                                </div>
+                                <span class="feed__time">3 days ago</span>
+                            </div>
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-people-group"
+                                        aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Attended cohort session on testing</p>
+                                    <p class="feed__meta">Group session &middot; 45 min</p>
+                                </div>
+                                <span class="feed__time">5 days ago</span>
+                            </div>
+                            <div class="feed__item">
+                                <span class="feed__icon"><i class="fa-solid fa-circle-check"
+                                        aria-hidden="true"></i></span>
+                                <div class="feed__body">
+                                    <p class="feed__title">Passed review on PR #13</p>
+                                    <p class="feed__meta">refactor: extract parseBooking helper</p>
+                                </div>
+                                <span class="feed__time">1 week ago</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:1rem;">
+                            <a class="btn btn--ghost btn--sm" href="../404.html">
+                                View full history
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <article class="d-card">
+                        <div class="d-card__head">
+                            <div>
+                                <h2 class="d-card__title">Mentor feedback</h2>
+                                <span class="d-card__sub">Open threads needing a reply</span>
+                            </div>
+                        </div>
+
+                        <div class="review-note">
+                            <div class="review-note__head">
+                                <span class="review-note__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user-tie"></i></span>
+                                <span class="review-note__who">Mentor</span>
+                                <span class="review-note__when">1 day ago</span>
+                            </div>
+                            <p>
+                                Consider a Map instead of an array for field errors — it keeps the
+                                field-to-message link explicit and rendering simpler.
+                            </p>
+                        </div>
+
+                        <div class="review-note" style="border-left-color: var(--orchid);">
+                            <div class="review-note__head">
+                                <span class="review-note__avatar" aria-hidden="true"><i
+                                        class="fa-solid fa-user-tie"></i></span>
+                                <span class="review-note__who">Mentor</span>
+                                <span class="review-note__when">4 days ago</span>
+                            </div>
+                            <p>
+                                Naming is clearer now. Next step: add a test for the conflicting-booking
+                                case before you move on.
+                            </p>
+                        </div>
+
+                        <div style="margin-top:1rem;">
+                            <a class="btn btn--primary btn--sm" href="../404.html">
+                                Reply to threads
+                                <i class="fa-solid fa-reply" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                </div>
+
+                <article class="d-card">
+                    <div class="d-card__head">
+                        <div>
+                            <h2 class="d-card__title">Resource library</h2>
+                            <span class="d-card__sub">Reference material for your current tracks</span>
+                        </div>
+                    </div>
+
+                    <div class="resource-list">
+                        <a class="resource-item" href="../404.html">
+                            <span class="resource-item__icon"><i class="fa-regular fa-file-lines"
+                                    aria-hidden="true"></i></span>
+                            <span class="resource-item__body">
+                                <span class="resource-item__title">Accessible form patterns cheat sheet</span>
+                                <span class="resource-item__meta">Frontend Craft &middot; PDF, 4 pages</span>
+                            </span>
+                            <span class="resource-item__go"><i class="fa-solid fa-arrow-right"
+                                    aria-hidden="true"></i></span>
+                        </a>
+
+                        <a class="resource-item" href="../404.html">
+                            <span class="resource-item__icon"><i class="fa-solid fa-code" aria-hidden="true"></i></span>
+                            <span class="resource-item__body">
+                                <span class="resource-item__title">Booking API reference implementation</span>
+                                <span class="resource-item__meta">Project Lab &middot; annotated source</span>
+                            </span>
+                            <span class="resource-item__go"><i class="fa-solid fa-arrow-right"
+                                    aria-hidden="true"></i></span>
+                        </a>
+
+                        <a class="resource-item" href="../404.html">
+                            <span class="resource-item__icon"><i class="fa-solid fa-vial" aria-hidden="true"></i></span>
+                            <span class="resource-item__body">
+                                <span class="resource-item__title">Testing patterns for beginners</span>
+                                <span class="resource-item__meta">Backend &amp; Data &middot; walkthrough</span>
+                            </span>
+                            <span class="resource-item__go"><i class="fa-solid fa-arrow-right"
+                                    aria-hidden="true"></i></span>
+                        </a>
+
+                        <a class="resource-item" href="../404.html">
+                            <span class="resource-item__icon"><i class="fa-solid fa-code-branch"
+                                    aria-hidden="true"></i></span>
+                            <span class="resource-item__body">
+                                <span class="resource-item__title">Writing reviewable pull requests</span>
+                                <span class="resource-item__meta">Workflow &middot; short guide</span>
+                            </span>
+                            <span class="resource-item__go"><i class="fa-solid fa-arrow-right"
+                                    aria-hidden="true"></i></span>
+                        </a>
+
+                        <a class="resource-item" href="../404.html">
+                            <span class="resource-item__icon"><i class="fa-solid fa-database"
+                                    aria-hidden="true"></i></span>
+                            <span class="resource-item__body">
+                                <span class="resource-item__title">Schema design worksheet</span>
+                                <span class="resource-item__meta">Backend &amp; Data &middot; editable doc</span>
+                            </span>
+                            <span class="resource-item__go"><i class="fa-solid fa-arrow-right"
+                                    aria-hidden="true"></i></span>
+                        </a>
+                    </div>
+                </article>
+
+                <article class="d-card d-card--dark">
+                    <div class="d-card__head">
+                        <div>
+                            <h2 class="d-card__title">Cohort notes</h2>
+                            <span class="d-card__sub">Shared with your group</span>
+                        </div>
+                    </div>
+
+                    <div class="feed">
+                        <div class="feed__item" style="border-color: rgba(235,211,248,0.12);">
+                            <span class="feed__icon"
+                                style="background:rgba(235,211,248,0.08);border-color:rgba(235,211,248,0.16);color:var(--orchid-300);">
+                                <i class="fa-solid fa-people-group" aria-hidden="true"></i>
+                            </span>
+                            <div class="feed__body">
+                                <p class="feed__title" style="color:var(--lavender);">Peer pairing session — Thursday
+                                </p>
+                                <p class="feed__meta" style="color:var(--on-dark-soft);">Bring one problem you&rsquo;re
+                                    stuck on</p>
+                            </div>
+                            <span class="feed__time" style="color:var(--on-dark-soft);">This week</span>
+                        </div>
+
+                        <div class="feed__item" style="border-color: rgba(235,211,248,0.12);">
+                            <span class="feed__icon"
+                                style="background:rgba(235,211,248,0.08);border-color:rgba(235,211,248,0.16);color:var(--orchid-300);">
+                                <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                            </span>
+                            <div class="feed__body">
+                                <p class="feed__title" style="color:var(--lavender);">Group thread: debugging habits</p>
+                                <p class="feed__meta" style="color:var(--on-dark-soft);">12 replies &middot; still open
+                                </p>
+                            </div>
+                            <span class="feed__time" style="color:var(--on-dark-soft);">3 days ago</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top:1rem;">
+                        <a class="btn btn--on-dark btn--sm" href="../404.html">
+                            Open cohort space
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var SESSION_KEY = 'stackly_demo_email';
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.addEventListener('load', function () {
+                if (!window.location.hash) { window.scrollTo(0, 0); }
+            });
+
+            function readDemoIdentity() {
+                var raw = '';
+                try {
+                    raw = sessionStorage.getItem(SESSION_KEY) || '';
+                } catch (err) {
+                    raw = '';
+                }
+                raw = raw.trim();
+
+                if (!raw) {
+                    return {
+                        greeting: 'Hello learner',
+                        display: 'demo learner',
+                        name: 'Demo Learner'
+                    };
+                }
+
+                var hasAt = raw.indexOf('@') !== -1;
+                var localPart = hasAt ? raw.split('@')[0] : raw;
+                var safeLocal = localPart || 'learner';
+
+                var displayName = safeLocal.charAt(0).toUpperCase() + safeLocal.slice(1);
+
+                return {
+                    greeting: 'Hello ' + safeLocal,
+                    display: hasAt ? raw : safeLocal,
+                    name: displayName
+                };
+            }
+
+            var identity = readDemoIdentity();
+
+            var greetingEl = document.getElementById('dash-greeting');
+            var profileEmail = document.getElementById('dash-profile-email');
+            var idNameEl = document.getElementById('dash-identity-name');
+            var idEmailEl = document.getElementById('dash-identity-email');
+
+            if (greetingEl) { greetingEl.textContent = identity.greeting; }
+            if (profileEmail) { profileEmail.textContent = identity.display; profileEmail.title = identity.display; }
+            if (idNameEl) { idNameEl.textContent = identity.name; }
+            if (idEmailEl) { idEmailEl.textContent = identity.display; }
+
+            var navButtons = Array.prototype.slice.call(document.querySelectorAll('.dash-nav__link'));
+            var panels = Array.prototype.slice.call(document.querySelectorAll('.dash-panel'));
+            var dashBody = document.querySelector('.dash-body');
+            var headerEl = document.querySelector('.dash-header');
+            var firstSection = 'overview';
+
+            function getPanel(name) {
+                for (var i = 0; i < panels.length; i++) {
+                    if (panels[i].getAttribute('data-panel') === name) { return panels[i]; }
+                }
+                return null;
+            }
+
+            function headerOffset() {
+                return headerEl ? headerEl.getBoundingClientRect().height : 68;
+            }
+
+            function scrollToPanelTop(panel) {
+                if (!panel) return;
+                var bodyTop = dashBody
+                    ? dashBody.getBoundingClientRect().top + window.pageYOffset
+                    : 0;
+                var target = Math.max(bodyTop - headerOffset() - 16, 0);
+
+                if (prefersReduced) {
+                    window.scrollTo(0, target);
+                } else {
+                    window.scrollTo({ top: target, behavior: 'smooth' });
+                }
+            }
+
+            function focusHeading(panel) {
+                if (!panel) return;
+                var heading = panel.querySelector('[tabindex="-1"]');
+                if (!heading) return;
+
+                window.setTimeout(function () {
+                    try { heading.focus({ preventScroll: true }); } catch (err) { heading.focus(); }
+                }, prefersReduced ? 0 : 320);
+            }
+
+            function animatePanel(panel) {
+                if (!panel || !window.gsap || prefersReduced) return;
+
+                var bars = panel.querySelectorAll('.chart-bars__fill');
+                var fills = panel.querySelectorAll('.skill__fill, .course-card__bar span');
+                var donut = panel.querySelector('.chart-donut__value');
+                var pctEl = panel.querySelector('.chart-donut__pct');
+
+                if (bars.length) {
+                    gsap.fromTo(bars,
+                        { scaleY: 0 },
+                        {
+                            scaleY: 1, duration: 0.85, ease: 'power3.out', stagger: 0.07,
+                            transformOrigin: 'bottom center'
+                        });
+                }
+
+                if (fills.length) {
+                    gsap.fromTo(fills,
+                        { scaleX: 0 },
+                        {
+                            scaleX: 1, duration: 0.85, ease: 'power3.out', stagger: 0.06,
+                            transformOrigin: 'left center'
+                        });
+                }
+
+                if (donut) {
+                    var pct = parseFloat(donut.getAttribute('data-pct') || '0');
+                    var circ = 339.29;
+                    var offset = circ * (1 - (pct / 100));
+
+                    gsap.fromTo(donut,
+                        { strokeDashoffset: circ },
+                        { strokeDashoffset: offset, duration: 1.15, ease: 'power2.out' });
+
+                    if (pctEl) {
+                        var counter = { v: 0 };
+                        gsap.to(counter, {
+                            v: pct, duration: 1.15, ease: 'power2.out',
+                            onUpdate: function () {
+                                pctEl.textContent = Math.round(counter.v) + '%';
+                            }
+                        });
+                    }
+                }
+            }
+
+            function primePanel(panel) {
+                if (!panel) return;
+                var donut = panel.querySelector('.chart-donut__value');
+                var pctEl = panel.querySelector('.chart-donut__pct');
+                if (!donut) return;
+
+                var pct = parseFloat(donut.getAttribute('data-pct') || '0');
+                if (prefersReduced || !window.gsap) {
+                    donut.style.strokeDashoffset = String(339.29 * (1 - (pct / 100)));
+                    if (pctEl) { pctEl.textContent = Math.round(pct) + '%'; }
+                }
+            }
+
+            function activateSection(name, options) {
+                var opts = options || {};
+                var target = getPanel(name);
+                if (!target) return;
+
+                panels.forEach(function (panel) {
+                    var active = panel === target;
+                    panel.classList.toggle('is-active', active);
+                    if (active) {
+                        panel.removeAttribute('hidden');
+                    } else {
+                        panel.setAttribute('hidden', '');
+                    }
+                });
+
+                navButtons.forEach(function (btn) {
+                    var active = btn.getAttribute('data-section') === name;
+                    btn.classList.toggle('is-active', active);
+                    if (active) {
+                        btn.setAttribute('aria-current', 'true');
+                    } else {
+                        btn.removeAttribute('aria-current');
+                    }
+                });
+
+                primePanel(target);
+
+                if (history.replaceState) {
+                    history.replaceState(null, '', '#' + name);
+                }
+
+                if (opts.scroll !== false) {
+                    scrollToPanelTop(target);
+                    focusHeading(target);
+                }
+
+                if (opts.animate !== false) {
+                    animatePanel(target);
+                }
+
+                closeDrawer(false);
+            }
+
+            navButtons.forEach(function (btn) {
+                btn.addEventListener('click', function () {
+                    activateSection(btn.getAttribute('data-section'));
+                });
+            });
+
+            var brands = Array.prototype.slice.call(document.querySelectorAll('.dash-brand'));
+            brands.forEach(function (brand) {
+                brand.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    activateSection(firstSection);
+                });
+            });
+
+            (function initFromHash() {
+                var hash = (window.location.hash || '').replace('#', '');
+                var valid = ['overview', 'courses', 'lab', 'skills', 'activity'];
+                if (hash && valid.indexOf(hash) !== -1) {
+                    activateSection(hash, { scroll: false, animate: false });
+                    window.setTimeout(function () { animatePanel(getPanel(hash)); }, 120);
+                } else {
+                    var initial = getPanel(firstSection);
+                    primePanel(initial);
+                    window.setTimeout(function () { animatePanel(initial); }, 160);
+                }
+            })();
+
+            var sidebar = document.getElementById('dash-sidebar');
+            var scrim = document.getElementById('dash-scrim');
+            var menuToggle = document.getElementById('dash-menu-toggle');
+            var closeBtn = document.getElementById('dash-drawer-close');
+            var lastFocus = null;
+
+            function isDrawerMode() {
+                return window.matchMedia('(max-width: 900px)').matches;
+            }
+
+            function openDrawer() {
+                if (!sidebar || !isDrawerMode()) return;
+                lastFocus = document.activeElement;
+
+                sidebar.classList.add('is-open');
+                if (scrim) {
+                    scrim.hidden = false;
+                    scrim.classList.add('is-visible');
+                }
+                document.body.style.overflow = 'hidden';
+
+                if (menuToggle) { menuToggle.setAttribute('aria-expanded', 'true'); }
+
+                if (closeBtn) { closeBtn.focus(); }
+            }
+
+            function closeDrawer(returnFocus) {
+                if (!sidebar || !sidebar.classList.contains('is-open')) return;
+
+                sidebar.classList.remove('is-open');
+                document.body.style.overflow = '';
+                if (menuToggle) { menuToggle.setAttribute('aria-expanded', 'false'); }
+
+                if (scrim) {
+                    scrim.classList.remove('is-visible');
+                    window.setTimeout(function () {
+                        if (!sidebar.classList.contains('is-open')) {
+                            scrim.hidden = true;
+                        }
+                    }, 280);
+                }
+
+                if (returnFocus !== false) {
+                    if (lastFocus && typeof lastFocus.focus === 'function') { lastFocus.focus(); }
+                    else if (menuToggle) { menuToggle.focus(); }
+                }
+            }
+
+            if (menuToggle) { menuToggle.addEventListener('click', openDrawer); }
+            if (closeBtn) { closeBtn.addEventListener('click', function () { closeDrawer(true); }); }
+            if (scrim) { scrim.addEventListener('click', function () { closeDrawer(true); }); }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && sidebar && sidebar.classList.contains('is-open')) {
+                    closeDrawer(true);
+                }
+            });
+
+            window.addEventListener('resize', function () {
+                if (!isDrawerMode() && sidebar && sidebar.classList.contains('is-open')) {
+                    closeDrawer(false);
+                }
+            });
+
+            var logoutLink = document.getElementById('dash-logout');
+            if (logoutLink) {
+                logoutLink.addEventListener('click', function () {
+                    try { sessionStorage.removeItem(SESSION_KEY); } catch (err) {  }
+                });
+            }
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted) {
+                    var stillThere = '';
+                    try { stillThere = sessionStorage.getItem(SESSION_KEY) || ''; } catch (err) { stillThere = ''; }
+                    if (!stillThere && greetingEl) { greetingEl.textContent = 'Hello learner'; }
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>

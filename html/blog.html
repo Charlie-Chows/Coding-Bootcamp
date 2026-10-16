@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog &amp; Insights — Stackly Coding Bootcamp</title>
+    <meta name="description"
+        content="Editorial notes from the Stackly teaching team: tutorials, workflow topics, project breakdowns, learning advice, and career preparation.">
+    <meta name="theme-color" content="#2E073F">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../css/blog.css">
+</head>
+
+<body class="is-loading">
+
+    <div class="loader" id="site-loader" role="status" aria-live="polite">
+        <img class="loader__logo" src="../logo.webp" alt="Stackly" width="150" height="48">
+        <div class="loader__bar"><span class="loader__fill" id="loader-fill"></span></div>
+        <p class="loader__label">Loading the journal</p>
+    </div>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header" id="site-header">
+        <div class="container site-header__inner">
+
+            <a class="brand" href="../index.html" aria-label="Stackly — back to home">
+                <img class="brand__logo" src="../logo.webp" alt="Stackly logo" width="130" height="38">
+            </a>
+
+            <nav class="site-nav" aria-label="Primary">
+                <ul class="site-nav__list">
+                    <li><a class="site-nav__link" href="../index.html">Home</a></li>
+                    <li><a class="site-nav__link" href="about.html">About</a></li>
+                    <li><a class="site-nav__link" href="services.html">Services</a></li>
+                    <li><a class="site-nav__link" href="blog.html" aria-current="page">Blog</a></li>
+                    <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="site-header__actions">
+                <a class="btn btn--primary site-header__login" href="login.html">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    Login
+                </a>
+                <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation menu"
+                    aria-expanded="false" aria-controls="fullscreen-nav">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="nav-overlay" id="fullscreen-nav" role="dialog" aria-modal="true" aria-label="Site navigation">
+
+        <div class="nav-overlay__top">
+            <a class="brand brand--light" href="../index.html" aria-label="Stackly — back to home">
+                <img class="brand__logo" src="../logo.webp" alt="Stackly logo" width="130" height="38">
+            </a>
+            <button class="nav-overlay__close" id="nav-close" type="button" aria-label="Close navigation menu">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav class="nav-overlay__nav" aria-label="Mobile primary">
+            <ul class="nav-overlay__list">
+                <li><a class="nav-overlay__link" href="../index.html">Home</a></li>
+                <li><a class="nav-overlay__link" href="about.html">About</a></li>
+                <li><a class="nav-overlay__link" href="services.html">Services</a></li>
+                <li><a class="nav-overlay__link" href="blog.html" aria-current="page">Blog</a></li>
+                <li><a class="nav-overlay__link" href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-overlay__foot">
+            <a class="btn btn--light nav-overlay__login" href="login.html">
+                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                Login to your dashboard
+            </a>
+            <p class="nav-overlay__note">Stackly Coding Bootcamp &middot; Salem, Tamil Nadu, India</p>
+        </div>
+
+    </div>
+
+    <main id="main">
+
+        <section class="bl-hero" aria-labelledby="bl-hero-title">
+            <div class="bl-hero__bg" aria-hidden="true">
+                <span class="bl-hero__glow"></span>
+            </div>
+
+            <div class="container bl-hero__inner">
+
+                <div class="bl-hero__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-regular fa-newspaper" aria-hidden="true"></i>
+                        Journal &amp; Insights
+                    </p>
+
+                    <h1 id="bl-hero-title" class="reveal-left">
+                        Notes from the studio floor.
+                    </h1>
+
+                    <p class="lead reveal-left">
+                        Writing from the Stackly teaching team on tutorials, workflow,
+                        project breakdowns, learning advice, and the unglamorous parts of
+                        becoming a developer.
+                    </p>
+
+                    <div class="bl-hero__actions reveal-up">
+                        <a class="btn btn--primary btn--lg" href="services.html">
+                            Explore our programs
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn--ghost btn--lg" href="contact.html">
+                            Suggest a topic
+                            <i class="fa-regular fa-lightbulb" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <ul class="bl-hero__chips meta-strip reveal-up">
+                        <li class="chip"><i class="fa-solid fa-code" aria-hidden="true"></i> Tutorials</li>
+                        <li class="chip"><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Workflow</li>
+                        <li class="chip"><i class="fa-solid fa-flask" aria-hidden="true"></i> Project breakdowns</li>
+                        <li class="chip"><i class="fa-solid fa-compass" aria-hidden="true"></i> Career</li>
+                    </ul>
+                </div>
+
+                <div class="bl-hero__visual reveal-image-right">
+                    <figure class="bl-hero__photo bl-hero__photo--main">
+                        <img src="../assets/images/photo-1486312338219-ce68d2c6f44d-1000.webp"
+                            alt="A writer's desk with a laptop open to a code editor and notes beside it" width="1000"
+                            height="750" decoding="async">
+                    </figure>
+
+                    <figure class="bl-hero__photo bl-hero__photo--inset">
+                        <img src="../assets/images/photo-1517245386807-bb43f82c33c4-700.webp"
+                            alt="A notebook and laptop on a quiet desk during a writing session" width="700"
+                            height="500" loading="lazy" decoding="async">
+                    </figure>
+
+                    <div class="bl-hero__badge">
+                        <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
+                        <div>
+                            <p class="bl-hero__badge-title">New this week</p>
+                            <p class="bl-hero__badge-body">Writing on debugging and workflow habits.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="featured-title">
+            <div class="container">
+
+                <div class="bl-section-head reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-star" aria-hidden="true"></i> Featured Story</p>
+                    <h2 id="featured-title">The piece we&rsquo;d start with.</h2>
+                </div>
+
+                <article class="featured-story reveal-left">
+
+                    <figure class="featured-story__media">
+                        <img src="../assets/images/photo-1461749280684-dccba630e2f6-1400.webp"
+                            alt="Close-up of a code editor showing a full-stack project with several files open"
+                            width="1400" height="900" loading="lazy" decoding="async">
+                    </figure>
+
+                    <div class="featured-story__body">
+                        <div class="featured-story__meta">
+                            <span class="chip chip--solid"><i class="fa-solid fa-star" aria-hidden="true"></i>
+                                Featured</span>
+                            <span class="featured-story__read"><i class="fa-regular fa-clock" aria-hidden="true"></i> 9
+                                min read</span>
+                        </div>
+
+                        <h3>Why your first project should be boring</h3>
+
+                        <p class="featured-story__lede">
+                            Ambitious first projects stall. A small, complete build teaches more
+                            about structure, state, and shipping than a half-finished idea ever will.
+                        </p>
+
+                        <p>
+                            We see this every cohort: the learner who wants to build a social
+                            network in week two and the learner who quietly finishes a to-do
+                            list with real persistence. Six weeks later, the second learner is
+                            the one debugging a data model with confidence — because they&rsquo;ve
+                            already shipped something end to end.
+                        </p>
+
+                        <ul class="featured-story__points">
+                            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Small scope forces you to
+                                finish</li>
+                            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Finishing teaches more than
+                                starting</li>
+                            <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Boring projects leave room
+                                to learn deeply</li>
+                        </ul>
+
+                        <a class="link-arrow" href="../404.html">
+                            Read the full article
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </article>
+
+            </div>
+        </section>
+
+        <section class="section section--soft" aria-labelledby="recent-title">
+            <div class="container">
+
+                <div class="bl-section-head reveal-up">
+                    <p class="eyebrow"><i class="fa-regular fa-clock" aria-hidden="true"></i> Recent Articles</p>
+                    <h2 id="recent-title">Freshly published this month.</h2>
+                    <p class="lead">
+                        Short, specific pieces we&rsquo;ve been writing alongside the current cohort.
+                    </p>
+                </div>
+
+                <div class="recent-grid">
+
+                    <article class="recent-card reveal-up">
+                        <figure class="recent-card__media">
+                            <img src="../assets/images/photo-1555949963-aa79dcee981c-900.webp"
+                                alt="A code editor with several source files open on a monitor" width="900" height="600"
+                                loading="lazy" decoding="async">
+                        </figure>
+                        <div class="recent-card__body">
+                            <span class="chip"><i class="fa-solid fa-code-branch" aria-hidden="true"></i>
+                                Workflow</span>
+                            <h3>Commits that tell a story</h3>
+                            <p>A practical pattern for splitting work so your history stays readable months later.</p>
+                            <div class="recent-card__foot">
+                                <span class="recent-card__read"><i class="fa-regular fa-clock" aria-hidden="true"></i> 6
+                                    min</span>
+                                <a class="link-arrow" href="../404.html">
+                                    Read
+                                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="recent-card reveal-up">
+                        <figure class="recent-card__media">
+                            <img src="../assets/images/photo-1516321318423-f06f85e504b3-900.webp"
+                                alt="A person reading code on a laptop with notes in the foreground" width="900"
+                                height="600" loading="lazy" decoding="async">
+                        </figure>
+                        <div class="recent-card__body">
+                            <span class="chip"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                                Learning</span>
+                            <h3>Debugging is a reading skill</h3>
+                            <p>How to slow down, read the error properly, and stop changing code at random.</p>
+                            <div class="recent-card__foot">
+                                <span class="recent-card__read"><i class="fa-regular fa-clock" aria-hidden="true"></i> 5
+                                    min</span>
+                                <a class="link-arrow" href="../404.html">
+                                    Read
+                                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="recent-card reveal-up">
+                        <figure class="recent-card__media">
+                            <img src="../assets/images/photo-1454165804606-c3d57bc86b40-900.webp"
+                                alt="A tidy desk with a laptop and interview preparation notes" width="900" height="600"
+                                loading="lazy" decoding="async">
+                        </figure>
+                        <div class="recent-card__body">
+                            <span class="chip"><i class="fa-solid fa-compass" aria-hidden="true"></i> Career</span>
+                            <h3>What interviewers actually ask about</h3>
+                            <p>The questions behind the questions — and how to answer with your own work.</p>
+                            <div class="recent-card__foot">
+                                <span class="recent-card__read"><i class="fa-regular fa-clock" aria-hidden="true"></i> 7
+                                    min</span>
+                                <a class="link-arrow" href="../404.html">
+                                    Read
+                                    <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="tutorials-title">
+            <div class="container split split--wide-left">
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-code" aria-hidden="true"></i>
+                        Programming Tutorials
+                    </p>
+                    <h2 id="tutorials-title" class="reveal-right">Walkthroughs you can run today.</h2>
+                    <p class="lead reveal-right">
+                        Each tutorial is written to be followed with a code editor open.
+                        No copy-paste. No magic steps. Every line explained before it&rsquo;s typed.
+                    </p>
+
+                    <ul class="tutorial-list">
+                        <li class="tutorial-item reveal-right">
+                            <span class="tutorial-item__icon"><i class="fa-solid fa-list-check"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Build a filtered list with vanilla JS</h3>
+                                <p>DOM updates, debouncing, and why you should never mutate state twice.</p>
+                            </div>
+                            <a class="link-arrow tutorial-item__link" href="../404.html"
+                                aria-label="Open the filtered list tutorial">
+                                Open
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+
+                        <li class="tutorial-item reveal-right">
+                            <span class="tutorial-item__icon"><i class="fa-solid fa-plug-circle-bolt"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Fetch data without breaking the UI</h3>
+                                <p>Loading states, error boundaries, and why optimistic updates need care.</p>
+                            </div>
+                            <a class="link-arrow tutorial-item__link" href="../404.html"
+                                aria-label="Open the fetch tutorial">
+                                Open
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+
+                        <li class="tutorial-item reveal-right">
+                            <span class="tutorial-item__icon"><i class="fa-solid fa-vial" aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Write your first meaningful test</h3>
+                                <p>Choosing what to test, and why testing the middle of a function is usually wrong.</p>
+                            </div>
+                            <a class="link-arrow tutorial-item__link" href="../404.html"
+                                aria-label="Open the testing tutorial">
+                                Open
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            Browse all tutorials
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="split__visual reveal-image-left">
+                    <div class="code-window">
+                        <div class="code-window__bar">
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__title">tutorials/filter-list.js</span>
+                        </div>
+<pre class="code-window__body"><code><span class="tok-key">function</span> <span class="tok-fn">renderList</span>(<span class="tok-var">items</span>, <span class="tok-var">query</span>) {
+  <span class="tok-key">const</span> <span class="tok-var">visible</span> = <span class="tok-var">items</span>.<span class="tok-fn">filter</span>((<span class="tok-var">i</span>) <span class="tok-key">=&gt;</span>
+    <span class="tok-var">i</span>.<span class="tok-prop">name</span>.<span class="tok-fn">toLowerCase</span>()
+      .<span class="tok-fn">includes</span>(<span class="tok-var">query</span>.<span class="tok-fn">toLowerCase</span>())
+  );
+
+  <span class="tok-var">list</span>.<span class="tok-fn">replaceChildren</span>(...<span class="tok-var">visible</span>.<span class="tok-fn">map</span>(<span class="tok-fn">toRow</span>));
+}
+
+<span class="tok-com">// Debounce so we don't re-render on every keystroke</span>
+<span class="tok-var">input</span>.<span class="tok-fn">addEventListener</span>(<span class="tok-str">'input'</span>,
+  <span class="tok-fn">debounce</span>((<span class="tok-var">e</span>) <span class="tok-key">=&gt;</span> <span class="tok-fn">renderList</span>(<span class="tok-var">items</span>, <span class="tok-var">e</span>.<span class="tok-prop">target</span>.<span class="tok-prop">value</span>), <span class="tok-num">120</span>)
+);</code></pre>                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section section--dark on-dark" aria-labelledby="workflow-title">
+            <div class="container">
+
+                <div class="bl-section-head bl-section-head--center reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-code-branch" aria-hidden="true"></i> Engineering Workflow
+                    </p>
+                    <h2 id="workflow-title">How teams actually move code.</h2>
+                    <p class="lead">
+                        Branches, reviews, environment configuration, and the small disciplines
+                        that make a codebase maintainable by more than one person.
+                    </p>
+                </div>
+
+                <div class="workflow-grid">
+
+                    <article class="workflow-card reveal-up">
+                        <span class="workflow-card__icon"><i class="fa-solid fa-code-branch"
+                                aria-hidden="true"></i></span>
+                        <h3>Branching with intent</h3>
+                        <p>Name a branch so the next person understands the change before opening the diff.</p>
+                        <span class="workflow-card__tag">Reading time · 5 min</span>
+                        <a class="link-arrow" href="../404.html">
+                            Read
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="workflow-card reveal-up">
+                        <span class="workflow-card__icon"><i class="fa-solid fa-code-pull-request"
+                                aria-hidden="true"></i></span>
+                        <h3>Writing reviewable PRs</h3>
+                        <p>Context, screenshots, and an honest note about what you&rsquo;re unsure of.</p>
+                        <span class="workflow-card__tag">Reading time · 6 min</span>
+                        <a class="link-arrow" href="../404.html">
+                            Read
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="workflow-card reveal-up">
+                        <span class="workflow-card__icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span>
+                        <h3>Environment configuration</h3>
+                        <p>Keeping local, staging, and production from quietly diverging.</p>
+                        <span class="workflow-card__tag">Reading time · 8 min</span>
+                        <a class="link-arrow" href="../404.html">
+                            Read
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="workflow-card reveal-up">
+                        <span class="workflow-card__icon"><i class="fa-solid fa-bug" aria-hidden="true"></i></span>
+                        <h3>Reproducing a bug before fixing it</h3>
+                        <p>Why the fastest fix is often to slow down and write the failing case first.</p>
+                        <span class="workflow-card__tag">Reading time · 5 min</span>
+                        <a class="link-arrow" href="../404.html">
+                            Read
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                </div>
+
+                <div class="workflow-diagram reveal-image-left">
+                    <div class="terminal">
+                        <div class="terminal__bar">
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="terminal__title">workflow — in practice</span>
+                        </div>
+<pre class="terminal__body"><span class="term-dim">main</span>      ●───────●──────────────●───────────●
+           \                       /
+<span class="term-ok">feature</span>     ●───●───●───●───●─────●
+            plan  build  test  review  merge
+
+<span class="term-prompt">$</span> git switch -c feature/availability-check
+<span class="term-prompt">$</span> git commit -m "feat: reject conflicting bookings"
+<span class="term-ok">✓ peer review approved</span>
+<span class="term-ok">✓ mentor review approved</span>
+<span class="term-prompt">$</span> git switch main && git merge feature/availability-check</pre>                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="breakdowns-title">
+            <div class="container split split--wide-right">
+
+                <div class="split__visual reveal-image-right">
+                    <figure class="frame frame--wide">
+                        <img src="../assets/images/photo-1551288049-bebda4e38f71-1200.webp"
+                            alt="An analytics dashboard with charts and progress panels" width="1200" height="800"
+                            loading="lazy" decoding="async">
+                    </figure>
+
+                    <div class="breakdown-card">
+                        <div class="breakdown-card__head">
+                            <span class="chip chip--dark"><i class="fa-solid fa-flask" aria-hidden="true"></i>
+                                Breakdown</span>
+                            <span class="breakdown-card__file">inventory-tracker/README.md</span>
+                        </div>
+
+                        <div class="breakdown-card__body">
+                            <h3>Inventory Tracker</h3>
+                            <p class="breakdown-card__meta">Full-stack &middot; Node &middot; SQL &middot; Vanilla JS
+                            </p>
+
+                            <div class="breakdown-card__section">
+                                <p class="breakdown-card__label">The constraint</p>
+                                <p>Two people editing stock at once. The spreadsheet they were using silently overwrote
+                                    each other.</p>
+                            </div>
+
+                            <div class="breakdown-card__section">
+                                <p class="breakdown-card__label">The approach</p>
+                                <ul class="breakdown-card__list">
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Optimistic locking on the
+                                        record version</li>
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> A single write path to keep
+                                        rules in one place</li>
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Progressive enhancement on
+                                        the client</li>
+                                </ul>
+                            </div>
+
+                            <a class="link-arrow" href="../404.html">
+                                Read the full breakdown
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                        Project Breakdowns
+                    </p>
+                    <h2 id="breakdowns-title" class="reveal-left">An honest walk through a real build.</h2>
+                    <p class="lead reveal-left">
+                        We take a finished project and pick it apart: the original problem,
+                        the decisions we made, the tradeoffs we accepted, and what we&rsquo;d
+                        do differently with hindsight.
+                    </p>
+                    <ul class="feature-list reveal-left">
+                        <li><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><span>Problems that
+                                didn&rsquo;t show up until the second week.</span></li>
+                        <li><i class="fa-solid fa-code-compare" aria-hidden="true"></i><span>Tradeoffs between
+                                simplicity, correctness, and speed.</span></li>
+                        <li><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i><span>What we&rsquo;d rebuild if
+                                we started again.</span></li>
+                    </ul>
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            Browse all project breakdowns
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section section--tint" aria-labelledby="advice-title">
+            <div class="container">
+
+                <div class="bl-section-head reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-lightbulb" aria-hidden="true"></i> Learning Advice</p>
+                    <h2 id="advice-title">Practical notes for the middle of the journey.</h2>
+                    <p class="lead">
+                        Most learning advice is either obvious or impossible. These pieces
+                        aim for something in between: specific enough to act on this week.
+                    </p>
+                </div>
+
+                <div class="advice-layout">
+
+                    <article class="advice-feature reveal-left">
+                        <figure class="advice-feature__media">
+                            <img src="../assets/images/photo-1499750310107-5fef28a66643-1200.webp"
+                                alt="A quiet study desk with a laptop, notebook, and coffee" width="1200" height="800"
+                                loading="lazy" decoding="async">
+                        </figure>
+                        <div class="advice-feature__body">
+                            <span class="chip"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Long read</span>
+                            <h3>The plateau is not a signal to quit</h3>
+                            <p>
+                                There&rsquo;s a specific week in most learning journeys when progress
+                                feels invisible. It&rsquo;s not failure — it&rsquo;s the point where the
+                                work changes shape. Here&rsquo;s how to recognise it and what to do.
+                            </p>
+                            <a class="link-arrow" href="../404.html">
+                                Read the article
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </article>
+
+                    <div class="advice-list">
+
+                        <article class="advice-item reveal-right">
+                            <span class="advice-item__icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Short sessions beat heroic ones</h3>
+                                <p>Why 45 focused minutes a day outpaces a single weekend sprint.</p>
+                            </div>
+                            <a class="link-arrow" href="../404.html" aria-label="Read: short sessions beat heroic ones">
+                                Read
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </article>
+
+                        <article class="advice-item reveal-right">
+                            <span class="advice-item__icon"><i class="fa-solid fa-pen" aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Write before you code</h3>
+                                <p>Explaining a problem in plain language usually reveals the real issue.</p>
+                            </div>
+                            <a class="link-arrow" href="../404.html" aria-label="Read: write before you code">
+                                Read
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </article>
+
+                        <article class="advice-item reveal-right">
+                            <span class="advice-item__icon"><i class="fa-solid fa-people-group"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Teach it to someone else</h3>
+                                <p>Explaining a concept out loud surfaces the parts you don&rsquo;t actually understand.
+                                </p>
+                            </div>
+                            <a class="link-arrow" href="../404.html" aria-label="Read: teach it to someone else">
+                                Read
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </article>
+
+                        <article class="advice-item reveal-right">
+                            <span class="advice-item__icon"><i class="fa-solid fa-list-check"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Keep a learning log</h3>
+                                <p>A short daily note that makes progress visible when it doesn&rsquo;t feel like it.
+                                </p>
+                            </div>
+                            <a class="link-arrow" href="../404.html" aria-label="Read: keep a learning log">
+                                Read
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="career-title">
+            <div class="container split split--wide-left">
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-briefcase" aria-hidden="true"></i>
+                        Career Preparation
+                    </p>
+                    <h2 id="career-title" class="reveal-right">Articles for the part after the code works.</h2>
+                    <p class="lead reveal-right">
+                        We don&rsquo;t publish success stories or placement numbers. What we do
+                        write about is the practical, sometimes awkward business of presenting
+                        your work to someone who&rsquo;s deciding whether to hire you.
+                    </p>
+
+                    <ul class="tutorial-list">
+                        <li class="tutorial-item reveal-right">
+                            <span class="tutorial-item__icon"><i class="fa-solid fa-file-lines"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Writing a README that gets you a reply</h3>
+                                <p>What reviewers actually look at first, and what makes them keep reading.</p>
+                            </div>
+                            <a class="link-arrow tutorial-item__link" href="../404.html"
+                                aria-label="Read: README article">
+                                Read
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+
+                        <li class="tutorial-item reveal-right">
+                            <span class="tutorial-item__icon"><i class="fa-solid fa-microphone-lines"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Talking through your code without rambling</h3>
+                                <p>A loose structure for the &ldquo;walk me through a project&rdquo; question.</p>
+                            </div>
+                            <a class="link-arrow tutorial-item__link" href="../404.html"
+                                aria-label="Read: walkthrough article">
+                                Read
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+
+                        <li class="tutorial-item reveal-right">
+                            <span class="tutorial-item__icon"><i class="fa-solid fa-magnifying-glass-chart"
+                                    aria-hidden="true"></i></span>
+                            <div>
+                                <h3>Reading a job description honestly</h3>
+                                <p>Mapping a role to your skills — and naming the gaps without spiralling.</p>
+                            </div>
+                            <a class="link-arrow tutorial-item__link" href="../404.html"
+                                aria-label="Read: job description article">
+                                Read
+                                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="split__visual reveal-image-left">
+                    <figure class="frame frame--tall">
+                        <img src="../assets/images/photo-1573497019940-1c28c88b4f3e-1000.webp"
+                            alt="A person reviewing notes and a laptop in preparation for a technical conversation"
+                            width="1000" height="1250" loading="lazy" decoding="async">
+                    </figure>
+
+                    <div class="float-card career-float">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        <span>No placement guarantees</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section section--deep on-dark" aria-labelledby="perspectives-title">
+            <div class="container">
+
+                <div class="bl-section-head bl-section-head--center reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i> Mentor Perspectives
+                    </p>
+                    <h2 id="perspectives-title">What we keep coming back to.</h2>
+                    <p class="lead">
+                        Reflections from the teaching team on the parts of learning to code
+                        that don&rsquo;t fit neatly into a syllabus.
+                    </p>
+                </div>
+
+                <div class="perspective-grid">
+
+                    <article class="perspective-card reveal-up">
+                        <i class="fa-solid fa-quote-left perspective-card__quote" aria-hidden="true"></i>
+                        <p class="perspective-card__text">
+                            The learners who go furthest aren&rsquo;t the fastest. They&rsquo;re the
+                            ones who come back the next day.
+                        </p>
+                        <p class="perspective-card__by">Stackly teaching team</p>
+                        <a class="link-arrow" href="../404.html">
+                            Read the full reflection
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="perspective-card reveal-up">
+                        <i class="fa-solid fa-quote-left perspective-card__quote" aria-hidden="true"></i>
+                        <p class="perspective-card__text">
+                            I&rsquo;d rather review ten honest, imperfect pull requests than one
+                            that copies a tutorial.
+                        </p>
+                        <p class="perspective-card__by">Stackly teaching team</p>
+                        <a class="link-arrow" href="../404.html">
+                            Read the full reflection
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="perspective-card reveal-up">
+                        <i class="fa-solid fa-quote-left perspective-card__quote" aria-hidden="true"></i>
+                        <p class="perspective-card__text">
+                            The moment a learner starts explaining their own code back to me is
+                            the moment I know they&rsquo;ve got it.
+                        </p>
+                        <p class="perspective-card__by">Stackly teaching team</p>
+                        <a class="link-arrow" href="../404.html">
+                            Read the full reflection
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                </div>
+
+                <p class="bl-footnote reveal-up">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    Quotes are illustrative and not attributed to named individuals.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="topics-title">
+            <div class="container">
+
+                <div class="bl-section-head bl-section-head--center reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-tags" aria-hidden="true"></i> Topics</p>
+                    <h2 id="topics-title">Browse by what you&rsquo;re working on.</h2>
+                    <p class="lead">
+                        Every article is filed under at least one topic. Pick the one that
+                        matches what you&rsquo;re building this week.
+                    </p>
+                </div>
+
+                <div class="topic-grid">
+
+                    <a class="topic-card reveal-up" href="../404.html">
+                        <span class="topic-card__icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span>
+                        <h3>Foundations</h3>
+                        <p>First steps, logic, and getting comfortable with tools.</p>
+                        <span class="topic-card__count">6 articles</span>
+                    </a>
+
+                    <a class="topic-card reveal-up" href="../404.html">
+                        <span class="topic-card__icon"><i class="fa-solid fa-window-restore"
+                                aria-hidden="true"></i></span>
+                        <h3>Frontend</h3>
+                        <p>Layout, responsiveness, accessibility, and interface behaviour.</p>
+                        <span class="topic-card__count">9 articles</span>
+                    </a>
+
+                    <a class="topic-card reveal-up" href="../404.html">
+                        <span class="topic-card__icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+                        <h3>Backend &amp; Data</h3>
+                        <p>APIs, schemas, testing, and the rules behind the interface.</p>
+                        <span class="topic-card__count">7 articles</span>
+                    </a>
+
+                    <a class="topic-card reveal-up" href="../404.html">
+                        <span class="topic-card__icon"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></span>
+                        <h3>Workflow</h3>
+                        <p>Git, reviews, environment configuration, and debugging.</p>
+                        <span class="topic-card__count">8 articles</span>
+                    </a>
+
+                    <a class="topic-card reveal-up" href="../404.html">
+                        <span class="topic-card__icon"><i class="fa-solid fa-graduation-cap"
+                                aria-hidden="true"></i></span>
+                        <h3>Learning</h3>
+                        <p>Habits, plateaus, and how to keep momentum when it&rsquo;s hard.</p>
+                        <span class="topic-card__count">5 articles</span>
+                    </a>
+
+                    <a class="topic-card reveal-up" href="../404.html">
+                        <span class="topic-card__icon"><i class="fa-solid fa-briefcase" aria-hidden="true"></i></span>
+                        <h3>Career</h3>
+                        <p>Portfolios, conversations, and honest preparation.</p>
+                        <span class="topic-card__count">4 articles</span>
+                    </a>
+
+                </div>
+
+                <p class="bl-footnote bl-footnote--center reveal-up">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    Articles and guides are updated with each ongoing cohort series.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="section section--soft" aria-labelledby="newsletter-title">
+            <div class="container split split--wide-right">
+
+                <div class="split__visual reveal-image-left">
+                    <div class="newsletter-visual">
+                        <div class="newsletter-visual__head">
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                            <span>Weekly reading list</span>
+                        </div>
+
+                        <ul class="newsletter-visual__list">
+                            <li>
+                                <span class="newsletter-visual__dot"></span>
+                                <span>Debugging is a reading skill</span>
+                                <span class="newsletter-visual__meta">5 min</span>
+                            </li>
+                            <li>
+                                <span class="newsletter-visual__dot"></span>
+                                <span>Commits that tell a story</span>
+                                <span class="newsletter-visual__meta">6 min</span>
+                            </li>
+                            <li>
+                                <span class="newsletter-visual__dot"></span>
+                                <span>The plateau is not a signal to quit</span>
+                                <span class="newsletter-visual__meta">9 min</span>
+                            </li>
+                            <li>
+                                <span class="newsletter-visual__dot"></span>
+                                <span>Reading a job description honestly</span>
+                                <span class="newsletter-visual__meta">7 min</span>
+                            </li>
+                        </ul>
+
+                        <div class="newsletter-visual__foot">
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            <span>Curated engineering reads delivered every weekend.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                        Stay in the Loop
+                    </p>
+                    <h2 id="newsletter-title" class="reveal-left">One short email a week. No noise.</h2>
+                    <p class="lead reveal-left">
+                        We send a short reading list — one tutorial, one workflow piece, and
+                        one reflection — so you always have something useful queued up.
+                    </p>
+
+                    <form class="newsletter-form reveal-left" id="newsletter-form" novalidate>
+
+                        <div class="field">
+                            <label class="field__label" for="newsletter-email">Email address</label>
+                            <input class="field__control" type="email" id="newsletter-email" name="email"
+                                placeholder="you@example.com" autocomplete="email" required
+                                aria-describedby="newsletter-email-error">
+                            <p class="field__error" id="newsletter-email-error" role="alert"></p>
+                        </div>
+
+                        <button class="btn btn--primary" type="submit">
+                            Join the reading list
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </button>
+
+                        <p class="newsletter-form__note">
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            We respect your inbox. No spam, ever. Unsubscribe anytime with one click.
+                        </p>
+
+                    </form>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="bl-cta on-dark" aria-labelledby="bl-cta-title">
+            <div class="container bl-cta__inner">
+
+                <div class="bl-cta__copy reveal-left">
+                    <p class="eyebrow">
+                        <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+                        Next Steps
+                    </p>
+                    <h2 id="bl-cta-title">Ready to write code instead of reading about it?</h2>
+                    <p class="lead">
+                        The journal is here when you need a reference. If you want to build,
+                        the programs are where it starts. Tell us where you are and we&rsquo;ll
+                        point you at the right one.
+                    </p>
+                    <a class="btn btn--primary btn--lg" href="contact.html">
+                        Talk to the Stackly team
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <p class="bl-cta__note">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        Admissions consultations are scheduled individually upon inquiry.
+                    </p>
+                </div>
+
+                <div class="bl-cta__visual reveal-image-right">
+                    <div class="code-window">
+                        <div class="code-window__bar">
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__title">stackly/read-then-build.md</span>
+                        </div>
+<pre class="code-window__body"><code><span class="tok-com"># Reading is useful.</span>
+<span class="tok-com"># Building is what changes you.</span>
+
+<span class="tok-key">1.</span> Pick one small project
+<span class="tok-key">2.</span> Ship it end to end
+<span class="tok-key">3.</span> Ask for feedback on the code
+<span class="tok-key">4.</span> Repeat, with slightly more ambition
+
+<span class="tok-com"># That's the whole loop.</span></code></pre>                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="site-footer__grid">
+
+                <div>
+                    <a class="brand brand--light" href="../index.html" aria-label="Stackly — back to home">
+                        <img class="brand__logo" src="../logo.webp" alt="Stackly logo" width="130" height="38">
+                    </a>
+                    <p class="site-footer__brand-text">
+                        A project-first coding bootcamp. Learn the fundamentals, build real
+                        software, and get honest feedback from mentors who read your code.
+                    </p>
+                    <div class="site-footer__social">
+                        <a href="../404.html" aria-label="Stackly on GitHub"><i class="fa-brands fa-github"
+                                aria-hidden="true"></i></a>
+                        <a href="../404.html" aria-label="Stackly on LinkedIn"><i class="fa-brands fa-linkedin-in"
+                                aria-hidden="true"></i></a>
+                        <a href="../404.html" aria-label="Stackly on X"><i class="fa-brands fa-x-twitter"
+                                aria-hidden="true"></i></a>
+                        <a href="../404.html" aria-label="Stackly on YouTube"><i class="fa-brands fa-youtube"
+                                aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <nav aria-label="Footer navigation">
+                    <h2 class="site-footer__title">Navigation</h2>
+                    <ul class="site-footer__list">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div>
+                    <h2 class="site-footer__title">Programs</h2>
+                    <ul class="site-footer__list">
+                        <li><a href="../404.html">Frontend Track</a></li>
+                        <li><a href="../404.html">Backend Track</a></li>
+                        <li><a href="../404.html">Full-Stack Track</a></li>
+                        <li><a href="../404.html">Project Labs</a></li>
+                        <li><a href="../404.html">Code Review Sessions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="site-footer__title">Resources</h2>
+                    <ul class="site-footer__list">
+                        <li><a href="../404.html">Learning Guide</a></li>
+                        <li><a href="../404.html">Career Preparation</a></li>
+                        <li><a href="../404.html">Community</a></li>
+                        <li><a href="../404.html">Learner Support</a></li>
+                        <li><a href="../404.html">Accessibility</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="site-footer__title">Contact</h2>
+                    <ul class="site-footer__contact">
+                        <li>
+                            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                            <span>+91 1234567899</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <span>Stackly, Salem, Tamil Nadu, India</span>
+                        </li>
+                        <li>
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                            <span>hello@example.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="site-footer__bottom">
+                <p>&copy; <span id="footer-year">2026</span> Stackly Coding Bootcamp.</p>
+                <p class="site-footer__legal"><a href="../404.html">Privacy Policy</a><a href="../404.html">Terms</a></p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+            window.addEventListener('load', function () {
+                if (!window.location.hash) { window.scrollTo(0, 0); }
+            });
+
+            var yearEl = document.getElementById('footer-year');
+            if (yearEl) { yearEl.textContent = String(new Date().getFullYear()); }
+
+            var header = document.getElementById('site-header');
+            if (header) {
+                var setHeaderState = function () {
+                    header.classList.toggle('is-scrolled', window.scrollY > 12);
+                };
+                setHeaderState();
+                window.addEventListener('scroll', setHeaderState, { passive: true });
+            }
+
+            var overlay = document.getElementById('fullscreen-nav');
+            var openBtn = document.getElementById('nav-toggle');
+            var closeBtn = document.getElementById('nav-close');
+            var lastFocus = null;
+
+            function openMenu() {
+                if (!overlay || !openBtn) return;
+                lastFocus = document.activeElement;
+                overlay.classList.add('is-open');
+                document.body.classList.add('menu-open');
+                openBtn.setAttribute('aria-expanded', 'true');
+
+                if (window.gsap && !prefersReduced) {
+                    gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+                    gsap.fromTo('.nav-overlay__link',
+                        { y: 34, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out', delay: 0.08 });
+                    gsap.fromTo('.nav-overlay__foot',
+                        { y: 22, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.45, ease: 'power3.out', delay: 0.28 });
+                }
+                if (closeBtn) { closeBtn.focus(); }
+            }
+
+            function closeMenu() {
+                if (!overlay || !openBtn) return;
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('menu-open');
+                openBtn.setAttribute('aria-expanded', 'false');
+                if (lastFocus && typeof lastFocus.focus === 'function') { lastFocus.focus(); }
+                else { openBtn.focus(); }
+            }
+
+            if (openBtn) { openBtn.addEventListener('click', openMenu); }
+            if (closeBtn) { closeBtn.addEventListener('click', closeMenu); }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
+                    closeMenu();
+                }
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 960 && overlay && overlay.classList.contains('is-open')) {
+                    closeMenu();
+                }
+            });
+
+            var loader = document.getElementById('site-loader');
+            var fill = document.getElementById('loader-fill');
+            var loaderDuration = prefersReduced ? 0.6 : 1.5;
+
+            function dismissLoader() {
+                if (!loader || loader.hidden) return;
+                loader.hidden = true;
+                document.body.classList.remove('is-loading');
+                document.documentElement.classList.remove('no-anim');
+                if (typeof window.__stacklyReveal === 'function') { window.__stacklyReveal(); }
+            }
+
+            if (loader) {
+                if (window.gsap && fill) {
+                    gsap.to(fill, { scaleX: 1, duration: loaderDuration, ease: 'power2.inOut' });
+                    gsap.to(loader, {
+                        opacity: 0,
+                        duration: prefersReduced ? 0.2 : 0.45,
+                        delay: loaderDuration,
+                        ease: 'power2.out',
+                        onComplete: dismissLoader
+                    });
+                } else {
+                    if (fill) { fill.style.transform = 'scaleX(1)'; }
+                    window.setTimeout(dismissLoader, loaderDuration * 1000);
+                }
+                window.setTimeout(function () {
+                    if (!loader.hidden) { dismissLoader(); }
+                }, (loaderDuration * 1000) + 1600);
+            } else {
+                document.body.classList.remove('is-loading');
+            }
+
+            var nlForm = document.getElementById('newsletter-form');
+            var nlEmail = document.getElementById('newsletter-email');
+            var nlError = document.getElementById('newsletter-email-error');
+
+            function isValidEmail(value) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+            }
+
+            function setFieldError(input, errorEl, message) {
+                if (!input || !errorEl) return;
+                if (message) {
+                    input.setAttribute('aria-invalid', 'true');
+                    errorEl.textContent = message;
+                    errorEl.classList.add('is-visible');
+                } else {
+                    input.removeAttribute('aria-invalid');
+                    errorEl.textContent = '';
+                    errorEl.classList.remove('is-visible');
+                }
+            }
+
+            if (nlForm && nlEmail && nlError) {
+                nlEmail.addEventListener('input', function () {
+                    if (nlEmail.getAttribute('aria-invalid') === 'true') {
+                        setFieldError(nlEmail, nlError, '');
+                    }
+                });
+
+                nlForm.addEventListener('submit', function (e) {
+                    e.preventDefault();
+                    var value = nlEmail.value.trim();
+
+                    if (!value) {
+                        setFieldError(nlEmail, nlError, 'Please enter your email address.');
+                        nlEmail.focus();
+                        return;
+                    }
+                    if (!isValidEmail(value)) {
+                        setFieldError(nlEmail, nlError, 'That doesn\u2019t look like a valid email address.');
+                        nlEmail.focus();
+                        return;
+                    }
+
+                    setFieldError(nlEmail, nlError, '');
+                    nlEmail.value = '';
+                    window.location.href = '../404.html';
+                });
+            }
+
+            function initReveals() {
+                var root = document.documentElement;
+                if (prefersReduced || !window.gsap || !window.ScrollTrigger) {
+                    root.classList.add('no-anim');
+                    return;
+                }
+                gsap.registerPlugin(ScrollTrigger);
+
+                var isNarrow = window.innerWidth <= 960;
+                var triggerOf = function (el) { return el.closest('section') || el; };
+
+                gsap.utils.toArray('.reveal-left').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : -56, y: isNarrow ? 26 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 84%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-right').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : 56, y: isNarrow ? 26 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 84%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-up').forEach(function (el) {
+                    gsap.fromTo(el, { y: 44, opacity: 0 }, {
+                        y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 86%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-image-left').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : -78, y: isNarrow ? 30 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1, ease: 'power4.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 82%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-image-right').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : 78, y: isNarrow ? 30 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1, ease: 'power4.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 82%' }
+                    });
+                });
+
+                [
+                    { sel: '.recent-grid .recent-card', trigger: '.recent-grid' },
+                    { sel: '.workflow-grid .workflow-card', trigger: '.workflow-grid' },
+                    { sel: '.perspective-grid .perspective-card', trigger: '.perspective-grid' },
+                    { sel: '.topic-grid .topic-card', trigger: '.topic-grid' },
+                    { sel: '.tutorial-list .tutorial-item', trigger: '.tutorial-list' },
+                    { sel: '.advice-list .advice-item', trigger: '.advice-list' }
+                ].forEach(function (group) {
+                    var items = gsap.utils.toArray(group.sel);
+                    var triggerEl = document.querySelector(group.trigger);
+                    if (!items.length || !triggerEl) return;
+                    gsap.fromTo(items,
+                        { y: 46, opacity: 0 },
+                        {
+                            y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', stagger: 0.1,
+                            scrollTrigger: { trigger: triggerEl, start: 'top 82%' }
+                        });
+                });
+
+                var nlRows = gsap.utils.toArray('.newsletter-visual__list li');
+                if (nlRows.length) {
+                    gsap.fromTo(nlRows,
+                        { x: 28, opacity: 0 },
+                        {
+                            x: 0, opacity: 1, duration: 0.65, ease: 'power3.out', stagger: 0.1,
+                            scrollTrigger: { trigger: '.newsletter-visual', start: 'top 84%' }
+                        });
+                }
+            }
+
+            window.__stacklyReveal = initReveals;
+
+            if (!loader) {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initReveals);
+                } else {
+                    initReveals();
+                }
+            }
+
+        })();
+    </script>
+
+</body>
+
+</html>

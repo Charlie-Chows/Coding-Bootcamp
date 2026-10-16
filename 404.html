@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Page Not Found — Stackly Coding Bootcamp</title>
+    <meta name="description"
+        content="This route doesn't point to a page on the Stackly demo site. Head back home or return to the previous page.">
+    <meta name="theme-color" content="#2E073F">
+    <meta name="robots" content="noindex">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="global.css">
+
+    <style>
+        .err-page {
+            min-height: 100vh;
+            min-height: 100dvh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background: var(--plum);
+            color: var(--lavender);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .err-page::before,
+        .err-page::after {
+            content: "";
+            position: fixed;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .err-page::before {
+            top: -22%;
+            right: -12%;
+            width: min(760px, 72vw);
+            height: min(760px, 72vw);
+            background: radial-gradient(circle at center,
+                    rgba(173, 73, 225, 0.32) 0%,
+                    rgba(122, 28, 172, 0.12) 44%,
+                    transparent 70%);
+            filter: blur(8px);
+        }
+
+        .err-page::after {
+            bottom: -28%;
+            left: -14%;
+            width: min(620px, 62vw);
+            height: min(620px, 62vw);
+            background: radial-gradient(circle at center,
+                    rgba(122, 28, 172, 0.34) 0%,
+                    transparent 66%);
+            filter: blur(8px);
+        }
+
+        .err-grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(235, 211, 248, 0.045) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(235, 211, 248, 0.045) 1px, transparent 1px);
+            background-size: 68px 68px;
+            mask-image: radial-gradient(circle at 50% 40%, black 30%, transparent 78%);
+            -webkit-mask-image: radial-gradient(circle at 50% 40%, black 30%, transparent 78%);
+        }
+
+        .err-shell {
+            position: relative;
+            z-index: 1;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            width: min(100% - 2.4rem, 1180px);
+            margin-inline: auto;
+            padding-block: clamp(1.75rem, 4vw, 3rem) clamp(2rem, 4vw, 3rem);
+        }
+
+        .err-brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.62rem;
+            align-self: flex-start;
+            text-decoration: none;
+            transition: opacity 0.25s var(--ease-out);
+        }
+
+        .err-brand:hover {
+            opacity: 0.86;
+        }
+
+        .err-brand:focus-visible {
+            outline: 3px solid var(--orchid);
+            outline-offset: 6px;
+            border-radius: 6px;
+        }
+
+        .err-brand__logo {
+            width: auto;
+            height: 38px;
+            object-fit: contain;
+            filter: brightness(0) saturate(100%) invert(91%) sepia(22%) saturate(1400%) hue-rotate(232deg) brightness(104%) contrast(96%);
+        }
+
+        .err-brand__name {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            color: var(--lavender);
+            line-height: 1;
+        }
+
+        .err-main {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(2.5rem, 6vw, 5rem);
+            align-items: center;
+            padding-block: clamp(2.5rem, 6vw, 4.5rem);
+        }
+
+        .err-copy>*+* {
+            margin-top: 1.15rem;
+        }
+
+        .err-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.55rem;
+            padding: 0.35rem 0.9rem;
+            border-radius: 999px;
+            background: rgba(235, 211, 248, 0.08);
+            border: 1px solid rgba(235, 211, 248, 0.18);
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--orchid-300);
+        }
+
+        .err-eyebrow i {
+            font-size: 0.78rem;
+            color: var(--orchid);
+        }
+
+        .err-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+            font-weight: 700;
+            line-height: 1.06;
+            letter-spacing: -0.026em;
+            color: var(--lavender);
+            margin: 0;
+        }
+
+        .err-title::after {
+            content: "";
+            display: block;
+            width: 68px;
+            height: 5px;
+            margin-top: 1.4rem;
+            border-radius: 5px;
+            background: linear-gradient(90deg, var(--purple), var(--orchid));
+        }
+
+        .err-lede {
+            font-size: clamp(1rem, 1.1vw, 1.1rem);
+            line-height: 1.7;
+            color: var(--on-dark-muted);
+            max-width: 52ch;
+            margin: 0;
+        }
+
+        .err-hint {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.6rem;
+            padding: 0.9rem 1.1rem;
+            border-radius: var(--r-s);
+            background: rgba(235, 211, 248, 0.05);
+            border: 1px solid rgba(235, 211, 248, 0.14);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            color: var(--on-dark-muted);
+            max-width: 52ch;
+            margin: 0;
+        }
+
+        .err-hint i {
+            flex-shrink: 0;
+            margin-top: 0.22rem;
+            color: var(--orchid-300);
+            font-size: 0.86rem;
+        }
+
+        .err-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.85rem;
+            padding-top: 0.6rem;
+        }
+
+        .err-actions .btn {
+            min-width: 168px;
+        }
+
+        .err-actions .btn--primary {
+            box-shadow: 0 12px 30px rgba(122, 28, 172, 0.42);
+        }
+
+        .err-visual {
+            position: relative;
+            isolation: isolate;
+            min-height: clamp(320px, 40vw, 460px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .err-mark {
+            font-family: var(--font-display);
+            font-size: clamp(6rem, 15vw, 12rem);
+            font-weight: 700;
+            line-height: 0.82;
+            letter-spacing: -0.06em;
+            margin: 0;
+            background: linear-gradient(135deg,
+                    var(--purple) 0%,
+                    var(--orchid) 48%,
+                    var(--lavender) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            filter: drop-shadow(0 24px 48px rgba(173, 73, 225, 0.34));
+            user-select: none;
+        }
+
+        .err-terminal {
+            position: relative;
+            z-index: 2;
+            border-radius: var(--r-m);
+            background: rgba(34, 5, 47, 0.72);
+            border: 1px solid rgba(235, 211, 248, 0.16);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.36);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            overflow: hidden;
+            max-width: 520px;
+        }
+
+        .err-terminal__bar {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1rem;
+            background: rgba(235, 211, 248, 0.05);
+            border-bottom: 1px solid rgba(235, 211, 248, 0.1);
+        }
+
+        .err-terminal__dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(235, 211, 248, 0.22);
+            flex-shrink: 0;
+        }
+
+        .err-terminal__dot:nth-child(1) {
+            background: var(--orchid);
+        }
+
+        .err-terminal__dot:nth-child(2) {
+            background: rgba(235, 211, 248, 0.4);
+        }
+
+        .err-terminal__dot:nth-child(3) {
+            background: rgba(235, 211, 248, 0.22);
+        }
+
+        .err-terminal__title {
+            margin-left: 0.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.74rem;
+            color: var(--on-dark-soft);
+            letter-spacing: 0.02em;
+        }
+
+        .err-terminal__body {
+            margin: 0;
+            padding: clamp(1rem, 2vw, 1.35rem);
+            font-family: var(--font-mono);
+            font-size: clamp(0.74rem, 1vw, 0.84rem);
+            line-height: 1.85;
+            color: rgba(235, 211, 248, 0.86);
+            white-space: pre;
+            overflow-x: auto;
+        }
+
+        .err-prompt {
+            color: var(--orchid-300);
+        }
+
+        .err-error {
+            color: #ff8aa2;
+        }
+
+        .err-warn {
+            color: #ffc98a;
+        }
+
+        .err-ok {
+            color: #8ce9b0;
+        }
+
+        .err-dim {
+            color: rgba(235, 211, 248, 0.42);
+        }
+
+        .err-cursor {
+            display: inline-block;
+            width: 0.55em;
+            height: 1em;
+            margin-left: 0.15em;
+            vertical-align: -0.1em;
+            background: var(--orchid-300);
+            animation: errBlink 1.05s steps(1) infinite;
+        }
+
+        @keyframes errBlink {
+
+            0%,
+            49% {
+                opacity: 1;
+            }
+
+            50%,
+            100% {
+                opacity: 0;
+            }
+        }
+
+        .err-badge {
+            position: absolute;
+            top: 4%;
+            right: 0;
+            z-index: 5;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.65rem;
+            padding: 0.7rem 1rem;
+            border-radius: var(--r-s);
+            background: var(--plum-700);
+            border: 1px solid rgba(235, 211, 248, 0.2);
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.34);
+            font-size: 0.82rem;
+            font-weight: 650;
+            color: var(--lavender);
+            white-space: nowrap;
+        }
+
+        .err-badge i {
+            color: var(--orchid-300);
+            font-size: 0.88rem;
+        }
+
+        .err-note {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.55rem;
+            padding-top: clamp(1.5rem, 3vw, 2rem);
+            border-top: 1px solid rgba(235, 211, 248, 0.12);
+            font-size: 0.8rem;
+            color: var(--on-dark-soft);
+            letter-spacing: 0.01em;
+            margin: 0;
+        }
+
+        .err-note i {
+            color: var(--orchid-300);
+            font-size: 0.78rem;
+        }
+
+        .err-note strong {
+            color: var(--on-dark-muted);
+            font-weight: 600;
+        }
+
+        .js .err-anim {
+            opacity: 0;
+            transform: translateY(22px);
+            animation: errEnter 0.85s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+        }
+
+        .js .err-anim--d1 {
+            animation-delay: 0.05s;
+        }
+
+        .js .err-anim--d2 {
+            animation-delay: 0.16s;
+        }
+
+        .js .err-anim--d3 {
+            animation-delay: 0.27s;
+        }
+
+        .js .err-anim--d4 {
+            animation-delay: 0.38s;
+        }
+
+        .js .err-anim--d5 {
+            animation-delay: 0.49s;
+        }
+
+        .js .err-anim--d6 {
+            animation-delay: 0.62s;
+        }
+
+        .js .err-anim--d7 {
+            animation-delay: 0.74s;
+        }
+
+        @keyframes errEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .no-js .err-anim {
+            opacity: 1;
+            transform: none;
+        }
+
+        @media (max-width: 960px) {
+            .err-main {
+                grid-template-columns: 1fr;
+                gap: clamp(2.25rem, 6vw, 3rem);
+                padding-block: clamp(2rem, 5vw, 3rem);
+            }
+
+            .err-visual {
+                min-height: auto;
+                order: 2;
+            }
+
+            .err-mark {
+                font-size: clamp(5rem, 22vw, 9rem);
+            }
+
+            .err-terminal {
+                max-width: 100%;
+            }
+
+            .err-badge {
+                position: static;
+                align-self: flex-start;
+                margin-top: 0.25rem;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .err-shell {
+                width: min(100% - 2rem, 1180px);
+                padding-block: 1.5rem 2rem;
+            }
+
+            .err-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .err-actions .btn {
+                width: 100%;
+                min-width: 0;
+            }
+
+            .err-title {
+                font-size: clamp(1.9rem, 8vw, 2.4rem);
+            }
+
+            .err-mark {
+                font-size: clamp(4.5rem, 26vw, 7rem);
+            }
+
+            .err-brand__logo {
+                height: 32px;
+            }
+
+            .err-brand__name {
+                font-size: 1rem;
+            }
+
+            .err-note {
+                font-size: 0.76rem;
+                line-height: 1.55;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .js .err-anim {
+                opacity: 1 !important;
+                transform: none !important;
+                animation: none !important;
+            }
+
+            .err-cursor {
+                animation: none;
+                opacity: 0.85;
+            }
+        }
+    </style>
+</head>
+
+<body class="err-page">
+
+    <div class="err-grid-bg" aria-hidden="true"></div>
+
+    <div class="err-shell">
+
+        <a class="err-brand err-anim err-anim--d1" href="index.html" aria-label="Stackly — back to home">
+            <img class="err-brand__logo" src="logo.webp" alt="Stackly logo" width="130" height="38">
+        </a>
+
+        <main class="err-main" id="main">
+
+            <div class="err-copy">
+
+                <p class="err-eyebrow err-anim err-anim--d2">
+                    <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+                    Error 404
+                </p>
+
+                <h1 class="err-title err-anim err-anim--d3">
+                    This page went off-script.
+                </h1>
+
+                <p class="err-lede err-anim err-anim--d4">
+                    The link you followed doesn&rsquo;t point to an active page.
+                    It might be an old route, an updated link, or a page that has moved.
+                </p>
+
+                <p class="err-hint err-anim err-anim--d4">
+                    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
+                    <span>
+                        Nothing is broken on your end. Use the buttons below to return home
+                        or jump back to your previous page.
+                    </span>
+                </p>
+
+                <div class="err-actions err-anim err-anim--d5">
+                    <a class="btn btn--primary btn--lg" href="index.html">
+                        <i class="fa-solid fa-house" aria-hidden="true"></i>
+                        Home
+                    </a>
+                    <button class="btn btn--on-dark btn--lg" id="go-back" type="button">
+                        <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                        Go Back
+                    </button>
+                </div>
+
+            </div>
+
+            <div class="err-visual">
+
+                <p class="err-mark err-anim err-anim--d2" aria-hidden="true">404</p>
+
+                <div class="err-terminal err-anim err-anim--d6">
+
+                    <div class="err-terminal__bar">
+                        <span class="err-terminal__dot"></span>
+                        <span class="err-terminal__dot"></span>
+                        <span class="err-terminal__dot"></span>
+                        <span class="err-terminal__title">stackly — route check</span>
+                    </div>
+<pre class="err-terminal__body"><span class="err-prompt">$</span> stackly open /requested-page
+
+<span class="err-error">✗  404  route not found</span>
+<span class="err-dim">   ────────────────────────────────</span>
+<span class="err-dim">   hint:</span>  check the URL, or head home
+<span class="err-dim">   docs:</span>  stackly.edu/curriculum
+
+<span class="err-prompt">$</span> <span class="err-cursor" aria-hidden="true"></span></pre>                </div>
+
+                <div class="err-badge err-anim err-anim--d7">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    <span>Route not found &middot; HTTP 404</span>
+                </div>
+
+            </div>
+
+        </main>
+
+        <p class="err-note err-anim err-anim--d7">
+            <i class="fa-solid fa-code" aria-hidden="true"></i>
+            <span><strong>Stackly Coding Bootcamp</strong></span>
+        </p>
+
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.addEventListener('load', function () {
+                if (!window.location.hash) { window.scrollTo(0, 0); }
+            });
+
+            var goBackBtn = document.getElementById('go-back');
+
+            function goHome() {
+                window.location.href = 'index.html';
+            }
+
+            if (goBackBtn) {
+                goBackBtn.addEventListener('click', function () {
+                    var cameFromSite = false;
+
+                    try {
+                        if (document.referrer) {
+                            var ref = new URL(document.referrer);
+                            cameFromSite = ref.origin === window.location.origin;
+                        }
+                    } catch (err) {
+                        cameFromSite = false;
+                    }
+
+                    var canGoBack = window.history.length > 1;
+
+                    if (cameFromSite && canGoBack) {
+                        window.history.back();
+
+                        window.setTimeout(function () {
+                            if (!document.hidden) { goHome(); }
+                        }, 420);
+                        return;
+                    }
+
+                    if (canGoBack) {
+                        window.history.back();
+                        window.setTimeout(function () {
+                            if (!document.hidden) { goHome(); }
+                        }, 420);
+                        return;
+                    }
+
+                    goHome();
+                });
+            }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && goBackBtn) {
+                    goBackBtn.click();
+                }
+            });
+
+        })();
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Programs &amp; Tracks — Stackly Coding Bootcamp</title>
+    <meta name="description"
+        content="Explore Stackly's bootcamp programs: programming foundations, frontend, backend, and full-stack tracks, project labs, mentor code review, and portfolio support.">
+    <meta name="theme-color" content="#2E073F">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../css/services.css">
+</head>
+
+<body class="is-loading">
+
+    <div class="loader" id="site-loader" role="status" aria-live="polite">
+        <img class="loader__logo" src="../logo.webp" alt="Stackly" width="150" height="48">
+        <div class="loader__bar"><span class="loader__fill" id="loader-fill"></span></div>
+        <p class="loader__label">Loading programs</p>
+    </div>
+
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <header class="site-header" id="site-header">
+        <div class="container site-header__inner">
+
+            <a class="brand" href="../index.html" aria-label="Stackly — back to home">
+                <img class="brand__logo" src="../logo.webp" alt="Stackly logo" width="130" height="38">
+            </a>
+
+            <nav class="site-nav" aria-label="Primary">
+                <ul class="site-nav__list">
+                    <li><a class="site-nav__link" href="../index.html">Home</a></li>
+                    <li><a class="site-nav__link" href="about.html">About</a></li>
+                    <li><a class="site-nav__link" href="services.html" aria-current="page">Services</a></li>
+                    <li><a class="site-nav__link" href="blog.html">Blog</a></li>
+                    <li><a class="site-nav__link" href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="site-header__actions">
+                <a class="btn btn--primary site-header__login" href="login.html">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    Login
+                </a>
+                <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Open navigation menu"
+                    aria-expanded="false" aria-controls="fullscreen-nav">
+                    <i class="fa-solid fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+
+        </div>
+    </header>
+
+    <div class="nav-overlay" id="fullscreen-nav" role="dialog" aria-modal="true" aria-label="Site navigation">
+
+        <div class="nav-overlay__top">
+            <a class="brand brand--light" href="../index.html" aria-label="Stackly — back to home">
+                <img class="brand__logo" src="../logo.webp" alt="Stackly logo" width="130" height="38">
+            </a>
+            <button class="nav-overlay__close" id="nav-close" type="button" aria-label="Close navigation menu">
+                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav class="nav-overlay__nav" aria-label="Mobile primary">
+            <ul class="nav-overlay__list">
+                <li><a class="nav-overlay__link" href="../index.html">Home</a></li>
+                <li><a class="nav-overlay__link" href="about.html">About</a></li>
+                <li><a class="nav-overlay__link" href="services.html" aria-current="page">Services</a></li>
+                <li><a class="nav-overlay__link" href="blog.html">Blog</a></li>
+                <li><a class="nav-overlay__link" href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="nav-overlay__foot">
+            <a class="btn btn--light nav-overlay__login" href="login.html">
+                <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                Login to your dashboard
+            </a>
+            <p class="nav-overlay__note">Stackly Coding Bootcamp &middot; Salem, Tamil Nadu, India</p>
+        </div>
+
+    </div>
+
+    <main id="main">
+
+        <section class="sv-hero" aria-labelledby="sv-hero-title">
+            <div class="sv-hero__bg" aria-hidden="true">
+                <span class="sv-hero__glow"></span>
+            </div>
+
+            <div class="container sv-hero__inner">
+
+                <div class="sv-hero__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-layer-group" aria-hidden="true"></i>
+                        Programs &amp; Learning Experiences
+                    </p>
+
+                    <h1 id="sv-hero-title" class="reveal-left">
+                        Choose the track that matches where you are right now.
+                    </h1>
+
+                    <p class="lead reveal-left">
+                        Stackly runs four connected programs — from absolute programming
+                        foundations to full-stack delivery — plus the labs, reviews, and
+                        support structures that hold them together.
+                    </p>
+
+                    <div class="sv-hero__actions reveal-up">
+                        <a class="btn btn--primary btn--lg" href="contact.html">
+                            Ask about a program
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                        <a class="btn btn--ghost btn--lg" href="about.html">
+                            How we teach
+                            <i class="fa-regular fa-circle-question" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                    <ul class="sv-hero__chips meta-strip reveal-up">
+                        <li class="chip"><i class="fa-solid fa-seedling" aria-hidden="true"></i> Foundations</li>
+                        <li class="chip"><i class="fa-solid fa-window-restore" aria-hidden="true"></i> Frontend</li>
+                        <li class="chip"><i class="fa-solid fa-database" aria-hidden="true"></i> Backend</li>
+                        <li class="chip"><i class="fa-solid fa-cubes" aria-hidden="true"></i> Full-Stack</li>
+                    </ul>
+                </div>
+
+                <div class="sv-hero__visual reveal-image-right">
+                    <div class="sv-hero__track">
+                        <div class="track-rail">
+                            <div class="track-rail__head">
+                                <span class="track-rail__title">Stackly track map</span>
+                                <span class="chip chip--dark track-rail__badge">Demo overview</span>
+                            </div>
+
+                            <ul class="track-rail__list">
+                                <li class="track-rail__item">
+                                    <span class="track-rail__dot track-rail__dot--1"></span>
+                                    <div>
+                                        <p class="track-rail__name">Foundations</p>
+                                        <p class="track-rail__desc">Logic · CLI · Git</p>
+                                    </div>
+                                </li>
+                                <li class="track-rail__item">
+                                    <span class="track-rail__dot track-rail__dot--2"></span>
+                                    <div>
+                                        <p class="track-rail__name">Frontend</p>
+                                        <p class="track-rail__desc">HTML · CSS · JS</p>
+                                    </div>
+                                </li>
+                                <li class="track-rail__item">
+                                    <span class="track-rail__dot track-rail__dot--3"></span>
+                                    <div>
+                                        <p class="track-rail__name">Backend</p>
+                                        <p class="track-rail__desc">API · DB · Tests</p>
+                                    </div>
+                                </li>
+                                <li class="track-rail__item">
+                                    <span class="track-rail__dot track-rail__dot--4"></span>
+                                    <div>
+                                        <p class="track-rail__name">Full-Stack</p>
+                                        <p class="track-rail__desc">Architecture · Deploy</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <figure class="sv-hero__shot">
+                        <img src="../assets/images/photo-1542831371-29b0f74f9713-900.webp"
+                            alt="A learner working through code on a laptop at a shared workspace" width="900"
+                            height="600" decoding="async">
+                    </figure>
+
+                    <div class="float-card sv-hero__float">
+                        <i class="fa-solid fa-code-pull-request" aria-hidden="true"></i>
+                        <span>Mentor-reviewed builds</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="overview-title">
+            <div class="container">
+
+                <div class="section__head section__head--center reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-map" aria-hidden="true"></i> Program Overview</p>
+                    <h2 id="overview-title">Four programs, one continuous path.</h2>
+                    <p class="lead">
+                        Each program builds on the last. You can start at the level that fits
+                        you and move through the rest — or enter directly into a track if you
+                        already have the foundations.
+                    </p>
+                </div>
+
+                <div class="program-grid">
+
+                    <article class="program-card reveal-up">
+                        <span class="program-card__icon"><i class="fa-solid fa-seedling" aria-hidden="true"></i></span>
+                        <h3>Foundations</h3>
+                        <p class="program-card__tag">For absolute beginners</p>
+                        <p>Programming logic, the command line, and your first Git commits — the ground floor of
+                            everything else.</p>
+                        <ul class="program-card__list">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> No prior experience needed</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Small daily builds</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Environment setup included</li>
+                        </ul>
+                        <a class="link-arrow" href="../404.html">
+                            Program details
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="program-card reveal-up">
+                        <span class="program-card__icon"><i class="fa-solid fa-window-restore"
+                                aria-hidden="true"></i></span>
+                        <h3>Frontend Track</h3>
+                        <p class="program-card__tag">For interface builders</p>
+                        <p>Semantic HTML, responsive CSS, and JavaScript that drives real, accessible interfaces.</p>
+                        <ul class="program-card__list">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Layout systems &amp; responsiveness
+                            </li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Accessibility as default</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Component thinking</li>
+                        </ul>
+                        <a class="link-arrow" href="../404.html">
+                            Program details
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="program-card reveal-up">
+                        <span class="program-card__icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+                        <h3>Backend Track</h3>
+                        <p class="program-card__tag">For systems thinkers</p>
+                        <p>Servers, routing, data modelling, and tests that tell you the truth before your users do.</p>
+                        <ul class="program-card__list">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> HTTP &amp; API design</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Database schema &amp; queries</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Testing &amp; error handling</li>
+                        </ul>
+                        <a class="link-arrow" href="../404.html">
+                            Program details
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                    <article class="program-card reveal-up">
+                        <span class="program-card__icon"><i class="fa-solid fa-cubes" aria-hidden="true"></i></span>
+                        <h3>Full-Stack Track</h3>
+                        <p class="program-card__tag">For complete builds</p>
+                        <p>Bring client, server, and database together into a deployed product you can defend in review.
+                        </p>
+                        <ul class="program-card__list">
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Architecture decisions</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Deployment &amp; environments</li>
+                            <li><i class="fa-solid fa-check" aria-hidden="true"></i> Portfolio case study</li>
+                        </ul>
+                        <a class="link-arrow" href="../404.html">
+                            Program details
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </article>
+
+                </div>
+
+                <p class="section__footnote section__footnote--center reveal-up">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    Curriculum progression is adapted to each cohort's pacing and practical engineering milestones.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="section section--soft" aria-labelledby="foundations-title">
+            <div class="container split split--wide-left">
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-seedling" aria-hidden="true"></i>
+                        Programming Foundations
+                    </p>
+                    <h2 id="foundations-title" class="reveal-right">The starting point most people skip.</h2>
+                    <p class="lead reveal-right">
+                        Foundations is where you learn to think in programs — how to break a
+                        problem into steps, name things well, and use the tools every developer
+                        touches daily.
+                    </p>
+                    <ul class="feature-list reveal-right">
+                        <li><i class="fa-solid fa-puzzle-piece" aria-hidden="true"></i><span>Decomposing problems before
+                                writing a line of code.</span></li>
+                        <li><i class="fa-solid fa-terminal" aria-hidden="true"></i><span>Working comfortably in the
+                                terminal from day one.</span></li>
+                        <li><i class="fa-solid fa-code-branch" aria-hidden="true"></i><span>Committing, branching, and
+                                reading your own history.</span></li>
+                        <li><i class="fa-solid fa-lightbulb" aria-hidden="true"></i><span>Functions, data shapes, and
+                                when to split logic apart.</span></li>
+                    </ul>
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            See the foundations module list
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="split__visual reveal-image-right">
+                    <div class="terminal">
+                        <div class="terminal__bar">
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="terminal__title">foundations — week 01</span>
+                        </div>
+<pre class="terminal__body"><span class="term-prompt">$</span> git init stackly-notes
+<span class="term-ok">Initialized empty Git repository</span>
+
+<span class="term-prompt">$</span> node guess-the-number.js
+<span class="term-dim">Pick a number between 1 and 10:</span> 7
+<span class="term-warn">Too high.</span>
+<span class="term-dim">Pick a number between 1 and 10:</span> 3
+<span class="term-ok">Correct in 2 attempts.</span>
+
+<span class="term-prompt">$</span> git commit -m "feat: game loop with feedback"
+<span class="term-ok">[main 3a91c47] 1 file changed, 42 insertions(+)</span></pre>                    </div>
+
+                    <div class="foundation-card">
+                        <i class="fa-solid fa-graduation-cap" aria-hidden="true"></i>
+                        <div>
+                            <p class="foundation-card__title">Who it&rsquo;s for</p>
+                            <p class="foundation-card__body">
+                                Learners with no prior coding experience, or anyone returning after
+                                a long break who wants a clean, structured restart.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="fe-title">
+            <div class="container split split--wide-right">
+
+                <div class="split__visual reveal-image-left">
+                    <div class="browser">
+                        <div class="browser__bar">
+                            <div class="browser__dots"><span></span><span></span><span></span></div>
+                            <div class="browser__url">localhost:5173/track/frontend</div>
+                        </div>
+                        <div class="browser__body">
+                            <div class="fe-board">
+                                <div class="fe-board__row">
+                                    <span class="fe-board__label">Module</span>
+                                    <span class="fe-board__value">Responsive pricing section</span>
+                                </div>
+                                <div class="fe-board__row">
+                                    <span class="fe-board__label">Skills</span>
+                                    <span class="fe-board__pills">
+                                        <span class="fe-pill">Layout</span>
+                                        <span class="fe-pill">Typography</span>
+                                        <span class="fe-pill">A11y</span>
+                                        <span class="fe-pill">Motion</span>
+                                    </span>
+                                </div>
+                                <div class="fe-board__row">
+                                    <span class="fe-board__label">Deliverable</span>
+                                    <span class="fe-board__value">Deployed page + review-ready PR</span>
+                                </div>
+                                <div class="fe-board__meters">
+                                    <div class="fe-meter">
+                                        <span class="fe-meter__fill" style="--w:82%"></span>
+                                        <span class="fe-meter__cap">Layout system</span>
+                                    </div>
+                                    <div class="fe-meter">
+                                        <span class="fe-meter__fill" style="--w:74%"></span>
+                                        <span class="fe-meter__cap">Accessibility</span>
+                                    </div>
+                                    <div class="fe-meter">
+                                        <span class="fe-meter__fill" style="--w:61%"></span>
+                                        <span class="fe-meter__cap">Performance</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-window-restore" aria-hidden="true"></i>
+                        Frontend Development Track
+                    </p>
+                    <h2 id="fe-title" class="reveal-right">Interfaces that hold up under real use.</h2>
+                    <p class="lead reveal-right">
+                        The frontend track is where your work becomes visible and the feedback
+                        becomes immediate. You build layouts that survive every screen size,
+                        write markup assistive technology understands, and keep JavaScript
+                        predictable.
+                    </p>
+                    <ul class="feature-list reveal-right">
+                        <li><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i><span>Layout systems, spacing
+                                rhythm, and typographic hierarchy.</span></li>
+                        <li><i class="fa-solid fa-universal-access" aria-hidden="true"></i><span>Keyboard paths, focus
+                                states, and contrast as default habits.</span></li>
+                        <li><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i><span>Mobile-first thinking
+                                rather than shrinking desktop layouts.</span></li>
+                        <li><i class="fa-solid fa-gauge-high" aria-hidden="true"></i><span>Performance basics: asset
+                                sizing, layout stability, lean JS.</span></li>
+                    </ul>
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            See the frontend syllabus
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section section--dark on-dark" aria-labelledby="be-title">
+            <div class="container split">
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-server" aria-hidden="true"></i>
+                        Backend Development Track
+                    </p>
+                    <h2 id="be-title" class="reveal-left">The rules, the data, and the contracts between them.</h2>
+                    <p class="lead reveal-left">
+                        Backend work is quiet and structural. You design routes around
+                        resources, model data that won&rsquo;t fight you later, and write tests
+                        that catch problems before they reach a user.
+                    </p>
+                    <ul class="feature-list reveal-left">
+                        <li><i class="fa-solid fa-route" aria-hidden="true"></i><span>Endpoint design centred on
+                                resources, not screens.</span></li>
+                        <li><i class="fa-solid fa-table-columns" aria-hidden="true"></i><span>Schema thinking:
+                                relationships, constraints, migrations.</span></li>
+                        <li><i class="fa-solid fa-shield-halved" aria-hidden="true"></i><span>Validation, error
+                                handling, and safe auth fundamentals.</span></li>
+                        <li><i class="fa-solid fa-vial" aria-hidden="true"></i><span>Unit and integration tests written
+                                beside the feature.</span></li>
+                    </ul>
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            See the backend syllabus
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="split__visual reveal-image-right">
+                    <div class="be-diagram" role="img"
+                        aria-label="Diagram of a request lifecycle: client sends request, server validates, database responds, response returns to client">
+                        <div class="be-diagram__stage">
+                            <span class="be-diagram__icon"><i class="fa-solid fa-display" aria-hidden="true"></i></span>
+                            <span class="be-diagram__label">Client</span>
+                        </div>
+
+                        <span class="be-diagram__arrow" aria-hidden="true">
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </span>
+
+                        <div class="be-diagram__stage be-diagram__stage--accent">
+                            <span class="be-diagram__icon"><i class="fa-solid fa-gears" aria-hidden="true"></i></span>
+                            <span class="be-diagram__label">Server &amp; validation</span>
+                        </div>
+
+                        <span class="be-diagram__arrow" aria-hidden="true">
+                            <i class="fa-solid fa-arrow-right-long"></i>
+                        </span>
+
+                        <div class="be-diagram__stage">
+                            <span class="be-diagram__icon"><i class="fa-solid fa-database"
+                                    aria-hidden="true"></i></span>
+                            <span class="be-diagram__label">Database</span>
+                        </div>
+                    </div>
+
+                    <div class="terminal be-terminal">
+                        <div class="terminal__bar">
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="terminal__title">api — route log</span>
+                        </div>
+<pre class="terminal__body"><span class="term-dim">GET</span>    /api/courses           <span class="term-ok">200</span>   14ms
+<span class="term-dim">POST</span>   /api/courses           <span class="term-ok">201</span>   38ms
+<span class="term-dim">PATCH</span>  /api/courses/:id       <span class="term-ok">200</span>   27ms
+<span class="term-warn">POST</span>   /api/courses           <span class="term-warn">422</span>   validation_error
+<span class="term-ok">4 passed</span>   <span class="term-dim">0 failed   coverage 86%</span></pre>                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="fs-title">
+            <div class="container split split--wide-left">
+
+                <div class="split__visual reveal-image-left">
+                    <figure class="frame frame--wide">
+                        <img src="../assets/images/photo-1519389950473-47ba0277781c-1200.webp"
+                            alt="A team reviewing a full-stack application on multiple screens together" width="1200"
+                            height="800" loading="lazy" decoding="async">
+                    </figure>
+
+                    <div class="fs-stack">
+                        <div class="fs-stack__layer fs-stack__layer--ui">
+                            <span class="fs-stack__icon"><i class="fa-solid fa-window-restore"
+                                    aria-hidden="true"></i></span>
+                            <span class="fs-stack__name">UI layer</span>
+                            <span class="fs-stack__note">Components · state · a11y</span>
+                        </div>
+                        <div class="fs-stack__layer fs-stack__layer--api">
+                            <span class="fs-stack__icon"><i class="fa-solid fa-plug-circle-bolt"
+                                    aria-hidden="true"></i></span>
+                            <span class="fs-stack__name">API layer</span>
+                            <span class="fs-stack__note">Routes · validation · contracts</span>
+                        </div>
+                        <div class="fs-stack__layer fs-stack__layer--data">
+                            <span class="fs-stack__icon"><i class="fa-solid fa-database" aria-hidden="true"></i></span>
+                            <span class="fs-stack__name">Data layer</span>
+                            <span class="fs-stack__note">Schema · queries · migrations</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-cubes" aria-hidden="true"></i>
+                        Full-Stack Development Track
+                    </p>
+                    <h2 id="fs-title" class="reveal-right">One product, every layer, your name on it.</h2>
+                    <p class="lead reveal-right">
+                        The full-stack track is where separate skills become a single system.
+                        You design the interface, build the API, shape the database, deploy
+                        the result, and then explain your decisions out loud.
+                    </p>
+                    <ul class="feature-list reveal-right">
+                        <li><i class="fa-solid fa-sitemap" aria-hidden="true"></i><span>Draw the architecture before
+                                writing the first component.</span></li>
+                        <li><i class="fa-solid fa-plug-circle-check" aria-hidden="true"></i><span>Connect client and
+                                server with clear contracts between them.</span></li>
+                        <li><i class="fa-solid fa-box-archive" aria-hidden="true"></i><span>Ship it, document it, and
+                                defend it in a project review.</span></li>
+                    </ul>
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            See the full-stack syllabus
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section section--tint" aria-labelledby="labs-title">
+            <div class="container">
+
+                <div class="section__head section__head--center reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-flask" aria-hidden="true"></i> Project Labs</p>
+                    <h2 id="labs-title">Where the syllabus turns into something that runs.</h2>
+                    <p class="lead">
+                        Project Labs are open-ended builds with real acceptance criteria.
+                        You choose the approach, the review is deeper, and the deliverable
+                        is something you could show a hiring team.
+                    </p>
+                </div>
+
+                <div class="lab-layout">
+
+                    <div class="lab-brief reveal-left">
+                        <div class="lab-brief__head">
+                            <span class="chip chip--solid"><i class="fa-solid fa-flask" aria-hidden="true"></i> Sample
+                                lab brief</span>
+                            <span class="lab-brief__file">labs/booking-flow.md</span>
+                        </div>
+
+                        <div class="lab-brief__body">
+                            <h3>Availability-aware booking flow</h3>
+                            <p>
+                                Build a two-step booking form backed by an availability endpoint.
+                                Validation must happen client-side before submit and again on the
+                                server. The completed flow should work with a keyboard alone.
+                            </p>
+
+                            <ul class="lab-brief__criteria">
+                                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Two-step form with clear
+                                    field-level errors</li>
+                                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Availability endpoint
+                                    returns conflict states</li>
+                                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Full keyboard path
+                                    verified end to end</li>
+                                <li><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Review-ready pull
+                                    request with context</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lab-steps reveal-right">
+                        <div class="lab-step">
+                            <span class="lab-step__num" aria-hidden="true"><i class="fa-solid fa-lightbulb"></i></span>
+                            <div>
+                                <h4>Plan the architecture</h4>
+                                <p>Sketch the components, routes, and data shape before coding.</p>
+                            </div>
+                        </div>
+
+                        <div class="lab-step">
+                            <span class="lab-step__num" aria-hidden="true"><i class="fa-solid fa-code"></i></span>
+                            <div>
+                                <h4>Build in small, reviewable steps</h4>
+                                <p>Small commits, focused branches, and a PR that tells a story.</p>
+                            </div>
+                        </div>
+
+                        <div class="lab-step">
+                            <span class="lab-step__num" aria-hidden="true"><i
+                                    class="fa-solid fa-code-pull-request"></i></span>
+                            <div>
+                                <h4>Submit for peer &amp; mentor review</h4>
+                                <p>Two rounds of feedback — one from a peer, one from a mentor.</p>
+                            </div>
+                        </div>
+
+                        <div class="lab-step">
+                            <span class="lab-step__num" aria-hidden="true"><i
+                                    class="fa-solid fa-arrows-rotate"></i></span>
+                            <div>
+                                <h4>Iterate and merge</h4>
+                                <p>Respond to comments, push follow-ups, and merge when approved.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <p class="section__cta section__cta--center reveal-up">
+                    <a class="link-arrow" href="../404.html">
+                        Browse sample lab briefs
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </p>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="mentor-title">
+            <div class="container split split--wide-right">
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-user-graduate" aria-hidden="true"></i>
+                        Code Review &amp; Mentorship
+                    </p>
+                    <h2 id="mentor-title" class="reveal-left">Feedback tied to the code you actually wrote.</h2>
+                    <p class="lead reveal-left">
+                        Every program includes structured review. Mentors read your work,
+                        ask why you made specific choices, and offer alternatives with
+                        honest tradeoffs — not just corrections.
+                    </p>
+                    <ul class="feature-list reveal-left">
+                        <li><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><span>Line-level comments with
+                                reasoning, not just flags.</span></li>
+                        <li><i class="fa-solid fa-people-arrows" aria-hidden="true"></i><span>Live pairing sessions when
+                                a concept refuses to click.</span></li>
+                        <li><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i><span>Strengths named as
+                                clearly as weaknesses.</span></li>
+                        <li><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i><span>Threads stay attached
+                                to the code so you can revisit later.</span></li>
+                    </ul>
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            How review sessions work
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="split__visual reveal-image-right">
+                    <div class="review-panel">
+                        <div class="review-panel__bar">
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="review-panel__title">src/api/bookings.js</span>
+                        </div>
+
+                        <div class="review-panel__body">
+                            <p class="review-panel__line review-panel__line--ctx">
+                                <span class="review-panel__num">21</span>
+                                <code>export async function create(req, res) {</code>
+                            </p>
+                            <p class="review-panel__line review-panel__line--del">
+                                <span class="review-panel__num">22</span>
+                                <code>  const { date, guests } = req.body;</code>
+                            </p>
+                            <p class="review-panel__line review-panel__line--add">
+                                <span class="review-panel__num">22</span>
+                                <code>  const booking = parseBooking(req.body);</code>
+                            </p>
+                            <p class="review-panel__line review-panel__line--add">
+                                <span class="review-panel__num">23</span>
+                                <code>  if (!booking.ok) return res.status(422).json(booking.errors);</code>
+                            </p>
+                            <p class="review-panel__line review-panel__line--ctx">
+                                <span class="review-panel__num">24</span>
+                                <code>  await db.bookings.insert(booking.value);</code>
+                            </p>
+                            <p class="review-panel__line review-panel__line--ctx">
+                                <span class="review-panel__num">25</span>
+                                <code>}</code>
+                            </p>
+                        </div>
+
+                        <div class="review-panel__comment">
+                            <i class="fa-solid fa-comment" aria-hidden="true"></i>
+                            <p>
+                                <strong>Mentor:</strong> Good move separating parsing from the handler.
+                                Now the validation is testable on its own and the route stays thin.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section section--soft" aria-labelledby="career-title">
+            <div class="container">
+
+                <div class="section__head reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Career-Readiness
+                        Workshops</p>
+                    <h2 id="career-title">Prepare for the conversation, not just the code test.</h2>
+                    <p class="lead">
+                        Stackly does not promise job placement. What we do offer is structured
+                        practice in the skills hiring teams actually evaluate: explaining your
+                        work, reading a brief carefully, and knowing your own code well enough
+                        to defend it.
+                    </p>
+                </div>
+
+                <div class="career-grid">
+
+                    <article class="career-card reveal-up">
+                        <span class="career-card__icon"><i class="fa-solid fa-file-lines" aria-hidden="true"></i></span>
+                        <h3>Portfolio &amp; README writing</h3>
+                        <p>Turning finished projects into case studies that read like engineering, not marketing.</p>
+                    </article>
+
+                    <article class="career-card reveal-up">
+                        <span class="career-card__icon"><i class="fa-solid fa-microphone-lines"
+                                aria-hidden="true"></i></span>
+                        <h3>Explaining your code out loud</h3>
+                        <p>Walking through decisions, including the parts you&rsquo;d now do differently.</p>
+                    </article>
+
+                    <article class="career-card reveal-up">
+                        <span class="career-card__icon"><i class="fa-solid fa-puzzle-piece"
+                                aria-hidden="true"></i></span>
+                        <h3>Structured problem approach</h3>
+                        <p>Facing unfamiliar problems with a repeatable process instead of panic.</p>
+                    </article>
+
+                    <article class="career-card reveal-up">
+                        <span class="career-card__icon"><i class="fa-solid fa-magnifying-glass-chart"
+                                aria-hidden="true"></i></span>
+                        <h3>Reading job descriptions honestly</h3>
+                        <p>Mapping a role to your current skills — and naming the gaps clearly.</p>
+                    </article>
+
+                </div>
+
+                <div class="career-note reveal-up">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    <p>
+                        Workshops focus on communication and preparation. Stackly does not
+                        guarantee interviews, offers, or placement outcomes.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section" aria-labelledby="portfolio-title">
+            <div class="container split split--wide-left">
+
+                <div class="split__copy">
+                    <p class="eyebrow reveal-up">
+                        <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                        Portfolio &amp; Capstone Support
+                    </p>
+                    <h2 id="portfolio-title" class="reveal-right">Your capstone becomes the proof.</h2>
+                    <p class="lead reveal-right">
+                        The capstone is the final program milestone: a complete product with
+                        a written case study, deployed and documented. Mentors work with you
+                        on scope, structure, and storytelling so the finished piece genuinely
+                        represents what you can do.
+                    </p>
+                    <ul class="feature-list reveal-right">
+                        <li><i class="fa-solid fa-scissors" aria-hidden="true"></i><span>Scope-cutting sessions so the
+                                project actually finishes.</span></li>
+                        <li><i class="fa-solid fa-sitemap" aria-hidden="true"></i><span>Architecture review before and
+                                during the build.</span></li>
+                        <li><i class="fa-solid fa-book-open" aria-hidden="true"></i><span>Case study writing: problem,
+                                decisions, tradeoffs, next steps.</span></li>
+                        <li><i class="fa-solid fa-presentation-screen" aria-hidden="true"></i><span>Presentation
+                                practice with mentor feedback before the final demo.</span></li>
+                    </ul>
+                    <p class="section__cta reveal-up">
+                        <a class="link-arrow" href="../404.html">
+                            See capstone examples
+                            <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                        </a>
+                    </p>
+                </div>
+
+                <div class="split__visual reveal-image-left">
+                    <div class="capstone-card">
+                        <div class="capstone-card__head">
+                            <span class="chip chip--dark"><i class="fa-solid fa-cubes" aria-hidden="true"></i>
+                                Capstone</span>
+                            <span class="capstone-card__file">README.md</span>
+                        </div>
+
+                        <div class="capstone-card__body">
+                            <h3>Inventory Tracker</h3>
+                            <p class="capstone-card__meta">Full-stack &middot; Node &middot; SQL &middot; Vanilla JS</p>
+
+                            <div class="capstone-card__section">
+                                <p class="capstone-card__label">Problem</p>
+                                <p>Small shops track stock in spreadsheets that break whenever two people edit at once.
+                                </p>
+                            </div>
+
+                            <div class="capstone-card__section">
+                                <p class="capstone-card__label">Key decisions</p>
+                                <ul class="capstone-card__list">
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Conflict-detection via
+                                        optimistic locking</li>
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Simple schema with one
+                                        clear write path</li>
+                                    <li><i class="fa-solid fa-check" aria-hidden="true"></i> Progressive enhancement on
+                                        the client</li>
+                                </ul>
+                            </div>
+
+                            <div class="capstone-card__section">
+                                <p class="capstone-card__label">What I&rsquo;d change</p>
+                                <p>Move to a typed API layer and add integration tests before the next feature.</p>
+                            </div>
+                        </div>
+
+                        <div class="capstone-card__foot">
+                            <i class="fa-solid fa-book" aria-hidden="true"></i>
+                            <p>Capstone deliverables include production deployment, testing suite, and architecture documentation.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="section section--deep on-dark" aria-labelledby="support-title">
+            <div class="container">
+
+                <div class="section__head section__head--center reveal-up">
+                    <p class="eyebrow"><i class="fa-solid fa-headset" aria-hidden="true"></i> Learning Support &amp;
+                        Program Format</p>
+                    <h2 id="support-title">How the programs are actually structured.</h2>
+                    <p class="lead">
+                        Stackly programs are cohort-based, project-first, and paced so you can
+                        hold a job or study alongside. The details below describe the format
+                        rather than specific schedules.
+                    </p>
+                </div>
+
+                <div class="format-grid">
+
+                    <article class="format-card reveal-up">
+                        <span class="format-card__icon"><i class="fa-solid fa-people-group"
+                                aria-hidden="true"></i></span>
+                        <h3>Cohort-based</h3>
+                        <p>You move through the program alongside a peer group that stays with you from start to
+                            capstone.</p>
+                    </article>
+
+                    <article class="format-card reveal-up">
+                        <span class="format-card__icon"><i class="fa-solid fa-clock" aria-hidden="true"></i></span>
+                        <h3>Flexible pacing</h3>
+                        <p>Modules can be revisited. Where a concept needs more time, that time exists.</p>
+                    </article>
+
+                    <article class="format-card reveal-up">
+                        <span class="format-card__icon"><i class="fa-solid fa-code-pull-request"
+                                aria-hidden="true"></i></span>
+                        <h3>Review at every stage</h3>
+                        <p>Peer review before mentor review. Both rounds sharpen the work and the learner.</p>
+                    </article>
+
+                    <article class="format-card reveal-up">
+                        <span class="format-card__icon"><i class="fa-solid fa-universal-access"
+                                aria-hidden="true"></i></span>
+                        <h3>Accessibility built in</h3>
+                        <p>Support for different learning styles, formats, and accessibility needs.</p>
+                    </article>
+
+                    <article class="format-card reveal-up">
+                        <span class="format-card__icon"><i class="fa-solid fa-comments" aria-hidden="true"></i></span>
+                        <h3>Open support channels</h3>
+                        <p>Real people to talk to when something isn&rsquo;t clicking — not just a FAQ page.</p>
+                    </article>
+
+                    <article class="format-card reveal-up">
+                        <span class="format-card__icon"><i class="fa-solid fa-arrows-rotate"
+                                aria-hidden="true"></i></span>
+                        <h3>Revised each run</h3>
+                        <p>Curriculum is adjusted based on learner feedback, not locked in place.</p>
+                    </article>
+
+                </div>
+
+                <p class="format-note reveal-up">
+                    <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                    Specific track timelines and cohort dates are coordinated directly with the Stackly team.
+                </p>
+
+            </div>
+        </section>
+
+        <section class="sv-cta on-dark" aria-labelledby="sv-cta-title">
+            <div class="container sv-cta__inner">
+
+                <div class="sv-cta__copy reveal-left">
+                    <p class="eyebrow">
+                        <i class="fa-solid fa-rocket" aria-hidden="true"></i>
+                        Next Steps
+                    </p>
+                    <h2 id="sv-cta-title">Not sure which program fits? Ask us.</h2>
+                    <p class="lead">
+                        Tell us what you already know and what you want to build. We&rsquo;ll
+                        point you at the right starting point — even if that&rsquo;s somewhere
+                        other than Stackly.
+                    </p>
+                    <a class="btn btn--primary btn--lg" href="contact.html">
+                        Talk to the Stackly team
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                    <p class="sv-cta__note">
+                        <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                        Admissions consultations are scheduled individually upon inquiry.
+                    </p>
+                </div>
+
+                <div class="sv-cta__visual reveal-image-right">
+                    <div class="code-window">
+                        <div class="code-window__bar">
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__dot"></span>
+                            <span class="code-window__title">stackly/which-track.md</span>
+                        </div>
+<pre class="code-window__body"><code><span class="tok-com"># Start here if…</span>
+
+<span class="tok-key">never coded before</span>  → Foundations
+<span class="tok-key">love interfaces</span>      → Frontend
+<span class="tok-key">like systems</span>         → Backend
+<span class="tok-key">want the full build</span>  → Full-Stack
+
+<span class="tok-com"># Not sure? A conversation is fine.</span></code></pre>                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+
+            <div class="site-footer__grid">
+
+                <div>
+                    <a class="brand brand--light" href="../index.html" aria-label="Stackly — back to home">
+                        <img class="brand__logo" src="../logo.webp" alt="Stackly logo" width="130" height="38">
+                    </a>
+                    <p class="site-footer__brand-text">
+                        A project-first coding bootcamp. Learn the fundamentals, build real
+                        software, and get honest feedback from mentors who read your code.
+                    </p>
+                    <div class="site-footer__social">
+                        <a href="../404.html" aria-label="Stackly on GitHub"><i class="fa-brands fa-github"
+                                aria-hidden="true"></i></a>
+                        <a href="../404.html" aria-label="Stackly on LinkedIn"><i class="fa-brands fa-linkedin-in"
+                                aria-hidden="true"></i></a>
+                        <a href="../404.html" aria-label="Stackly on X"><i class="fa-brands fa-x-twitter"
+                                aria-hidden="true"></i></a>
+                        <a href="../404.html" aria-label="Stackly on YouTube"><i class="fa-brands fa-youtube"
+                                aria-hidden="true"></i></a>
+                    </div>
+                </div>
+
+                <nav aria-label="Footer navigation">
+                    <h2 class="site-footer__title">Navigation</h2>
+                    <ul class="site-footer__list">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+
+                <div>
+                    <h2 class="site-footer__title">Programs</h2>
+                    <ul class="site-footer__list">
+                        <li><a href="../404.html">Frontend Track</a></li>
+                        <li><a href="../404.html">Backend Track</a></li>
+                        <li><a href="../404.html">Full-Stack Track</a></li>
+                        <li><a href="../404.html">Project Labs</a></li>
+                        <li><a href="../404.html">Code Review Sessions</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="site-footer__title">Resources</h2>
+                    <ul class="site-footer__list">
+                        <li><a href="../404.html">Learning Guide</a></li>
+                        <li><a href="../404.html">Career Preparation</a></li>
+                        <li><a href="../404.html">Community</a></li>
+                        <li><a href="../404.html">Learner Support</a></li>
+                        <li><a href="../404.html">Accessibility</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h2 class="site-footer__title">Contact</h2>
+                    <ul class="site-footer__contact">
+                        <li>
+                            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+                            <span>+91 1234567899</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+                            <span>Stackly, Salem, Tamil Nadu, India</span>
+                        </li>
+                        <li>
+                            <i class="fa-regular fa-envelope" aria-hidden="true"></i>
+                            <span>hello@example.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="site-footer__bottom">
+                <p>&copy; <span id="footer-year">2026</span> Stackly Coding Bootcamp.</p>
+                <p class="site-footer__legal"><a href="../404.html">Privacy Policy</a><a href="../404.html">Terms</a></p>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+            window.addEventListener('load', function () {
+                if (!window.location.hash) { window.scrollTo(0, 0); }
+            });
+
+            var yearEl = document.getElementById('footer-year');
+            if (yearEl) { yearEl.textContent = String(new Date().getFullYear()); }
+
+            var header = document.getElementById('site-header');
+            if (header) {
+                var setHeaderState = function () {
+                    header.classList.toggle('is-scrolled', window.scrollY > 12);
+                };
+                setHeaderState();
+                window.addEventListener('scroll', setHeaderState, { passive: true });
+            }
+
+            var overlay = document.getElementById('fullscreen-nav');
+            var openBtn = document.getElementById('nav-toggle');
+            var closeBtn = document.getElementById('nav-close');
+            var lastFocus = null;
+
+            function openMenu() {
+                if (!overlay || !openBtn) return;
+                lastFocus = document.activeElement;
+                overlay.classList.add('is-open');
+                document.body.classList.add('menu-open');
+                openBtn.setAttribute('aria-expanded', 'true');
+
+                if (window.gsap && !prefersReduced) {
+                    gsap.fromTo(overlay, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: 'power2.out' });
+                    gsap.fromTo('.nav-overlay__link',
+                        { y: 34, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.5, stagger: 0.06, ease: 'power3.out', delay: 0.08 });
+                    gsap.fromTo('.nav-overlay__foot',
+                        { y: 22, opacity: 0 },
+                        { y: 0, opacity: 1, duration: 0.45, ease: 'power3.out', delay: 0.28 });
+                }
+                if (closeBtn) { closeBtn.focus(); }
+            }
+
+            function closeMenu() {
+                if (!overlay || !openBtn) return;
+                overlay.classList.remove('is-open');
+                document.body.classList.remove('menu-open');
+                openBtn.setAttribute('aria-expanded', 'false');
+                if (lastFocus && typeof lastFocus.focus === 'function') { lastFocus.focus(); }
+                else { openBtn.focus(); }
+            }
+
+            if (openBtn) { openBtn.addEventListener('click', openMenu); }
+            if (closeBtn) { closeBtn.addEventListener('click', closeMenu); }
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
+                    closeMenu();
+                }
+            });
+
+            window.addEventListener('resize', function () {
+                if (window.innerWidth > 960 && overlay && overlay.classList.contains('is-open')) {
+                    closeMenu();
+                }
+            });
+
+            var loader = document.getElementById('site-loader');
+            var fill = document.getElementById('loader-fill');
+            var loaderDuration = prefersReduced ? 0.6 : 1.5;
+
+            function dismissLoader() {
+                if (!loader || loader.hidden) return;
+                loader.hidden = true;
+                document.body.classList.remove('is-loading');
+                document.documentElement.classList.remove('no-anim');
+                if (typeof window.__stacklyReveal === 'function') { window.__stacklyReveal(); }
+            }
+
+            if (loader) {
+                if (window.gsap && fill) {
+                    gsap.to(fill, { scaleX: 1, duration: loaderDuration, ease: 'power2.inOut' });
+                    gsap.to(loader, {
+                        opacity: 0,
+                        duration: prefersReduced ? 0.2 : 0.45,
+                        delay: loaderDuration,
+                        ease: 'power2.out',
+                        onComplete: dismissLoader
+                    });
+                } else {
+                    if (fill) { fill.style.transform = 'scaleX(1)'; }
+                    window.setTimeout(dismissLoader, loaderDuration * 1000);
+                }
+                window.setTimeout(function () {
+                    if (!loader.hidden) { dismissLoader(); }
+                }, (loaderDuration * 1000) + 1600);
+            } else {
+                document.body.classList.remove('is-loading');
+            }
+
+            function initReveals() {
+                var root = document.documentElement;
+                if (prefersReduced || !window.gsap || !window.ScrollTrigger) {
+                    root.classList.add('no-anim');
+                    return;
+                }
+                gsap.registerPlugin(ScrollTrigger);
+
+                var isNarrow = window.innerWidth <= 960;
+                var triggerOf = function (el) { return el.closest('section') || el; };
+
+                gsap.utils.toArray('.reveal-left').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : -56, y: isNarrow ? 26 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 84%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-right').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : 56, y: isNarrow ? 26 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1, ease: 'power3.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 84%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-up').forEach(function (el) {
+                    gsap.fromTo(el, { y: 44, opacity: 0 }, {
+                        y: 0, opacity: 1, duration: 0.9, ease: 'power3.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 86%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-image-left').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : -78, y: isNarrow ? 30 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1.15, ease: 'power4.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 82%' }
+                    });
+                });
+                gsap.utils.toArray('.reveal-image-right').forEach(function (el) {
+                    gsap.fromTo(el, { x: isNarrow ? 0 : 78, y: isNarrow ? 30 : 0, opacity: 0 }, {
+                        x: 0, y: 0, opacity: 1, duration: 1.15, ease: 'power4.out',
+                        scrollTrigger: { trigger: triggerOf(el), start: 'top 82%' }
+                    });
+                });
+
+                [
+                    { sel: '.program-grid .program-card', trigger: '.program-grid' },
+                    { sel: '.career-grid .career-card', trigger: '.career-grid' },
+                    { sel: '.format-grid .format-card', trigger: '.format-grid' },
+                    { sel: '.lab-steps .lab-step', trigger: '.lab-steps' }
+                ].forEach(function (group) {
+                    var items = gsap.utils.toArray(group.sel);
+                    var triggerEl = document.querySelector(group.trigger);
+                    if (!items.length || !triggerEl) return;
+                    gsap.fromTo(items,
+                        { y: 46, opacity: 0 },
+                        {
+                            y: 0, opacity: 1, duration: 0.85, ease: 'power3.out', stagger: 0.12,
+                            scrollTrigger: { trigger: triggerEl, start: 'top 82%' }
+                        });
+                });
+
+                var meters = gsap.utils.toArray('.fe-meter__fill');
+                if (meters.length) {
+                    gsap.fromTo(meters,
+                        { scaleX: 0 },
+                        {
+                            scaleX: 1, duration: 1.1, ease: 'power3.out', stagger: 0.12,
+                            transformOrigin: 'left center',
+                            scrollTrigger: { trigger: '.fe-board', start: 'top 82%' }
+                        });
+                }
+
+                var stages = gsap.utils.toArray('.be-diagram__stage, .be-diagram__arrow');
+                if (stages.length) {
+                    gsap.fromTo(stages,
+                        { y: 26, opacity: 0 },
+                        {
+                            y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.12,
+                            scrollTrigger: { trigger: '.be-diagram', start: 'top 84%' }
+                        });
+                }
+
+                var layers = gsap.utils.toArray('.fs-stack__layer');
+                if (layers.length) {
+                    gsap.fromTo(layers,
+                        { x: 40, opacity: 0 },
+                        {
+                            x: 0, opacity: 1, duration: 0.75, ease: 'power3.out', stagger: 0.14,
+                            scrollTrigger: { trigger: '.fs-stack', start: 'top 84%' }
+                        });
+                }
+
+                var railItems = gsap.utils.toArray('.track-rail__item');
+                if (railItems.length) {
+                    gsap.fromTo(railItems,
+                        { x: 34, opacity: 0 },
+                        {
+                            x: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.1,
+                            delay: 0.15
+                        });
+                }
+            }
+
+            window.__stacklyReveal = initReveals;
+
+            if (!loader) {
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initReveals);
+                } else {
+                    initReveals();
+                }
+            }
+
+        })();
+    </script>
+
+</body>
+
+</html>

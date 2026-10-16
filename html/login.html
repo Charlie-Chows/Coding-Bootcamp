@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sign In — Stackly Coding Bootcamp</title>
+    <meta name="description"
+        content="Sign in to your Stackly demo dashboard. Frontend prototype — no real authentication.">
+    <meta name="theme-color" content="#2E073F">
+    <meta name="robots" content="noindex">
+
+    <script>
+        document.documentElement.classList.remove('no-js');
+        document.documentElement.classList.add('js');
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body class="auth-page">
+
+    <a class="skip-link" href="#auth-main">Skip to sign-in form</a>
+
+    <div class="auth-shell">
+
+        <aside class="auth-brand-panel" aria-label="About Stackly">
+
+            <div class="auth-brand-panel__body">
+                <p class="eyebrow auth-brand-panel__eyebrow">
+                    <i class="fa-solid fa-right-to-bracket" aria-hidden="true"></i>
+                    Welcome back
+                </p>
+                <h1 class="auth-brand-panel__title">Continue where you left off.</h1>
+                <p class="auth-brand-panel__lede">
+                    Sign in to reach your dashboard — your modules, project lab, mentor
+                    reviews, and progress all in one place.
+                </p>
+
+                <ul class="auth-brand-panel__points">
+                    <li>
+                        <i class="fa-solid fa-list-check" aria-hidden="true"></i>
+                        <span>Track modules and project milestones</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-comments" aria-hidden="true"></i>
+                        <span>Read mentor feedback on your code</span>
+                    </li>
+                    <li>
+                        <i class="fa-solid fa-chart-simple" aria-hidden="true"></i>
+                        <span>See skill progress build week by week</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="auth-brand-panel__preview" aria-hidden="true">
+                <div class="code-window">
+                    <div class="code-window__bar">
+                        <span class="code-window__dot"></span>
+                        <span class="code-window__dot"></span>
+                        <span class="code-window__dot"></span>
+                        <span class="code-window__title">stackly — session</span>
+                    </div>
+<pre class="code-window__body"><code><span class="tok-com">$ stackly session verify</span>
+
+<span class="tok-key">✓</span> workspace ready
+<span class="tok-key">✓</span> cohort connected
+<span class="tok-key">✓</span> mentor thread synced
+
+<span class="tok-com">// session verified</span></code></pre>                </div>
+            </div>
+
+        </aside>
+
+        <main class="auth-form-panel" id="auth-main">
+
+            <div class="auth-form-panel__top">
+                <a class="auth-back-chip" href="../index.html">
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                    Back to Home
+                </a>
+            </div>
+
+            <div class="auth-form-card">
+
+                <a class="brand auth-form-card__brand" href="../index.html" aria-label="Stackly — back to home">
+                    <img class="brand__logo" src="../logo.webp" alt="Stackly logo" width="130" height="38">
+                </a>
+
+                <header class="auth-form-card__head">
+                    <span class="auth-form-card__badge">
+                        <i class="fa-solid fa-lock" aria-hidden="true"></i>
+                        Sign in
+                    </span>
+                    <h2 class="auth-form-card__title">Welcome back to Stackly</h2>
+                    <p class="auth-form-card__lede">
+                        Enter your details to open your dashboard.
+                    </p>
+                </header>
+
+
+
+                <form class="auth-form" id="login-form" novalidate autocomplete="on">
+
+                    <div class="field">
+                        <label class="field__label" for="login-email">Email address</label>
+                        <input class="field__control" type="email" id="login-email" name="email"
+                            placeholder="you@example.com" autocomplete="email" inputmode="email" spellcheck="false"
+                            required aria-describedby="login-email-error">
+                        <p class="field__error" id="login-email-error" role="alert"></p>
+                    </div>
+
+                    <div class="field">
+                        <label class="field__label" for="login-password">Password</label>
+                        <div class="password-wrap">
+                            <input class="field__control" type="password" id="login-password" name="password"
+                                placeholder="Enter your password" autocomplete="current-password" required
+                                aria-describedby="login-password-error">
+                            <button class="password-toggle" id="login-password-toggle" type="button"
+                                aria-label="Show password" aria-pressed="false">
+                                <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                            </button>
+                        </div>
+                        <p class="field__error" id="login-password-error" role="alert"></p>
+                    </div>
+
+                    <div class="field">
+                        <span class="field__label" id="login-role-label">Sign in as</span>
+                        <div class="custom-select" id="login-role-select">
+                            <button class="custom-select__trigger" id="login-role-trigger" type="button"
+                                aria-haspopup="listbox" aria-expanded="false"
+                                aria-labelledby="login-role-label login-role-trigger">
+                                <span class="custom-select__value" id="login-role-value">User</span>
+                                <i class="fa-solid fa-chevron-down custom-select__chevron" aria-hidden="true"></i>
+                            </button>
+
+                            <ul class="custom-select__list" id="login-role-list" role="listbox"
+                                aria-labelledby="login-role-label" tabindex="-1">
+                                <li class="custom-select__option is-selected" id="login-role-opt-user" role="option"
+                                    data-value="user" data-label="User" aria-selected="true">
+                                    <i class="fa-solid fa-user" aria-hidden="true"></i>
+                                    <span>User</span>
+                                </li>
+                                <li class="custom-select__option" id="login-role-opt-admin" role="option"
+                                    data-value="admin" data-label="Admin" aria-selected="false">
+                                    <i class="fa-solid fa-user-shield" aria-hidden="true"></i>
+                                    <span>Admin</span>
+                                </li>
+                            </ul>
+
+                            <input type="hidden" name="role" id="login-role" value="user">
+                        </div>
+                    </div>
+
+                    <div class="auth-form-row">
+                        <label class="checkbox" for="login-remember">
+                            <input type="checkbox" id="login-remember" name="remember">
+                            <span class="checkbox__box" aria-hidden="true">
+                                <i class="fa-solid fa-check"></i>
+                            </span>
+                            <span class="checkbox__label">Keep me signed in on this device</span>
+                        </label>
+
+                        <a class="auth-inline-link" href="../404.html">Forgot password?</a>
+                    </div>
+
+                    <button class="btn btn--primary btn--lg btn--block auth-submit" type="submit">
+                        <span>Sign in to dashboard</span>
+                        <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+                    </button>
+
+                </form>
+
+                <div class="auth-divider"><span>or continue with</span></div>
+
+                <div class="auth-social">
+                    <a class="auth-social__btn" href="../404.html">
+                        <i class="fa-brands fa-github" aria-hidden="true"></i>
+                        <span>GitHub</span>
+                    </a>
+                    <a class="auth-social__btn" href="../404.html">
+                        <i class="fa-brands fa-google" aria-hidden="true"></i>
+                        <span>Google</span>
+                    </a>
+                </div>
+
+                <p class="auth-switch">
+                    New to Stackly?
+                    <a href="signup.html">Create an account</a>
+                </p>
+
+
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <script>
+        (function () {
+            'use strict';
+
+            var SESSION_KEY = 'stackly_demo_email';
+
+            if ('scrollRestoration' in history) {
+                history.scrollRestoration = 'manual';
+            }
+            window.addEventListener('load', function () {
+                if (!window.location.hash) { window.scrollTo(0, 0); }
+            });
+
+            var passwordInput = document.getElementById('login-password');
+            var emailInput = document.getElementById('login-email');
+
+            window.addEventListener('pageshow', function (event) {
+                if (event.persisted && passwordInput) {
+                    passwordInput.value = '';
+                    passwordInput.type = 'password';
+                    resetToggleButton();
+                }
+            });
+
+            var toggleBtn = document.getElementById('login-password-toggle');
+
+            function resetToggleButton() {
+                if (!toggleBtn) return;
+                toggleBtn.setAttribute('aria-pressed', 'false');
+                toggleBtn.setAttribute('aria-label', 'Show password');
+                var icon = toggleBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+
+            if (toggleBtn && passwordInput) {
+                toggleBtn.addEventListener('click', function () {
+                    var isVisible = passwordInput.type === 'text';
+                    passwordInput.type = isVisible ? 'password' : 'text';
+                    toggleBtn.setAttribute('aria-pressed', String(!isVisible));
+                    toggleBtn.setAttribute('aria-label', isVisible ? 'Show password' : 'Hide password');
+
+                    var icon = toggleBtn.querySelector('i');
+                    if (icon) {
+                        if (isVisible) {
+                            icon.classList.remove('fa-eye-slash');
+                            icon.classList.add('fa-eye');
+                        } else {
+                            icon.classList.remove('fa-eye');
+                            icon.classList.add('fa-eye-slash');
+                        }
+                    }
+
+                    passwordInput.focus();
+                });
+            }
+
+            function initCustomSelect(root) {
+                if (!root) return;
+
+                var trigger = root.querySelector('.custom-select__trigger');
+                var list = root.querySelector('.custom-select__list');
+                var options = Array.prototype.slice.call(root.querySelectorAll('.custom-select__option'));
+                var hidden = root.querySelector('input[type="hidden"]');
+                var valueEl = root.querySelector('.custom-select__value');
+
+                if (!trigger || !list || !options.length || !hidden || !valueEl) return;
+
+                var activeIndex = 0;
+                for (var i = 0; i < options.length; i++) {
+                    if (options[i].classList.contains('is-selected')) { activeIndex = i; break; }
+                }
+
+                function isOpen() { return root.classList.contains('is-open'); }
+
+                function setFocused(i) {
+                    options.forEach(function (opt) { opt.classList.remove('is-focused'); });
+                    activeIndex = (i + options.length) % options.length;
+                    var opt = options[activeIndex];
+                    opt.classList.add('is-focused');
+                    trigger.setAttribute('aria-activedescendant', opt.id);
+                    if (typeof opt.scrollIntoView === 'function') {
+                        opt.scrollIntoView({ block: 'nearest' });
+                    }
+                }
+
+                function open() {
+                    if (isOpen()) return;
+                    root.classList.add('is-open');
+                    trigger.setAttribute('aria-expanded', 'true');
+                    setFocused(activeIndex);
+                }
+
+                function close(returnFocus) {
+                    if (!isOpen()) return;
+                    root.classList.remove('is-open');
+                    trigger.setAttribute('aria-expanded', 'false');
+                    trigger.removeAttribute('aria-activedescendant');
+                    options.forEach(function (opt) { opt.classList.remove('is-focused'); });
+                    if (returnFocus) { trigger.focus(); }
+                }
+
+                function select(i) {
+                    options.forEach(function (opt, idx) {
+                        var selected = idx === i;
+                        opt.classList.toggle('is-selected', selected);
+                        opt.setAttribute('aria-selected', String(selected));
+                    });
+
+                    var chosen = options[i];
+                    hidden.value = chosen.getAttribute('data-value') || '';
+                    valueEl.textContent = chosen.getAttribute('data-label') || chosen.textContent.trim();
+                    close(true);
+                }
+
+                trigger.addEventListener('click', function () {
+                    isOpen() ? close(true) : open();
+                });
+
+                trigger.addEventListener('keydown', function (e) {
+                    switch (e.key) {
+                        case 'ArrowDown':
+                        case 'ArrowUp':
+                            e.preventDefault();
+                            if (!isOpen()) { open(); }
+                            else { setFocused(activeIndex + (e.key === 'ArrowDown' ? 1 : -1)); }
+                            break;
+                        case 'Home':
+                            if (isOpen()) { e.preventDefault(); setFocused(0); }
+                            break;
+                        case 'End':
+                            if (isOpen()) { e.preventDefault(); setFocused(options.length - 1); }
+                            break;
+                        case 'Enter':
+                        case ' ':
+                            e.preventDefault();
+                            if (isOpen()) { select(activeIndex); }
+                            else { open(); }
+                            break;
+                        case 'Escape':
+                            if (isOpen()) { e.preventDefault(); close(true); }
+                            break;
+                        case 'Tab':
+                            if (isOpen()) { close(false); }
+                            break;
+                        default:
+                            break;
+                    }
+                });
+
+                options.forEach(function (opt, idx) {
+                    opt.addEventListener('click', function () { select(idx); });
+
+                    opt.addEventListener('mouseenter', function () {
+                        if (!isOpen()) return;
+                        setFocused(idx);
+                    });
+
+                    opt.addEventListener('keydown', function (e) {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            select(idx);
+                        } else if (e.key === 'Escape') {
+                            e.preventDefault();
+                            close(true);
+                        }
+                    });
+                });
+
+                document.addEventListener('click', function (e) {
+                    if (!root.contains(e.target)) { close(false); }
+                });
+
+                root.addEventListener('focusout', function (e) {
+                    if (!root.contains(e.relatedTarget)) { close(false); }
+                });
+            }
+
+            initCustomSelect(document.getElementById('login-role-select'));
+
+            var form = document.getElementById('login-form');
+            var emailErr = document.getElementById('login-email-error');
+            var passErr = document.getElementById('login-password-error');
+            var roleInput = document.getElementById('login-role');
+
+            function isEmailValid(value) {
+                return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+            }
+
+            function setError(input, errorEl, message) {
+                if (!input || !errorEl) return;
+                if (message) {
+                    input.setAttribute('aria-invalid', 'true');
+                    errorEl.textContent = message;
+                    errorEl.classList.add('is-visible');
+                } else {
+                    input.removeAttribute('aria-invalid');
+                    errorEl.textContent = '';
+                    errorEl.classList.remove('is-visible');
+                }
+            }
+
+            if (emailInput) {
+                emailInput.addEventListener('input', function () {
+                    if (emailInput.getAttribute('aria-invalid') === 'true') {
+                        setError(emailInput, emailErr, '');
+                    }
+                });
+            }
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function () {
+                    if (passwordInput.getAttribute('aria-invalid') === 'true') {
+                        setError(passwordInput, passErr, '');
+                    }
+                });
+            }
+
+            if (form) {
+                form.addEventListener('submit', function (e) {
+                    e.preventDefault();
+
+                    var firstInvalid = null;
+                    var emailValue = emailInput ? emailInput.value.trim() : '';
+                    var passValue = passwordInput ? passwordInput.value : '';
+
+                    if (!emailValue) {
+                        setError(emailInput, emailErr, 'Please enter your email address.');
+                        if (!firstInvalid) firstInvalid = emailInput;
+                    } else if (!isEmailValid(emailValue)) {
+                        setError(emailInput, emailErr, 'That doesn\u2019t look like a valid email address.');
+                        if (!firstInvalid) firstInvalid = emailInput;
+                    } else {
+                        setError(emailInput, emailErr, '');
+                    }
+
+                    if (!passValue) {
+                        setError(passwordInput, passErr, 'Please enter your password.');
+                        if (!firstInvalid) firstInvalid = passwordInput;
+                    } else if (passValue.length < 6) {
+                        setError(passwordInput, passErr, 'Passwords are at least 6 characters in this demo.');
+                        if (!firstInvalid) firstInvalid = passwordInput;
+                    } else {
+                        setError(passwordInput, passErr, '');
+                    }
+
+                    if (firstInvalid) {
+                        firstInvalid.focus();
+                        return;
+                    }
+
+                    var localPart = emailValue.split('@')[0] || 'learner';
+
+                    try {
+                        sessionStorage.setItem(SESSION_KEY, localPart);
+                    } catch (err) {
+                    }
+
+                    if (passwordInput) {
+                        passwordInput.value = '';
+                        passwordInput.type = 'password';
+                    }
+                    resetToggleButton();
+
+                    var role = roleInput ? roleInput.value : 'user';
+                    window.location.href = (role === 'admin') ? 'admin.html' : 'user.html';
+                });
+            }
+
+        })();
+    </script>
+
+</body>
+
+</html>
